@@ -237,6 +237,31 @@ export const Checkout: React.FC = () => {
           {/* Left Column: Scheduling & Customer Info */}
           <div className="lg:col-span-7 space-y-8">
             
+            {/* Urgent / Same-Day Delivery Callout via Swiggy Direct */}
+            <div className="bg-gradient-to-r from-[#200F0D] via-[#351915] to-[#200F0D] text-white p-5 rounded-3xl border border-[#FC8019]/40 shadow-lg flex flex-col sm:flex-row items-center justify-between gap-4">
+              <div className="flex items-center gap-3.5 text-center sm:text-left">
+                <div className="w-11 h-11 rounded-2xl bg-[#FC8019] flex items-center justify-center shrink-0 text-white font-black text-xl shadow">
+                  ⚡
+                </div>
+                <div>
+                  <span className="text-xs font-extrabold text-[#FC8019] uppercase tracking-wider block">
+                    Need Urgent Same-Day Delivery Right Now?
+                  </span>
+                  <p className="text-xs text-[#D7BFAE] mt-0.5">
+                    Order directly via our official Swiggy Direct kitchen menu for express 30–45 min doorstep delivery.
+                  </p>
+                </div>
+              </div>
+              <a
+                href="https://www.swiggy.com/direct/brand/708273?source=swiggy-direct&subSource=whatsapp"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="shrink-0 bg-[#FC8019] hover:bg-[#e26e10] text-white text-xs font-extrabold uppercase tracking-wider px-5 py-3 rounded-full transition-all shadow-md hover:scale-105 active:scale-95"
+              >
+                Open Swiggy Direct →
+              </a>
+            </div>
+
             {/* 1. Fulfillment Method */}
             <div className="bg-white rounded-3xl p-6 sm:p-8 border border-[#D7BFAE]/40 shadow-sm">
               <div className="flex items-center gap-2 mb-4">

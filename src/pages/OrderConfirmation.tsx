@@ -150,13 +150,13 @@ export const OrderConfirmation: React.FC = () => {
           {/* Quick WhatsApp Action Button */}
           <div className="max-w-md mx-auto">
             <a
-              href={`https://wa.me/917841716999?text=${whatsappMessage}`}
+              href={`https://wa.me/918637478423?text=${whatsappMessage}`}
               target="_blank"
               rel="noopener noreferrer"
               className="w-full inline-flex items-center justify-center gap-2.5 bg-emerald-600 text-white py-4 px-6 rounded-full font-semibold text-xs uppercase tracking-wider shadow-lg hover:bg-emerald-700 transition-all hover:scale-[1.02]"
             >
               <MessageCircle className="w-4 h-4" />
-              Send Order Summary to WhatsApp (+91 78417 16999)
+              Send Order Summary to WhatsApp (+91 863 747 8423)
             </a>
             <p className="text-[11px] text-[#8A554D] mt-2">
               Share your order summary with our baker to receive instant status updates and UPI QR.

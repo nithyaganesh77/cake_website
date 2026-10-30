@@ -49,7 +49,49 @@ export const Home: React.FC = () => {
       {/* 3. Shop by Category with Zoom Overlays */}
       <CategorySection categories={categories} />
 
-      {/* 4. Featured Products with Live Portion Selector */}
+      {/* 4. Swiggy Instant Same-Day Delivery Spotlight */}
+      <section className="py-10 bg-gradient-to-r from-[#200F0D] via-[#351915] to-[#200F0D] text-white border-y border-[#FC8019]/30 relative overflow-hidden">
+        <div className="absolute -right-20 -bottom-20 w-80 h-80 rounded-full bg-[#FC8019]/15 blur-3xl pointer-events-none" />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="flex flex-col lg:flex-row items-center justify-between gap-6 bg-white/5 backdrop-blur-md p-6 sm:p-8 rounded-3xl border border-white/10 shadow-2xl">
+            <div className="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-5">
+              <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-[#FC8019] flex items-center justify-center shrink-0 shadow-lg text-white font-black text-2xl">
+                ⚡
+              </div>
+              <div>
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FC8019]/20 text-[#FC8019] text-[11px] font-bold uppercase tracking-wider mb-1.5 border border-[#FC8019]/30">
+                  <span>Same-Day &amp; Instant Delivery</span>
+                </div>
+                <h3 className="font-serif font-bold text-2xl sm:text-3xl text-[#FFF7F0]">
+                  Need Desserts Within 30–45 Mins? Order on Swiggy Direct
+                </h3>
+                <p className="text-xs sm:text-sm text-[#D7BFAE] mt-1.5 max-w-xl">
+                  Craving our signature fudgy brownies, bento cakes, or desserts right now? Order directly through our official Swiggy Direct menu in Coimbatore with express doorstep dispatch.
+                </p>
+              </div>
+            </div>
+
+            <div className="flex flex-wrap items-center justify-center gap-3 shrink-0">
+              <a
+                href="https://www.swiggy.com/direct/brand/708273?source=swiggy-direct&subSource=whatsapp"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2.5 bg-[#FC8019] text-white text-xs uppercase tracking-wider font-extrabold px-7 py-4 rounded-full shadow-xl hover:bg-[#e26e10] transition-all hover:scale-105 active:scale-95"
+              >
+                <span>Order on Swiggy (Instant) →</span>
+              </a>
+              <Link
+                to="/shop?category=cat-courier-slabs"
+                className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/15 text-white text-xs uppercase tracking-wider font-bold px-6 py-4 rounded-full border border-white/20 transition-all hover:scale-105"
+              >
+                <span>📦 Courier Brownie Slabs</span>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 5. Featured Products with Live Portion Selector */}
       <section className="py-20 bg-[#FFF7F0]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
@@ -121,18 +163,26 @@ export const Home: React.FC = () => {
               </p>
             </div>
 
-            <div className="flex items-center gap-3 shrink-0">
+            <div className="flex flex-wrap items-center justify-center gap-3 shrink-0">
               <a
-                href="https://wa.me/917841716999?text=Hello%20Cakes%20%26%20Dessert!%20I%20would%20like%20to%20enquire%20about%20ordering%20a%20cake."
+                href="https://wa.me/918637478423?text=Hello%20Cakes%20%26%20Dessert!%20I%20would%20like%20to%20enquire%20about%20ordering%20a%20cake."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2.5 bg-[#4B2923] text-white text-xs uppercase tracking-wider font-bold px-6 py-4 rounded-full shadow-lg hover:bg-[#2F1916] transition-all hover:scale-105"
               >
                 <MessageCircle className="w-4 h-4 text-[#E9AEBB]" />
-                WhatsApp Baker (+91 78417 16999)
+                WhatsApp Baker (+91 863 747 8423)
               </a>
               <a
-                href="tel:+917841716999"
+                href="https://www.swiggy.com/direct/brand/708273?source=swiggy-direct&subSource=whatsapp"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 bg-[#FC8019] text-white text-xs uppercase tracking-wider font-extrabold px-6 py-4 rounded-full shadow-lg hover:bg-[#e26e10] transition-all hover:scale-105"
+              >
+                <span>⚡ Swiggy Same-Day</span>
+              </a>
+              <a
+                href="tel:+918637478423"
                 className="p-4 rounded-full bg-white text-[#4B2923] hover:bg-[#FFF7F0] border border-[#D7BFAE]/60 transition-colors shadow-sm"
                 aria-label="Call bakery"
               >

@@ -84,8 +84,8 @@ export const Contact: React.FC = () => {
                 <div>
                   <strong className="text-[#4B2923] block text-sm">Direct Phone &amp; WhatsApp</strong>
                   <div className="mt-1 space-y-0.5">
+                    <a href="tel:+918637478423" className="hover:text-[#4B2923] font-bold block text-emerald-800">+91 863 747 8423 (Primary Order WhatsApp)</a>
                     <a href="tel:+917841716999" className="hover:text-[#4B2923] font-medium block">+91 78417 16999</a>
-                    <a href="tel:+918637478423" className="hover:text-[#4B2923] font-medium block">+91 86374 78423</a>
                     <a href="tel:+919533308332" className="hover:text-[#4B2923] font-medium block">+91 95333 08332</a>
                   </div>
                 </div>
@@ -114,16 +114,24 @@ export const Contact: React.FC = () => {
               </div>
             </div>
 
-            {/* Direct WhatsApp Callout */}
-            <div className="pt-4 border-t border-[#D7BFAE]/30">
+            {/* Direct WhatsApp Callout & Swiggy Direct */}
+            <div className="pt-4 border-t border-[#D7BFAE]/30 space-y-2.5">
               <a
-                href="https://wa.me/917841716999"
+                href="https://wa.me/918637478423"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full inline-flex items-center justify-center gap-2 bg-[#4B2923] text-white py-3.5 px-6 rounded-full font-semibold text-xs uppercase tracking-wider hover:bg-[#2F1916] transition-colors shadow"
               >
                 <MessageCircle className="w-4 h-4 text-[#E9AEBB]" />
-                Connect on WhatsApp (+91 78417 16999)
+                Connect on WhatsApp (+91 863 747 8423)
+              </a>
+              <a
+                href="https://www.swiggy.com/direct/brand/708273?source=swiggy-direct&subSource=whatsapp"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full inline-flex items-center justify-center gap-2 bg-[#FC8019] text-white py-3.5 px-6 rounded-full font-bold text-xs uppercase tracking-wider hover:bg-[#e26e10] transition-colors shadow"
+              >
+                <span>⚡ Order Same-Day on Swiggy Direct</span>
               </a>
             </div>
           </div>

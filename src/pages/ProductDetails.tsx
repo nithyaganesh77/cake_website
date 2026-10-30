@@ -326,6 +326,29 @@ export const ProductDetails: React.FC = () => {
               >
                 Schedule Pre-Order Directly
               </button>
+
+              {/* Swiggy Direct Instant Order */}
+              <a
+                href="https://www.swiggy.com/direct/brand/708273?source=swiggy-direct&subSource=whatsapp"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full inline-flex items-center justify-center gap-2 bg-[#FC8019] text-white py-3.5 px-6 rounded-full font-bold text-xs uppercase tracking-wider hover:bg-[#e26e10] transition-colors shadow-sm"
+              >
+                <span>⚡ Need it Today? Order on Swiggy Direct</span>
+              </a>
+
+              {/* Courier Shipping Badge if Brownie Slab */}
+              {product.category_id === 'cat-courier-slabs' && (
+                <div className="bg-amber-50 rounded-2xl p-3 border border-amber-200 text-xs text-amber-900 flex items-center gap-2.5">
+                  <span className="text-xl">📦</span>
+                  <div>
+                    <strong className="block font-bold">Courier Shipping Across India Available</strong>
+                    <span className="text-[11px] text-amber-800">
+                      Vacuum-sealed &amp; ambient temperature stable for 7 days. Delivered safely anywhere in Tamil Nadu &amp; India!
+                    </span>
+                  </div>
+                </div>
+              )}
             </div>
 
             {/* Ingredients & Storage Instructions */}

@@ -48,6 +48,22 @@ const SHOWCASE_ITEMS: ShowcaseItem[] = [
     cacaoNote: '70% Dark Cacao',
   },
   {
+    id: 'slab',
+    name: 'Chocolate-Filled Brownie Slab',
+    frenchSubtitle: 'Fudge Fondant • Courier Across Tamil Nadu & India',
+    category: 'Courier & Travel Special',
+    price: 'From ₹550',
+    priceNum: 550,
+    serves: '500g Slab (Serves 4-6)',
+    leadTime: '6h Express Notice',
+    description: 'Thick, intensely fudgy dark chocolate brownie slab covered and infused with rich Belgian chocolate filling. Specially packaged for safe courier shipping across India.',
+    image: 'https://images.unsplash.com/photo-1515037893149-de7f840978e2?auto=format&fit=crop&w=1200&q=85',
+    link: '/product/chocolate-filled-fudgy-brownie-slab',
+    tag: '📦 Courier Deliverable',
+    dietary: '100% Eggless Option',
+    cacaoNote: 'Filled Belgian Fudge',
+  },
+  {
     id: 'velvet',
     name: 'Velvet Rose & Mascarpone',
     frenchSubtitle: 'Organic Rose & Italian Mascarpone Cream',
@@ -62,22 +78,6 @@ const SHOWCASE_ITEMS: ShowcaseItem[] = [
     tag: 'Anniversary Favorite',
     dietary: '100% Eggless',
     cacaoNote: 'Delicate Berry Tang',
-  },
-  {
-    id: 'brownie',
-    name: 'Signature Fudgy Brownie Box',
-    frenchSubtitle: 'Triple Cocoa Decadence • Box of 4',
-    category: 'Luxury Dessert Gifting',
-    price: '₹450',
-    priceNum: 450,
-    serves: 'Box of 4 Large Squares',
-    leadTime: '6h Express',
-    description: 'Melt-in-your-mouth gooey centers with a papery, crackly shiny crust, crafted with three varieties of fine cocoa.',
-    image: 'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=1200&q=85',
-    link: '/product/signature-fudgy-chocolate-brownie-box',
-    tag: 'Daily Fresh Batch',
-    dietary: 'Eggless Available',
-    cacaoNote: 'Triple Cocoa',
   },
   {
     id: 'bento',
@@ -163,12 +163,22 @@ export const HeroSection: React.FC = () => {
               <ArrowRight className="w-4 h-4 text-[#2F1916]" />
             </Link>
 
+            <a
+              href="https://www.swiggy.com/direct/brand/708273?source=swiggy-direct&subSource=whatsapp"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 bg-[#FC8019] hover:bg-[#e26e10] text-white text-xs uppercase tracking-widest font-extrabold px-6 py-3.5 rounded-full shadow-lg transition-all hover:scale-105 active:scale-95"
+            >
+              <span className="w-2 h-2 rounded-full bg-white animate-ping" />
+              <span>⚡ Swiggy Same-Day</span>
+            </a>
+
             <Link
               to="/custom-cakes"
-              className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/15 text-white text-xs uppercase tracking-widest font-bold px-7 py-3.5 rounded-full border border-white/20 backdrop-blur-md transition-all hover:scale-105"
+              className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/15 text-white text-xs uppercase tracking-widest font-bold px-6 py-3.5 rounded-full border border-white/20 backdrop-blur-md transition-all hover:scale-105"
             >
               <Cake className="w-4 h-4 text-[#E9AEBB]" />
-              <span>Custom Cake Builder</span>
+              <span>Custom Cake</span>
             </Link>
           </motion.div>
 

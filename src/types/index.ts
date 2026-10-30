@@ -216,5 +216,7 @@ export interface SiteSettings {
   cash_on_pickup_enabled: boolean;
   cash_on_delivery_enabled: boolean;
   free_delivery_threshold: number;
+  swiggy_direct_url?: string;
+  courier_delivery_enabled?: boolean;
 }
 

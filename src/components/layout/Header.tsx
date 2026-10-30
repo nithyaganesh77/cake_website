@@ -159,6 +159,18 @@ export const Header: React.FC = () => {
                 )}
               </button>
 
+              {/* Swiggy Same-Day Delivery Instant Order Pill */}
+              <a
+                href="https://www.swiggy.com/direct/brand/708273?source=swiggy-direct&subSource=whatsapp"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hidden lg:inline-flex items-center gap-1.5 bg-[#FC8019] text-white text-[11px] font-bold px-3.5 py-2 rounded-full hover:bg-[#e26e10] shadow-sm transition-all hover:scale-105"
+                title="Need it right now? Order on Swiggy Direct for Instant 30-45 min delivery in Coimbatore"
+              >
+                <span className="w-2 h-2 rounded-full bg-white animate-ping" />
+                <span>Swiggy Same-Day</span>
+              </a>
+
               {/* Order Now CTA */}
               <Link
                 to="/shop"
@@ -232,6 +244,14 @@ export const Header: React.FC = () => {
                 </nav>
 
                 <div className="pt-2 space-y-3">
+                  <a
+                    href="https://www.swiggy.com/direct/brand/708273?source=swiggy-direct&subSource=whatsapp"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full flex items-center justify-center gap-2 bg-[#FC8019] text-white py-3 rounded-full font-bold text-sm shadow hover:bg-[#e26e10] transition-colors"
+                  >
+                    <span>⚡ Order Same-Day Delivery on Swiggy</span>
+                  </a>
                   <Link
                     to="/custom-cakes"
                     className="w-full flex items-center justify-center gap-2 bg-[#F7DCE2] text-[#4B2923] py-3 rounded-full font-medium text-sm border border-[#E9AEBB]"
@@ -250,10 +270,10 @@ export const Header: React.FC = () => {
 
                 <div className="pt-3 border-t border-[#D7BFAE]/30 flex items-center justify-between text-xs text-[#8A554D]">
                   <a
-                    href="tel:+917841716999"
+                    href="tel:+918637478423"
                     className="inline-flex items-center gap-1.5 text-[#4B2923] font-medium"
                   >
-                    <Phone className="w-3.5 h-3.5" /> +91 78417 16999
+                    <Phone className="w-3.5 h-3.5" /> +91 86374 78423
                   </a>
                   <span className="text-[11px] text-[#8A554D]">Coimbatore Cloud Studio</span>
                 </div>

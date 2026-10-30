@@ -2,12 +2,21 @@ import { Category, Product, DeliveryArea, TimeSlot, SiteSettings } from '@/types
 
 export const INITIAL_CATEGORIES: Category[] = [
   {
+    id: 'cat-courier-slabs',
+    name: 'Brownie Slabs (Courier Orders)',
+    slug: 'brownie-slabs-courier',
+    description: 'Thick, chocolate-filled fudgy brownie slabs securely packaged for courier delivery across Tamil Nadu & India.',
+    image: 'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=800&q=80',
+    display_order: 1,
+    is_active: true,
+  },
+  {
     id: 'cat-brownies',
     name: 'Signature Brownies',
     slug: 'signature-brownies',
     description: 'Ultra-fudgy, crackly-top brownies handcrafted with 70% dark Belgian chocolate.',
     image: 'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=800&q=80',
-    display_order: 1,
+    display_order: 2,
     is_active: true,
   },
   {
@@ -58,6 +67,78 @@ export const INITIAL_CATEGORIES: Category[] = [
 ];
 
 export const INITIAL_PRODUCTS: Product[] = [
+  {
+    id: 'prod-courier-brownie-slab',
+    name: 'Chocolate-Filled Fudgy Brownie Slab (Courier Special)',
+    slug: 'chocolate-filled-fudgy-brownie-slab',
+    description: 'Specially crafted for long-distance courier delivery across Tamil Nadu & Pan-India. A thick, intensely fudgy dark chocolate brownie slab covered and infused with rich Belgian chocolate filling. Securely vacuum-sealed in ambient-stable protective packaging with 7 days fresh shelf-life.',
+    category_id: 'cat-courier-slabs',
+    category_name: 'Brownie Slabs (Courier Orders)',
+    base_price: 550,
+    images: [
+      'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=1000&q=85',
+      'https://images.unsplash.com/photo-1515037893149-de7f840978e2?auto=format&fit=crop&w=1000&q=85',
+    ],
+    is_featured: true,
+    is_bestseller: true,
+    is_new: true,
+    is_available: true,
+    preparation_time_hours: 6,
+    min_order_hours: 6,
+    dietary_flags: {
+      is_eggless_available: true,
+      contains_nuts: false,
+    },
+    variants: [
+      { id: 'var-slab-500g', name: '500g Slab (Serves 4-6)', weight_label: '500g Slab', price: 550, serves_label: 'Serves 4-6', is_default: true },
+      { id: 'var-slab-750g', name: '750g Double Chocolate Stuffed Slab', weight_label: '750g Stuffed Slab', price: 790, serves_label: 'Serves 6-8' },
+      { id: 'var-slab-1kg', name: '1 Kg Grand Sharing Slab', weight_label: '1 Kg Grand Slab', price: 990, serves_label: 'Serves 10-14' },
+    ],
+    customization: {
+      allow_eggless: true,
+      eggless_surcharge: 0,
+      allow_message: true,
+      max_message_chars: 40,
+      allow_topper: false,
+    },
+    ingredients: ['70% Belgian Dark Chocolate', 'Liquid Chocolate Fudge Filling', 'Butter', 'Cocoa Powder', 'Flour', 'Vanilla'],
+    storage_instructions: 'Ambient courier safe. Stays fresh for 7 days at room temperature. Warm for 15 seconds in microwave before eating for molten center!',
+  },
+  {
+    id: 'prod-triple-ganache-brownie-slab',
+    name: 'Triple Ganache Covered Brownie Slab Gift Box',
+    slug: 'triple-ganache-covered-brownie-slab',
+    description: 'Courier-ready dessert slab drenched in three layers of dark Callebaut chocolate filling, hazelnut crunch, and sea salt flakes. Arrives intact anywhere in Tamil Nadu and India in insulated courier gift packaging.',
+    category_id: 'cat-courier-slabs',
+    category_name: 'Brownie Slabs (Courier Orders)',
+    base_price: 620,
+    images: [
+      'https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?auto=format&fit=crop&w=1000&q=85',
+      'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=1000&q=85',
+    ],
+    is_featured: true,
+    is_bestseller: false,
+    is_new: true,
+    is_available: true,
+    preparation_time_hours: 6,
+    min_order_hours: 6,
+    dietary_flags: {
+      is_eggless_available: true,
+      contains_nuts: true,
+    },
+    variants: [
+      { id: 'var-triple-600g', name: '600g Gift Slab Box', weight_label: '600g Slab Box', price: 620, serves_label: 'Serves 5-8', is_default: true },
+      { id: 'var-triple-1-2kg', name: '1.2 Kg Deluxe Slab Box', weight_label: '1.2 Kg Deluxe Slab', price: 1190, serves_label: 'Serves 12-16' },
+    ],
+    customization: {
+      allow_eggless: true,
+      eggless_surcharge: 0,
+      allow_message: true,
+      max_message_chars: 40,
+    },
+    ingredients: ['Belgian Callebaut Ganache', 'Fudge Brownie Base', 'Roasted Hazelnuts', 'Sea Salt', 'Cocoa Butter'],
+    storage_instructions: 'Packaged for travel and courier shipping. 7 days freshness at room temperature.',
+  },
   {
     id: 'prod-belgian-truffle',
     name: 'Royal Belgian Dark Truffle Cake',
@@ -371,8 +452,8 @@ export const INITIAL_SETTINGS: SiteSettings = {
   tagline: 'Made with Love. Baked for Beautiful Moments.',
   hero_headline: 'Every Celebration Deserves Something Sweet.',
   hero_description: 'Discover beautifully crafted artisanal cakes and decadent desserts, made with care and fresh to order in Coimbatore for your most special moments.',
-  phone_numbers: ['+91 78417 16999', '+91 86374 78423', '+91 95333 08332'],
-  whatsapp_number: '917841716999',
+  phone_numbers: ['+91 86374 78423', '+91 78417 16999', '+91 95333 08332'],
+  whatsapp_number: '918637478423',
   email: 'cakesanddessert1@gmail.com',
   address_pickup: 'Podanur Main Road, Coimbatore, Tamil Nadu 641023 (Exact studio pickup instructions shared upon order confirmation)',
   operating_hours: 'Daily: 10:00 AM – 09:00 PM',
@@ -385,5 +466,7 @@ export const INITIAL_SETTINGS: SiteSettings = {
   cash_on_pickup_enabled: true,
   cash_on_delivery_enabled: true,
   free_delivery_threshold: 2000,
+  swiggy_direct_url: 'https://www.swiggy.com/direct/brand/708273?source=swiggy-direct&subSource=whatsapp',
+  courier_delivery_enabled: true,
 };
 

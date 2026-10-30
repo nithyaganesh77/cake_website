@@ -83,6 +83,20 @@ async function ensureInitialized() {
     }
     await tx.objectStore('site_settings').put({ key: 'main_settings', ...INITIAL_SETTINGS });
     await tx.done;
+  } else {
+    // Seamlessly sync new initial categories, courier products and updated phone/swiggy settings
+    const courierCat = await db.get('categories', 'cat-courier-slabs');
+    if (!courierCat) {
+      const tx = db.transaction(['categories', 'products', 'site_settings'], 'readwrite');
+      for (const cat of INITIAL_CATEGORIES) {
+        await tx.objectStore('categories').put(cat);
+      }
+      for (const prod of INITIAL_PRODUCTS) {
+        await tx.objectStore('products').put(prod);
+      }
+      await tx.objectStore('site_settings').put({ key: 'main_settings', ...INITIAL_SETTINGS });
+      await tx.done;
+    }
   }
 }
 

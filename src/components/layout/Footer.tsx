@@ -38,13 +38,21 @@ export const Footer: React.FC = () => {
                 </svg>
               </a>
               <a
-                href="https://wa.me/917841716999"
+                href="https://wa.me/918637478423"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 bg-[#4B2923] px-3.5 py-1.5 rounded-full text-xs text-[#FFF7F0] hover:bg-[#8A554D] transition-colors"
               >
                 <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
-                WhatsApp Baker
+                WhatsApp Baker (+91 863 747 8423)
+              </a>
+              <a
+                href="https://www.swiggy.com/direct/brand/708273?source=swiggy-direct&subSource=whatsapp"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 bg-[#FC8019] px-3.5 py-1.5 rounded-full text-xs text-white hover:bg-[#e26e10] transition-colors font-bold"
+              >
+                <span>⚡ Swiggy Same-Day</span>
               </a>
             </div>
           </div>
@@ -55,6 +63,11 @@ export const Footer: React.FC = () => {
               Boutique Menu
             </h4>
             <ul className="space-y-2.5 text-sm text-[#D7BFAE]">
+              <li>
+                <Link to="/shop?category=cat-courier-slabs" className="hover:text-[#E9AEBB] transition-colors text-amber-200 font-medium">
+                  📦 Courier Brownie Slabs (Pan-India)
+                </Link>
+              </li>
               <li>
                 <Link to="/shop?category=cat-brownies" className="hover:text-[#E9AEBB] transition-colors">
                   Signature Fudgy Brownies
@@ -130,8 +143,8 @@ export const Footer: React.FC = () => {
             <div className="flex items-center gap-3 text-sm text-[#D7BFAE]">
               <Phone className="w-4 h-4 text-[#E9AEBB] shrink-0" />
               <div className="flex flex-col">
-                <a href="tel:+917841716999" className="hover:text-white">+91 78417 16999</a>
-                <a href="tel:+918637478423" className="hover:text-white">+91 86374 78423</a>
+                <a href="tel:+918637478423" className="hover:text-white font-medium">+91 863 747 8423</a>
+                <a href="tel:+917841716999" className="hover:text-white text-xs text-[#D7BFAE]/80">+91 78417 16999</a>
               </div>
             </div>
 

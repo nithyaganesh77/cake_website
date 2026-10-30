@@ -108,7 +108,7 @@ export const Shop: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Page Header */}
-        <div className="text-center max-w-2xl mx-auto mb-10">
+        <div className="text-center max-w-2xl mx-auto mb-8">
           <span className="text-xs uppercase tracking-widest font-semibold text-[#8A554D] block mb-2">
             Freshly Baked in Coimbatore
           </span>
@@ -117,8 +117,33 @@ export const Shop: React.FC = () => {
           </h1>
           <div className="w-16 h-0.5 bg-[#E9AEBB] mx-auto mt-3 mb-3" />
           <p className="text-sm text-[#8A554D]">
-            Browse our signature bakes, celebration cakes, and fudgy brownies. Pre-order scheduled delivery or studio pickup available.
+            Browse our signature bakes, courier brownie slabs, celebration cakes, and fudgy brownies. Pre-order scheduled delivery or studio pickup available.
           </p>
+        </div>
+
+        {/* Swiggy Same-Day Delivery Quick Bar */}
+        <div className="mb-8 bg-gradient-to-r from-[#200F0D] via-[#351915] to-[#200F0D] text-white p-4 sm:p-5 rounded-3xl border border-[#FC8019]/40 shadow-lg flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="flex items-center gap-3 text-center sm:text-left">
+            <div className="w-10 h-10 rounded-2xl bg-[#FC8019] flex items-center justify-center shrink-0 text-white font-black text-lg shadow">
+              ⚡
+            </div>
+            <div>
+              <span className="text-xs font-bold text-[#FC8019] uppercase tracking-wider block">
+                Need Instant 30–45 Min Delivery Today in Coimbatore?
+              </span>
+              <p className="text-xs text-[#D7BFAE] mt-0.5">
+                Same-Day Celebration Cakes, Bento Cakes &amp; Brownies are available right now on our official Swiggy Direct Kitchen.
+              </p>
+            </div>
+          </div>
+          <a
+            href="https://www.swiggy.com/direct/brand/708273?source=swiggy-direct&subSource=whatsapp"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="shrink-0 bg-[#FC8019] hover:bg-[#e26e10] text-white text-xs font-extrabold uppercase tracking-wider px-6 py-3 rounded-full transition-all shadow-md hover:scale-105 active:scale-95"
+          >
+            Order on Swiggy Now →
+          </a>
         </div>
 
         {/* Search & Sort Controls Bar */}

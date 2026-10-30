@@ -96,13 +96,13 @@ export const BulkOrders: React.FC = () => {
           </div>
 
           <a
-            href={`https://wa.me/917841716999?text=${waText}`}
+            href={`https://wa.me/918637478423?text=${waText}`}
             target="_blank"
             rel="noopener noreferrer"
             className="w-full inline-flex items-center justify-center gap-2 bg-[#4B2923] text-white py-4 px-6 rounded-full font-semibold text-xs uppercase tracking-wider shadow hover:bg-[#2F1916] transition-all"
           >
             <MessageCircle className="w-4 h-4 text-[#E9AEBB]" />
-            Connect Immediately on WhatsApp (+91 78417 16999)
+            Connect Immediately on WhatsApp (+91 863 747 8423)
           </a>
         </div>
       </div>

@@ -70,13 +70,13 @@ export class ErrorBoundary extends Component<Props, State> {
               </a>
 
               <a
-                href="https://wa.me/917841716999"
+                href="https://wa.me/918637478423"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2 text-xs text-[#8A554D] hover:text-[#4B2923] mt-2 underline"
               >
                 <PhoneCall className="w-3.5 h-3.5" />
-                Need immediate help? Contact Bakery WhatsApp (+91 78417 16999)
+                Need immediate help? Contact Bakery WhatsApp (+91 863 747 8423)
               </a>
             </div>
           </div>

@@ -23,6 +23,18 @@ export const FloatingQuickActions: React.FC = () => {
         <ArrowUp className="w-4 h-4" />
       </button>
 
+      {/* Floating Swiggy Same-Day Delivery Instant Order Button */}
+      <a
+        href="https://www.swiggy.com/direct/brand/708273?source=swiggy-direct&subSource=whatsapp"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="flex items-center gap-2 bg-[#FC8019] hover:bg-[#e26e10] text-white px-3.5 py-2.5 rounded-full shadow-2xl transition-all hover:scale-105 active:scale-95 border border-white/20 text-xs font-bold"
+        title="Need it within 30-45 mins? Order on Swiggy Direct"
+      >
+        <span className="w-2 h-2 rounded-full bg-white animate-ping" />
+        <span>Swiggy Same-Day</span>
+      </a>
+
       {/* Floating Cart Button (if items > 0) */}
       {itemCount > 0 && (
         <motion.button
@@ -44,11 +56,11 @@ export const FloatingQuickActions: React.FC = () => {
       <div className="relative">
         <span className="absolute -inset-1 rounded-full bg-emerald-500 opacity-40 animate-ping pointer-events-none" />
         <a
-          href="https://wa.me/917841716999?text=Hello%20Cakes%20%26%20Dessert!%20I%20would%20like%20to%20enquire%20about%20ordering%20a%20cake."
+          href="https://wa.me/918637478423?text=Hello%20Cakes%20%26%20Dessert!%20I%20would%20like%20to%20enquire%20about%20ordering%20a%20cake."
           target="_blank"
           rel="noopener noreferrer"
           className="relative w-12 h-12 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white flex items-center justify-center shadow-xl transition-transform hover:scale-110 active:scale-95"
-          aria-label="Chat on WhatsApp with Baker"
+          aria-label="Chat on WhatsApp with Baker (+91 86374 78423)"
         >
           <MessageCircle className="w-6 h-6" />
         </a>
