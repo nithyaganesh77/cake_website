@@ -183,7 +183,7 @@ export const HeroSection: React.FC = () => {
             >
               <Link
                 to={activeItem.link}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-[#4B2923] text-white text-xs uppercase tracking-widest font-bold px-8 py-4 rounded-full shadow-[0_12px_30px_rgba(75,41,35,0.25)] hover:bg-[#2F1916] hover:scale-105 active:scale-95 transition-all group"
+                className="w-full sm:w-auto shimmer-btn inline-flex items-center justify-center gap-3 bg-[#4B2923] text-white text-xs uppercase tracking-widest font-bold px-8 py-4 rounded-full shadow-[0_12px_30px_rgba(75,41,35,0.25)] hover:bg-[#2F1916] hover:scale-105 active:scale-95 transition-all group"
               >
                 <span>Order {activeItem.name.split(' ')[0]} Now ({activeItem.price})</span>
                 <ArrowRight className="w-4 h-4 text-[#E9AEBB] group-hover:translate-x-1 transition-transform" />

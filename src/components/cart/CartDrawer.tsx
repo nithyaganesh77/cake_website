@@ -49,6 +49,36 @@ export const CartDrawer: React.FC = () => {
                 </button>
               </div>
 
+              {/* Free Delivery / Reward Progress Meter */}
+              {items.length > 0 && (
+                <div className="bg-[#FFF7F0] px-6 py-3 border-b border-[#D7BFAE]/30">
+                  {subtotal < 1200 ? (
+                    <div>
+                      <div className="flex items-center justify-between text-[11px] font-bold text-[#4B2923] mb-1.5">
+                        <span className="flex items-center gap-1.5">
+                          <Sparkles className="w-3.5 h-3.5 text-[#8A554D]" />
+                          <span>Add <span className="text-[#8A554D]">₹{1200 - subtotal}</span> for Free Priority Delivery</span>
+                        </span>
+                        <span>{Math.round((subtotal / 1200) * 100)}%</span>
+                      </div>
+                      <div className="w-full bg-[#D7BFAE]/40 rounded-full h-1.5 overflow-hidden">
+                        <motion.div
+                          className="bg-gradient-to-r from-[#8A554D] to-[#4B2923] h-full rounded-full"
+                          initial={{ width: 0 }}
+                          animate={{ width: `${Math.min(100, (subtotal / 1200) * 100)}%` }}
+                          transition={{ duration: 0.5 }}
+                        />
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="flex items-center gap-2 text-xs font-bold text-emerald-800 bg-emerald-50 py-1 px-3 rounded-lg border border-emerald-200">
+                      <Sparkles className="w-4 h-4 text-emerald-600" />
+                      <span>🎉 Congratulations! Free Priority Delivery Unlocked!</span>
+                    </div>
+                  )}
+                </div>
+              )}
+
               {/* Items List */}
               <div className="flex-1 overflow-y-auto p-6 space-y-4">
                 {items.length === 0 ? (
