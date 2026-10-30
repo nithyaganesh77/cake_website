@@ -79,29 +79,29 @@ export const Header: React.FC = () => {
             </div>
 
             {/* Brand Logo */}
-            <Link to="/" className="flex items-center gap-3 group">
-              <div className="w-10 h-10 rounded-xl bg-[#4B2923] flex items-center justify-center text-[#FFF7F0] shadow-sm group-hover:scale-105 transition-transform duration-300">
-                <Cake className="w-6 h-6 text-[#E9AEBB]" />
+            <Link to="/" className="flex items-center gap-2.5 sm:gap-3 group shrink-0">
+              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#4B2923] flex items-center justify-center text-[#FFF7F0] shadow-sm group-hover:scale-105 transition-transform duration-300 shrink-0">
+                <Cake className="w-5 h-5 sm:w-6 sm:h-6 text-[#E9AEBB]" />
               </div>
               <div className="flex flex-col">
-                <span className="font-serif font-extrabold text-xl sm:text-2xl tracking-tight text-[#4B2923] leading-none">
+                <span className="font-serif font-extrabold text-lg sm:text-xl xl:text-2xl tracking-tight text-[#4B2923] leading-none whitespace-nowrap">
                   Cakes &amp; Dessert
                 </span>
-                <span className="text-[10px] tracking-widest uppercase font-medium text-[#8A554D] mt-0.5">
+                <span className="text-[9px] sm:text-[10px] tracking-wider uppercase font-medium text-[#8A554D] mt-0.5 whitespace-nowrap">
                   Boutique Studio • Coimbatore
                 </span>
               </div>
             </Link>
 
             {/* Desktop Navigation Links */}
-            <nav className="hidden lg:flex items-center gap-7">
+            <nav className="hidden lg:flex items-center gap-3.5 xl:gap-5 shrink-0">
               {navLinks.map((link) => {
                 const isActive = location.pathname === link.path;
                 return (
                   <Link
                     key={link.path}
                     to={link.path}
-                    className="relative py-1 text-sm font-medium transition-colors text-[#4B2923] hover:text-[#8A554D]"
+                    className="relative py-1 text-xs xl:text-sm font-semibold tracking-tight transition-colors text-[#4B2923] hover:text-[#8A554D] whitespace-nowrap"
                   >
                     {link.label}
                     {isActive && (
@@ -117,25 +117,25 @@ export const Header: React.FC = () => {
             </nav>
 
             {/* Right Action Icons & CTA */}
-            <div className="flex items-center gap-2 sm:gap-3.5">
+            <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
               {/* Search Toggle */}
               <button
                 onClick={() => setIsSearchOpen(!isSearchOpen)}
-                className="p-2.5 text-[#4B2923] hover:bg-[#F7DCE2] rounded-full transition-colors"
+                className="p-2 text-[#4B2923] hover:bg-[#F7DCE2] rounded-full transition-colors shrink-0"
                 aria-label="Search cakes and brownies"
               >
-                <Search className="w-5 h-5" />
+                <Search className="w-4 h-4 sm:w-5 sm:h-5" />
               </button>
 
               {/* Wishlist Icon */}
               <Link
                 to="/shop?filter=wishlist"
-                className="relative p-2.5 text-[#4B2923] hover:bg-[#F7DCE2] rounded-full transition-colors hidden sm:flex"
+                className="relative p-2 text-[#4B2923] hover:bg-[#F7DCE2] rounded-full transition-colors hidden sm:flex shrink-0"
                 aria-label="View Wishlist"
               >
-                <Heart className="w-5 h-5" />
+                <Heart className="w-4 h-4 sm:w-5 sm:h-5" />
                 {wishlistCount > 0 && (
-                  <span className="absolute top-1 right-1 w-4 h-4 rounded-full bg-[#E9AEBB] text-[#2F1916] text-[10px] font-bold flex items-center justify-center">
+                  <span className="absolute top-0.5 right-0.5 w-4 h-4 rounded-full bg-[#E9AEBB] text-[#2F1916] text-[10px] font-bold flex items-center justify-center">
                     {wishlistCount}
                   </span>
                 )}
@@ -144,15 +144,15 @@ export const Header: React.FC = () => {
               {/* Shopping Bag / Cart */}
               <button
                 onClick={openCart}
-                className="relative p-2.5 text-[#4B2923] hover:bg-[#F7DCE2] rounded-full transition-colors"
+                className="relative p-2 text-[#4B2923] hover:bg-[#F7DCE2] rounded-full transition-colors shrink-0"
                 aria-label={`Open shopping cart with ${itemCount} items`}
               >
-                <ShoppingBag className="w-5 h-5" />
+                <ShoppingBag className="w-4 h-4 sm:w-5 sm:h-5" />
                 {itemCount > 0 && (
                   <motion.span
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
-                    className="absolute top-1 right-1 w-4 h-4 rounded-full bg-[#4B2923] text-white text-[10px] font-bold flex items-center justify-center shadow"
+                    className="absolute top-0.5 right-0.5 w-4 h-4 rounded-full bg-[#4B2923] text-white text-[10px] font-bold flex items-center justify-center shadow"
                   >
                     {itemCount}
                   </motion.span>
@@ -164,20 +164,20 @@ export const Header: React.FC = () => {
                 href="https://www.swiggy.com/direct/brand/708273?source=swiggy-direct&subSource=whatsapp"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hidden lg:inline-flex items-center gap-1.5 bg-[#FC8019] text-white text-[11px] font-bold px-3.5 py-2 rounded-full hover:bg-[#e26e10] shadow-sm transition-all hover:scale-105"
+                className="hidden lg:inline-flex items-center gap-1.5 bg-[#FC8019] text-white text-[11px] font-bold px-3 py-1.5 rounded-full hover:bg-[#e26e10] shadow-xs transition-all hover:scale-105 whitespace-nowrap shrink-0"
                 title="Need it right now? Order on Swiggy Direct for Instant 30-45 min delivery in Coimbatore"
               >
-                <span className="w-2 h-2 rounded-full bg-white animate-ping" />
+                <span className="w-1.5 h-1.5 rounded-full bg-white animate-ping" />
                 <span>Swiggy Same-Day</span>
               </a>
 
               {/* Order Now CTA */}
               <Link
                 to="/shop"
-                className="hidden md:inline-flex items-center gap-2 bg-[#4B2923] text-white text-xs uppercase tracking-wider font-semibold px-5 py-2.5 rounded-full hover:bg-[#2F1916] shadow-sm transition-all hover:shadow hover:scale-[1.02]"
+                className="hidden sm:inline-flex items-center gap-1.5 bg-[#4B2923] text-white text-xs uppercase tracking-wider font-bold px-4 py-2 rounded-full hover:bg-[#2F1916] shadow-xs transition-all hover:scale-105 whitespace-nowrap shrink-0"
               >
                 <Sparkles className="w-3.5 h-3.5 text-[#E9AEBB]" />
-                Order Now
+                <span>Order Now</span>
               </Link>
             </div>
           </div>
