@@ -78,3 +78,4 @@ export const bulkOrderRequestSchema = z.object({
 export type CheckoutFormData = z.infer<typeof checkoutFormSchema>;
 export type CustomCakeFormData = z.infer<typeof customCakeRequestSchema>;
 export type BulkOrderFormData = z.infer<typeof bulkOrderRequestSchema>;
+

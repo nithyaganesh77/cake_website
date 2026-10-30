@@ -226,3 +226,4 @@ export const QuickViewModal: React.FC<QuickViewModalProps> = ({ product, isOpen,
     </AnimatePresence>
   );
 };
+

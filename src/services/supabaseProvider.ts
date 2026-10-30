@@ -326,3 +326,4 @@ export const SupabaseProvider = {
     return data.publicUrl;
   },
 };
+

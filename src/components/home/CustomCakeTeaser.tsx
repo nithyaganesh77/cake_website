@@ -87,3 +87,4 @@ export const CustomCakeTeaser: React.FC = () => {
     </section>
   );
 };
+

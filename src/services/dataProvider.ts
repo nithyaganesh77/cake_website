@@ -177,3 +177,4 @@ class DataProviderService {
 }
 
 export const dataProvider = new DataProviderService();
+

@@ -104,3 +104,4 @@ The colour palette evokes warm chocolate, velvety creams, and delicate blush con
   - Cart drawer slide-in from right with backdrop blur.
   - Interactive multi-step cake builder with forward/backward slide transitions.
   - Quick toast notifications on cart updates.
+

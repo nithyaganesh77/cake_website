@@ -135,3 +135,4 @@ To apply in Supabase:
 1. Log into Supabase Dashboard -> Select Project -> **SQL Editor**.
 2. Paste the contents of `001_initial_schema.sql`.
 3. Click **Run**.
+

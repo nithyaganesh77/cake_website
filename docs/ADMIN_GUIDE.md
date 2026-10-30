@@ -73,3 +73,4 @@ When customers design bespoke cakes via the website's Custom Cake Builder:
 - **UPI Details:** Update your bakery UPI VPA (`cakesanddessert@upi`) and recipient name.
 - **Bank Transfer:** Update account number and IFSC for large corporate orders.
 - **Contact Numbers:** Manage verified phone numbers displayed across the website and header.
+

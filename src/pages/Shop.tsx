@@ -368,3 +368,4 @@ export const Shop: React.FC = () => {
     </div>
   );
 };
+

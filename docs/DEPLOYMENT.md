@@ -72,3 +72,4 @@ git push -u origin main
 - [x] 1-click WhatsApp order synchronization tested with preformatted text.
 - [x] Admin dashboard verified for product updates, slot limits, and order tracking.
 - [x] Public SEO tags, Open Graph preview, sitemap.xml, robots.txt, and webmanifest present.
+

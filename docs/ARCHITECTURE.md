@@ -78,3 +78,4 @@ Per business requirements, no Razorpay, Stripe, or mandatory online gateway is i
   - Studio Bank Transfer (NEFT/IMPS).
   - Cash on Pickup / Cash on Delivery.
 - Order confirmation provides an instant 1-click **WhatsApp** sync button that prefills the entire order summary for direct baker coordination.
+

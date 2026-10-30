@@ -217,3 +217,4 @@ export interface SiteSettings {
   cash_on_delivery_enabled: boolean;
   free_delivery_threshold: number;
 }
+

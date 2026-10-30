@@ -386,3 +386,4 @@ export const INITIAL_SETTINGS: SiteSettings = {
   cash_on_delivery_enabled: true,
   free_delivery_threshold: 2000,
 };
+

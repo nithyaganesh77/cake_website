@@ -71,3 +71,4 @@ The website is currently fully functional in **Local Demo Mode** using IndexedDB
    VITE_APP_ENV=production
    ```
 4. Rebuild the application (`npm run build`). The `dataProvider` will automatically switch to **Cloud Mode**.
+

@@ -219,3 +219,4 @@ on conflict (id) do nothing;
 
 create policy "Public can view bakery media" on storage.objects for select using (bucket_id = 'bakery-media');
 create policy "Anyone can upload custom cake reference images" on storage.objects for insert with check (bucket_id = 'bakery-media');
+
