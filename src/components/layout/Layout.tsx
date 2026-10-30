@@ -4,6 +4,7 @@ import { Header } from './Header';
 import { Footer } from './Footer';
 import { CartDrawer } from '../cart/CartDrawer';
 import { DemoModeBanner } from '../common/DemoModeBanner';
+import { FloatingQuickActions } from '../common/FloatingQuickActions';
 
 export const Layout: React.FC = () => {
   return (
@@ -14,8 +15,8 @@ export const Layout: React.FC = () => {
         <Outlet />
       </main>
       <CartDrawer />
+      <FloatingQuickActions />
       <Footer />
     </div>
   );
 };
-
