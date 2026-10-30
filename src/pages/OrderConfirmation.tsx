@@ -264,7 +264,7 @@ export const OrderConfirmation: React.FC = () => {
                     <h5 className="font-serif font-bold text-sm text-[#4B2923]">{item.product_name}</h5>
                     <p className="text-[#8A554D]">
                       {item.variant_weight} • Qty {item.quantity}
-                      {item.is_eggless && ' • 100% Eggless'}
+                      {item.is_eggless && ' • Eggless Option Available'}
                     </p>
                     {item.custom_message && (
                       <p className="text-[11px] text-[#4B2923] italic">"{item.custom_message}"</p>

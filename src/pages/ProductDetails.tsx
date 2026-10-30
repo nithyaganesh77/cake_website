@@ -180,7 +180,7 @@ export const ProductDetails: React.FC = () => {
                 </span>
                 {product.dietary_flags.is_eggless_available && (
                   <span className="text-emerald-700 font-medium text-[11px]">
-                    • 100% Eggless Option Available
+                    • Eggless Option Available
                   </span>
                 )}
               </div>
@@ -244,7 +244,7 @@ export const ProductDetails: React.FC = () => {
               <div className="p-3.5 bg-[#FFF7F0] rounded-2xl border border-[#D7BFAE]/40 flex items-center justify-between">
                 <div>
                   <span className="text-xs font-bold text-[#4B2923] block">
-                    Make this 100% Eggless
+                    Make this Eggless
                   </span>
                   <span className="text-[11px] text-[#8A554D]">
                     Prepared in dedicated vegetarian pans (+₹{product.customization.eggless_surcharge})

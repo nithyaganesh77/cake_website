@@ -190,7 +190,7 @@ export const Shop: React.FC = () => {
               }`}
             >
               <span className={`w-2 h-2 rounded-full ${egglessOnly ? 'bg-emerald-600' : 'bg-gray-400'}`} />
-              100% Eggless
+              Eggless Option Available
             </button>
 
             {/* Sorting Dropdown */}
@@ -341,7 +341,7 @@ export const Shop: React.FC = () => {
                       onChange={(e) => setEgglessOnly(e.target.checked)}
                       className="w-4 h-4 rounded text-[#4B2923] focus:ring-[#E9AEBB]"
                     />
-                    <span>100% Eggless Only</span>
+                    <span>Eggless Option Available</span>
                   </label>
                 </div>
 

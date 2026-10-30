@@ -104,7 +104,7 @@ export const QuickViewModal: React.FC<QuickViewModalProps> = ({ product, isOpen,
               {(product.dietary_flags?.is_eggless_available || isEggless) && (
                 <div className="absolute bottom-8 left-8 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/95 border border-emerald-500/30 text-emerald-800 text-[11px] font-bold shadow-sm">
                   <span className="w-2 h-2 rounded-full bg-emerald-600" />
-                  <span>100% Pure Eggless</span>
+                  <span>Eggless Option Available</span>
                 </div>
               )}
             </div>
@@ -171,7 +171,7 @@ export const QuickViewModal: React.FC<QuickViewModalProps> = ({ product, isOpen,
                         className="rounded text-[#4B2923] focus:ring-[#8A554D] w-4 h-4 accent-[#4B2923]"
                       />
                       <span className="text-xs font-bold text-[#4B2923]">
-                        Make it 100% Eggless (+₹{product.customization.eggless_surcharge || 50})
+                        Make it Eggless (+₹{product.customization.eggless_surcharge || 50})
                       </span>
                     </label>
                   </div>

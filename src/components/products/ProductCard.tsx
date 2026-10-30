@@ -65,7 +65,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           )}
           {product.dietary_flags.is_eggless_available && (
             <span className="bg-emerald-50 text-emerald-800 border border-emerald-200 text-[10px] font-medium px-2 py-0.5 rounded-full flex items-center gap-1 shadow-2xs">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-600"></span> 100% Eggless
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-600"></span> Eggless Option Available
             </span>
           )}
         </div>

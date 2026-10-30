@@ -49,7 +49,7 @@ export const CelebrationQuiz: React.FC = () => {
         category: 'Celebration Cakes',
         price: 'From ₹850',
         image: 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?q=80&w=800&auto=format&fit=crop',
-        dietary: isEgglessOnly ? '100% Eggless Available' : 'Classic & Eggless',
+        dietary: isEgglessOnly ? 'Eggless Option Available' : 'Classic & Eggless',
         slug: '/product/belgian-dark-truffle-cake',
         reason: 'Layered with pure Callebaut 70% dark ganache; the crowd-favorite centerpiece in Coimbatore.',
       };
@@ -60,7 +60,7 @@ export const CelebrationQuiz: React.FC = () => {
         category: 'Celebration Cakes',
         price: 'From ₹900',
         image: 'https://images.unsplash.com/photo-1586788680434-30d324b2d46f?q=80&w=800&auto=format&fit=crop',
-        dietary: '100% Eggless',
+        dietary: 'Eggless Option Available',
         slug: '/product/velvet-rose-berry-cake',
         reason: 'Delicate crumb lightly scented with organic rosewater, balanced with tart berry compote.',
       };
@@ -81,7 +81,7 @@ export const CelebrationQuiz: React.FC = () => {
       category: 'Bento Cakes',
       price: 'From ₹450',
       image: 'https://images.unsplash.com/photo-1535141192574-5d4897c13136?q=80&w=800&auto=format&fit=crop',
-      dietary: '100% Eggless',
+      dietary: 'Eggless Option Available',
       slug: '/product/pastel-korean-bento-cake',
       reason: 'Compact 4-inch adorable cake with customizable hand-piped greeting and butter sponge.',
     };
@@ -227,9 +227,9 @@ export const CelebrationQuiz: React.FC = () => {
                   }`}
                 >
                   <span className="inline-block px-3 py-1 bg-green-100 text-green-800 text-[10px] font-bold uppercase rounded-full mb-2">
-                    100% Eggless
+                    Eggless Option Available
                   </span>
-                  <h4 className="font-serif font-bold text-lg text-[#4B2923]">Eggless Only</h4>
+                  <h4 className="font-serif font-bold text-lg text-[#4B2923]">Eggless Option</h4>
                   <p className="text-xs text-[#8A554D] mt-1">Baked with vegetarian pride</p>
                 </div>
 
