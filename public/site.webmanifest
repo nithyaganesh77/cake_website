@@ -1,0 +1,16 @@
+{
+  "name": "Cakes & Dessert — Luxury Bakery",
+  "short_name": "Cakes & Dessert",
+  "description": "Handcrafted luxury celebration cakes and desserts in Coimbatore",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FFF7F0",
+  "theme_color": "#4B2923",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
