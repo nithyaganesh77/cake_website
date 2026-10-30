@@ -57,3 +57,4 @@ export const FloatingQuickActions: React.FC = () => {
     </div>
   );
 };
+

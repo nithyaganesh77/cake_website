@@ -215,3 +215,4 @@ export const FlavourExplorerSection: React.FC = () => {
     </section>
   );
 };
+

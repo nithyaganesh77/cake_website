@@ -333,3 +333,4 @@ export const CelebrationQuiz: React.FC = () => {
     </section>
   );
 };
+
