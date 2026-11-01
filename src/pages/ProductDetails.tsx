@@ -183,6 +183,9 @@ export const ProductDetails: React.FC = () => {
                     • Eggless Option Available
                   </span>
                 )}
+                <span className="text-amber-800 font-medium text-[11px]">
+                  • 100% Gelatine-Free &amp; Halal-Friendly
+                </span>
               </div>
 
               <h1 className="font-serif font-extrabold text-2xl sm:text-3xl text-[#4B2923] mt-2 mb-2 leading-tight">

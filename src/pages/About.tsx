@@ -68,7 +68,7 @@ export const About: React.FC = () => {
             </h3>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <div className="space-y-3">
               <div className="w-12 h-12 rounded-2xl bg-[#FFF7F0] border border-[#D7BFAE] flex items-center justify-center text-[#4B2923]">
                 <Sparkles className="w-6 h-6 text-[#E9AEBB]" />
@@ -77,7 +77,19 @@ export const About: React.FC = () => {
                 Belgian Callebaut &amp; Pure Cocoa
               </h4>
               <p className="text-xs text-[#8A554D] leading-relaxed">
-                We never touch hydrogenated vegetable oil chocolate coatings. Only real cocoa butter and single-origin dark chocolate are melted into our brownies and ganaches.
+                We never touch compound coatings or hydrogenated oils. Only genuine cocoa butter and certified single-origin dark chocolate are melted into our signature bakes.
+              </p>
+            </div>
+
+            <div className="space-y-3">
+              <div className="w-12 h-12 rounded-2xl bg-[#FFF7F0] border border-[#D7BFAE] flex items-center justify-center text-[#4B2923]">
+                <ShieldCheck className="w-6 h-6 text-emerald-600" />
+              </div>
+              <h4 className="font-serif font-bold text-lg text-[#4B2923]">
+                100% Halal &amp; Gelatine-Free
+              </h4>
+              <p className="text-xs text-[#8A554D] leading-relaxed">
+                Every creation in our Podanur studio is strictly crafted without animal gelatine, pork derivatives, or alcohol extracts. We use pure Madagascar vanilla beans and certified plant-based setting agents (agar-agar).
               </p>
             </div>
 

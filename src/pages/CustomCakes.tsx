@@ -350,7 +350,7 @@ export const CustomCakes: React.FC = () => {
                     type="text"
                     value={formData.theme_or_occasion}
                     onChange={(e) => setFormData({ ...formData, theme_or_occasion: e.target.value })}
-                    placeholder="e.g., 1st Birthday Pastel Jungle, Elegant Golden 50th Anniversary, Minimal Floral"
+                    placeholder="e.g., Nikah & Wedding Reception, 1st Birthday Pastel Jungle, Elegant Golden Anniversary, Eid Gifting"
                     className="w-full text-xs p-3.5 rounded-xl border border-[#D7BFAE] bg-[#FFF7F0] focus:ring-1 focus:ring-[#4B2923]"
                   />
                 </div>
@@ -376,7 +376,7 @@ export const CustomCakes: React.FC = () => {
                     type="text"
                     value={formData.message_on_cake}
                     onChange={(e) => setFormData({ ...formData, message_on_cake: e.target.value })}
-                    placeholder="e.g., Happy 30th Birthday Rahul! • Forever & Always"
+                    placeholder="e.g., Nikah Mubarak / Happy 30th Birthday Rahul! • Forever & Always"
                     maxLength={40}
                     className="w-full text-xs p-3.5 rounded-xl border border-[#D7BFAE] bg-[#FFF7F0] focus:ring-1 focus:ring-[#4B2923]"
                   />

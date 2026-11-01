@@ -13,9 +13,10 @@ interface QuizOption {
 
 const OCCASIONS: QuizOption[] = [
   { id: 'birthday', label: 'Milestone Birthday', desc: 'Showstopper cake for big joyful gatherings' },
+  { id: 'nikah', label: 'Nikah & Wedding Milestones', desc: 'Bespoke multi-tier elegance, gold leaf & floral accents' },
   { id: 'anniversary', label: 'Romantic Anniversary', desc: 'Elegant, refined, floral or chocolate notes' },
-  { id: 'tea', label: 'Intimate Tea or Coffee', desc: 'Bento cakes, fudgy brownies, delicate bites' },
-  { id: 'corporate', label: 'Corporate & Gifting', desc: 'Sharing brownie boxes, curated assorted tubs' },
+  { id: 'tea', label: 'Family Gathering & Gifting', desc: 'Sharing brownie slabs, Korean bento cakes & dessert jars' },
+  { id: 'corporate', label: 'Festive Hampers & Corporate', desc: 'Curated assorted dessert boxes & bespoke packaging' },
 ];
 
 const CRAVINGS: QuizOption[] = [

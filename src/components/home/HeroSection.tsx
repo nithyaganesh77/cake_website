@@ -104,6 +104,11 @@ export const HeroSection: React.FC = () => {
             <span>Eggless Option Available</span>
           </span>
           <span className="text-white/20 hidden sm:inline">•</span>
+          <span className="flex items-center gap-1.5 font-medium text-amber-200">
+            <Sparkles className="w-3.5 h-3.5 text-amber-300" />
+            <span>100% Halal-Friendly &amp; Gelatine-Free</span>
+          </span>
+          <span className="text-white/20 hidden sm:inline">•</span>
           <span className="flex items-center gap-1.5 font-medium">
             <Sparkles className="w-3.5 h-3.5 text-[#E9AEBB]" />
             <span>70% Callebaut Belgian Chocolate</span>

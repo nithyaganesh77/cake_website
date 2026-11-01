@@ -162,6 +162,24 @@ export const Footer: React.FC = () => {
           </div>
         </div>
 
+        {/* Studio Purity & Dietary Integrity Banner */}
+        <div className="py-6 my-6 border-b border-[#4B2923]/60 flex flex-wrap items-center justify-between gap-4 text-xs text-[#D7BFAE]">
+          <div className="flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-emerald-400" />
+            <span className="text-[#FFF7F0] font-semibold">Our Studio Purity Promise:</span>
+            <span>100% Halal-Friendly Kitchen</span>
+            <span className="text-[#4B2923]">•</span>
+            <span>Zero Animal Gelatine (100% Agar-Agar)</span>
+            <span className="text-[#4B2923]">•</span>
+            <span>Alcohol-Free Extracts</span>
+            <span className="text-[#4B2923]">•</span>
+            <span>Eggless Option Available</span>
+          </div>
+          <div className="text-[11px] text-[#E9AEBB]">
+            Handcrafted with Care in Podanur, Coimbatore
+          </div>
+        </div>
+
         {/* Bottom bar */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#D7BFAE]/70">
           <p>© {new Date().getFullYear()} Cakes &amp; Dessert. Handcrafted with <Heart className="w-3.5 h-3.5 inline text-[#E9AEBB] fill-[#E9AEBB]" /> in Coimbatore. All rights reserved.</p>
