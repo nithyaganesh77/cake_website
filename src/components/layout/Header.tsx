@@ -94,7 +94,7 @@ export const Header: React.FC = () => {
             </Link>
 
             {/* Desktop Navigation Links */}
-            <nav className="hidden lg:flex items-center gap-3.5 xl:gap-5 shrink-0">
+            <nav className="hidden lg:flex items-center gap-5 xl:gap-7 shrink-0">
               {navLinks.map((link) => {
                 const isActive = location.pathname === link.path;
                 return (
@@ -117,7 +117,7 @@ export const Header: React.FC = () => {
             </nav>
 
             {/* Right Action Icons & CTA */}
-            <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
+            <div className="flex items-center gap-2 sm:gap-3 shrink-0">
               {/* Search Toggle */}
               <button
                 onClick={() => setIsSearchOpen(!isSearchOpen)}
@@ -159,22 +159,10 @@ export const Header: React.FC = () => {
                 )}
               </button>
 
-              {/* Swiggy Same-Day Delivery Instant Order Pill */}
-              <a
-                href="https://www.swiggy.com/direct/brand/708273?source=swiggy-direct&subSource=whatsapp"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hidden lg:inline-flex items-center gap-1.5 bg-[#FC8019] text-white text-[11px] font-bold px-3 py-1.5 rounded-full hover:bg-[#e26e10] shadow-xs transition-all hover:scale-105 whitespace-nowrap shrink-0"
-                title="Need it right now? Order on Swiggy Direct for Instant 30-45 min delivery in Coimbatore"
-              >
-                <span className="w-1.5 h-1.5 rounded-full bg-white animate-ping" />
-                <span>Swiggy Same-Day</span>
-              </a>
-
-              {/* Order Now CTA */}
+              {/* Order Now CTA Button */}
               <Link
                 to="/shop"
-                className="hidden sm:inline-flex items-center gap-1.5 bg-[#4B2923] text-white text-xs uppercase tracking-wider font-bold px-4 py-2 rounded-full hover:bg-[#2F1916] shadow-xs transition-all hover:scale-105 whitespace-nowrap shrink-0"
+                className="hidden sm:inline-flex items-center gap-1.5 bg-[#4B2923] text-white text-xs uppercase tracking-wider font-bold px-5 py-2.5 rounded-full hover:bg-[#2F1916] shadow-xs transition-all hover:scale-105 active:scale-95 whitespace-nowrap shrink-0"
               >
                 <Sparkles className="w-3.5 h-3.5 text-[#E9AEBB]" />
                 <span>Order Now</span>

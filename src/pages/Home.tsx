@@ -40,16 +40,13 @@ export const Home: React.FC = () => {
 
   return (
     <div className="space-y-0">
-      {/* 1. Hero Section with Interactive Live Cake Switcher */}
+      {/* 1. Hero Section with Interactive Clean Minimalist Aesthetic */}
       <HeroSection />
 
-      {/* 2. Interactive Celebration Cake Matchmaker Quiz */}
-      <CelebrationQuiz />
-
-      {/* 3. Shop by Category with Zoom Overlays */}
+      {/* 2. Shop by Category with Zoom Overlays */}
       <CategorySection categories={categories} />
 
-      {/* 4. Swiggy Instant Same-Day Delivery Spotlight */}
+      {/* 3. Swiggy Instant Same-Day Delivery Spotlight (In the scroll) */}
       <section className="py-10 bg-gradient-to-r from-[#200F0D] via-[#351915] to-[#200F0D] text-white border-y border-[#FC8019]/30 relative overflow-hidden">
         <div className="absolute -right-20 -bottom-20 w-80 h-80 rounded-full bg-[#FC8019]/15 blur-3xl pointer-events-none" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -90,6 +87,9 @@ export const Home: React.FC = () => {
           </div>
         </div>
       </section>
+
+      {/* 4. Interactive Celebration Cake Matchmaker Quiz */}
+      <CelebrationQuiz />
 
       {/* 5. Featured Products with Live Portion Selector */}
       <section className="py-20 bg-[#FFF7F0]">

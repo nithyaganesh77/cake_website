@@ -16,12 +16,21 @@ export const HeroSection: React.FC = () => {
   };
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-[#FDF8F3] via-[#FFF7F0] to-[#FAF1E8] text-[#2A1612] pt-16 pb-20 sm:pt-20 sm:pb-28 border-b border-[#D7BFAE]/30">
+    <section className="relative overflow-hidden bg-gradient-to-b from-[#FFFBF7] via-[#FFF7F0] to-[#FAF1E8] text-[#2A1612] pt-16 pb-20 sm:pt-24 sm:pb-32 border-b border-[#D7BFAE]/30">
       
-      {/* Subtle Luminous Background Shapes */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[750px] h-[450px] bg-[radial-gradient(ellipse_at_center,_rgba(233,174,187,0.15)_0%,_rgba(215,191,174,0.12)_50%,_transparent_75%)] pointer-events-none" />
+      {/* Subtle Editorial Curved Line & Glow Background (Matches Reference Image) */}
+      <svg
+        className="absolute top-0 right-0 w-[550px] sm:w-[750px] h-full text-[#D7BFAE]/20 pointer-events-none"
+        viewBox="0 0 600 600"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <circle cx="450" cy="150" r="320" stroke="currentColor" strokeWidth="1" strokeDasharray="4 4" />
+        <circle cx="450" cy="150" r="420" stroke="currentColor" strokeWidth="0.75" />
+      </svg>
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[750px] h-[450px] bg-[radial-gradient(ellipse_at_center,_rgba(233,174,187,0.12)_0%,_rgba(215,191,174,0.08)_50%,_transparent_75%)] pointer-events-none" />
       <div className="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-[#E9AEBB]/10 blur-3xl pointer-events-none" />
-      <div className="absolute -bottom-24 -right-24 w-96 h-96 rounded-full bg-[#D7BFAE]/20 blur-3xl pointer-events-none" />
+      <div className="absolute -bottom-24 -right-24 w-96 h-96 rounded-full bg-[#D7BFAE]/15 blur-3xl pointer-events-none" />
 
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
         
@@ -41,11 +50,11 @@ export const HeroSection: React.FC = () => {
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="font-serif text-4xl sm:text-6xl lg:text-7xl font-extrabold text-[#2A1612] tracking-tight leading-[1.12] max-w-4xl mx-auto"
+          className="font-serif text-4xl sm:text-6xl lg:text-7xl font-extrabold text-[#2A1612] tracking-tight leading-[1.14] max-w-4xl mx-auto"
         >
-          Every Celebration Deserves <br className="hidden sm:block" />
+          Every Sweet Celebration, <br className="hidden sm:block" />
           <span className="font-display italic font-normal text-[#8A554D] block sm:inline mt-1 sm:mt-0">
-            Something Sweet &amp; Handcrafted.
+            Artfully Handcrafted.
           </span>
         </motion.h1>
 
@@ -56,7 +65,7 @@ export const HeroSection: React.FC = () => {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="text-base sm:text-lg text-[#6B423B] max-w-2xl mx-auto mt-5 sm:mt-6 font-normal leading-relaxed"
         >
-          Bespoke celebration cakes, artisanal fudgy brownies, and Korean bento cakes slow-baked from scratch with pure Belgian chocolate and fresh dairy butter.
+          Bespoke celebration cakes, artisanal fudgy brownies, and Korean bento cakes slow-baked from scratch with pure 70% Callebaut chocolate and fresh dairy butter.
         </motion.p>
 
         {/* Exactly 2 Clean, Elegant Action Buttons (No clutter) */}
@@ -115,7 +124,7 @@ export const HeroSection: React.FC = () => {
         <div className="mt-8 flex justify-center">
           <button
             onClick={scrollToContent}
-            className="text-xs text-[#8A554D]/70 hover:text-[#2A1612] flex items-center gap-1 transition-colors cursor-pointer group"
+            className="text-xs text-[#8A554D]/70 hover:text-[#2A1612] flex items-center gap-1.5 transition-colors cursor-pointer group"
           >
             <span className="tracking-wider uppercase text-[10px]">Scroll to Explore</span>
             <ChevronDown className="w-3.5 h-3.5 group-hover:translate-y-0.5 transition-transform" />
