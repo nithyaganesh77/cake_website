@@ -18,6 +18,7 @@ import {
   MapPin,
   Navigation,
   Package,
+  MessageCircle,
 } from 'lucide-react';
 import { useCart } from '@/contexts/CartContext';
 import { dataProvider } from '@/services/dataProvider';
@@ -231,11 +232,61 @@ export const Checkout: React.FC = () => {
         special_instructions: specialInstructions || undefined,
       });
 
+      // Build detailed WhatsApp message to direct immediately
+      const itemsSummary = snapshotItems
+        .map(
+          (i) =>
+            `• ${i.product_name} (${i.variant_weight}) x${i.quantity}${
+              i.custom_message ? ` ["${i.custom_message}"]` : ''
+            }`
+        )
+        .join('\n');
+
+      let deliveryDetailsText = '';
+      if (deliveryMethod === 'courier') {
+        deliveryDetailsText =
+          `📦 *FULFILLMENT: Pan-India Express Courier*\n` +
+          `🏠 *Complete Postal Address:*\n` +
+          `${deliveryAddress || 'Address provided'}\n` +
+          `City: ${deliveryCity || 'City'}\n` +
+          `State: ${deliveryState || 'State'}\n` +
+          `📮 Pincode: ${deliveryPincode || ''}\n` +
+          (deliveryLandmark ? `🚩 Landmark: ${deliveryLandmark}\n` : '');
+      } else if (deliveryMethod === 'local_delivery' || deliveryMethod === 'delivery') {
+        deliveryDetailsText =
+          `📍 *FULFILLMENT: Doorstep Delivery (Inside Coimbatore)*\n` +
+          `🔗 *Google Maps Pin:* ${googleMapsLink || 'Pin provided'}\n` +
+          (deliveryAddress ? `🏠 House / Door Details: ${deliveryAddress}\n` : '') +
+          (deliveryPincode ? `📮 Coimbatore Pincode: ${deliveryPincode}\n` : '') +
+          (deliveryLandmark ? `🚩 Landmark: ${deliveryLandmark}\n` : '');
+      } else {
+        deliveryDetailsText =
+          `🏪 *FULFILLMENT: Studio Pickup (Podanur Kitchen, Coimbatore)*\n` +
+          `📍 *Pickup Address:* ${siteSettings?.address_pickup || 'Podanur Main Road, Coimbatore 641023'}\n`;
+      }
+
+      const whatsappText =
+        `🎂 *Hello Cakes & Dessert! I would like to place my pre-order.* 🎂\n\n` +
+        `*Order ID:* ${createdOrder.order_number}\n` +
+        `*Customer:* ${customerName} (${customerPhone})\n\n` +
+        `${deliveryDetailsText}\n` +
+        `*Scheduled Date:* ${scheduledDate}\n` +
+        `*Time Window:* ${selectedSlot ? selectedSlot.label : 'Standard Fulfillment Window'}\n\n` +
+        `*Items Ordered:*\n${itemsSummary}\n\n` +
+        `*Total Amount:* ₹${finalTotal}\n` +
+        `*Payment Preference:* ${paymentPreference.toUpperCase()}\n\n` +
+        `Please confirm kitchen preparation schedule and payment details!`;
+
+      const whatsappUrl = `https://wa.me/918637478423?text=${encodeURIComponent(whatsappText)}`;
+
       // Clear cart upon successful order creation
       clearCart();
 
-      // Navigate to luxury confirmation page with secure tracking token
+      // Navigate to luxury confirmation page with secure tracking token, and direct to WhatsApp
       navigate(`/order-confirmation/${createdOrder.order_number}?token=${createdOrder.tracking_token}`);
+      setTimeout(() => {
+        window.location.href = whatsappUrl;
+      }, 150);
     } catch (err: any) {
       console.error('Failed to submit order', err);
       alert('Order could not be saved: ' + (err.message || 'Please verify details and retry.'));
@@ -831,7 +882,15 @@ export const Checkout: React.FC = () => {
               </div>
 
               <div className="flex justify-between">
-                <span>Fulfillment Fee ({deliveryMethod === 'delivery' ? 'Local Delivery' : 'Pickup'})</span>
+                <span>
+                  Fulfillment Fee (
+                  {deliveryMethod === 'courier'
+                    ? 'Courier Pan-India'
+                    : deliveryMethod === 'local_delivery' || deliveryMethod === 'delivery'
+                    ? 'Local Delivery'
+                    : 'Studio Pickup'}
+                  )
+                </span>
                 <span className="font-semibold text-[#4B2923]">
                   {deliveryFee === 0 ? 'FREE' : `₹${deliveryFee}`}
                 </span>
@@ -847,20 +906,30 @@ export const Checkout: React.FC = () => {
             <div className="bg-[#FFF7F0] rounded-2xl p-4 border border-[#D7BFAE]/40 text-xs text-[#8A554D] space-y-1.5">
               <div className="flex items-center gap-2 text-[#4B2923] font-semibold">
                 <Sparkles className="w-4 h-4 text-[#E9AEBB]" />
-                <span>Instant Confirmation &amp; WhatsApp Receipt</span>
+                <span>Instant Confirmation &amp; WhatsApp Direct Order</span>
               </div>
               <p className="text-[11px] leading-relaxed">
-                Your order is saved directly in our system. You will receive an immediate Order Number and direct WhatsApp connection with our baker.
+                Your order is saved directly in our kitchen database. You will immediately be connected to our WhatsApp baker with your full order summary and receipt.
               </p>
             </div>
 
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full bg-[#4B2923] text-white py-4 px-6 rounded-full font-semibold text-xs uppercase tracking-wider flex items-center justify-center gap-2 hover:bg-[#2F1916] transition-all shadow-md active:scale-98"
+              className="w-full bg-emerald-700 hover:bg-emerald-800 text-white py-4 px-6 rounded-full font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2.5 transition-all shadow-md active:scale-98 cursor-pointer"
             >
-              {isSubmitting ? 'Securing Your Baking Slot...' : `Place Pre-Order (₹${finalTotal})`}
-              <ArrowRight className="w-4 h-4 text-[#E9AEBB]" />
+              {isSubmitting ? (
+                <>
+                  <div className="w-4 h-4 rounded-full border-2 border-white/30 border-t-white animate-spin" />
+                  <span>Connecting to WhatsApp...</span>
+                </>
+              ) : (
+                <>
+                  <MessageCircle className="w-4 h-4 text-white" />
+                  <span>Place Pre-Order via WhatsApp (₹{finalTotal})</span>
+                  <ArrowRight className="w-4 h-4" />
+                </>
+              )}
             </button>
 
             <p className="text-[10px] text-center text-[#8A554D]">
