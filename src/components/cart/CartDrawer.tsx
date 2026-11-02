@@ -137,28 +137,28 @@ export const CartDrawer: React.FC = () => {
             className="absolute inset-0 bg-[#2F1916]/60 backdrop-blur-sm"
           />
 
-          <div className="fixed inset-y-0 right-0 max-w-full flex pl-10">
+          <div className="fixed inset-y-0 right-0 max-w-full flex pl-0 sm:pl-10">
             <motion.div
               initial={{ x: '100%' }}
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', damping: 28, stiffness: 300 }}
-              className="w-screen max-w-md bg-[#FFF7F0] shadow-2xl flex flex-col justify-between border-l border-[#D7BFAE]/50"
+              className="w-screen max-w-md bg-[#FFF7F0] shadow-2xl flex flex-col justify-between border-l border-[#D7BFAE]/50 h-full"
             >
               {/* Header */}
-              <div className="p-6 bg-white border-b border-[#D7BFAE]/30 flex items-center justify-between">
+              <div className="px-4 py-3.5 sm:px-6 sm:py-4 bg-white border-b border-[#D7BFAE]/30 flex items-center justify-between shrink-0">
                 <div className="flex items-center gap-2.5">
-                  <div className="w-9 h-9 rounded-full bg-[#F7DCE2] flex items-center justify-center text-[#4B2923]">
-                    <ShoppingBag className="w-5 h-5" />
+                  <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[#F7DCE2] flex items-center justify-center text-[#4B2923]">
+                    <ShoppingBag className="w-4 h-4 sm:w-5 sm:h-5" />
                   </div>
                   <div>
-                    <h2 className="font-serif font-bold text-xl text-[#4B2923]">Your Dessert Bag</h2>
-                    <p className="text-xs text-[#8A554D]">{itemCount} {itemCount === 1 ? 'item' : 'items'} selected</p>
+                    <h2 className="font-serif font-bold text-lg sm:text-xl text-[#4B2923] leading-tight">Your Dessert Bag</h2>
+                    <p className="text-[11px] sm:text-xs text-[#8A554D]">{itemCount} {itemCount === 1 ? 'item' : 'items'} selected</p>
                   </div>
                 </div>
                 <button
                   onClick={closeCart}
-                  className="p-2 text-[#8A554D] hover:text-[#4B2923] hover:bg-[#FFF7F0] rounded-full transition-colors"
+                  className="p-1.5 text-[#8A554D] hover:text-[#4B2923] hover:bg-[#FFF7F0] rounded-full transition-colors cursor-pointer"
                   aria-label="Close cart"
                 >
                   <X className="w-5 h-5" />
@@ -167,7 +167,7 @@ export const CartDrawer: React.FC = () => {
 
               {/* Free Delivery / Reward Progress Meter */}
               {items.length > 0 && (
-                <div className="bg-[#FFF7F0] px-6 py-3 border-b border-[#D7BFAE]/30">
+                <div className="bg-[#FFF7F0] px-4 py-2 sm:px-6 sm:py-2.5 border-b border-[#D7BFAE]/30 shrink-0">
                   {subtotal < 1200 ? (
                     <div>
                       <div className="flex items-center justify-between text-[11px] font-bold text-[#4B2923] mb-1.5">
@@ -196,7 +196,7 @@ export const CartDrawer: React.FC = () => {
               )}
 
               {/* Items List */}
-              <div className="flex-1 overflow-y-auto p-6 space-y-4">
+              <div className="flex-1 overflow-y-auto p-3 sm:p-5 space-y-2.5 sm:space-y-3">
                 {items.length === 0 ? (
                   <div className="h-full flex flex-col items-center justify-center text-center py-12">
                     <div className="w-20 h-20 rounded-full bg-[#F7DCE2]/60 flex items-center justify-center text-[#4B2923] mb-4">
@@ -223,12 +223,12 @@ export const CartDrawer: React.FC = () => {
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, scale: 0.95 }}
-                      className="bg-white rounded-2xl p-4 border border-[#D7BFAE]/30 shadow-sm flex gap-3.5"
+                      className="bg-white rounded-2xl p-3 sm:p-3.5 border border-[#D7BFAE]/30 shadow-xs flex gap-3"
                     >
                       <img
                         src={item.product.images[0]}
                         alt={item.product.name}
-                        className="w-20 h-20 rounded-xl object-cover shrink-0 border border-[#D7BFAE]/20"
+                        className="w-16 h-16 sm:w-18 sm:h-18 rounded-xl object-cover shrink-0 border border-[#D7BFAE]/20"
                       />
 
                       <div className="flex-1 min-w-0">
@@ -296,10 +296,10 @@ export const CartDrawer: React.FC = () => {
 
                 {/* Delivery & Address Configuration in Bag */}
                 {items.length > 0 && (
-                  <div className="bg-white rounded-2xl p-4 border border-[#D7BFAE]/50 shadow-xs space-y-3">
+                  <div className="bg-white rounded-2xl p-3 sm:p-3.5 border border-[#D7BFAE]/50 shadow-xs space-y-2.5">
                     <div className="flex items-center justify-between">
-                      <span className="text-xs font-bold uppercase tracking-wider text-[#4B2923]">
-                        Choose Fulfillment:
+                      <span className="text-[11px] font-bold uppercase tracking-wider text-[#4B2923]">
+                        Fulfillment:
                       </span>
                       <span className="text-[10px] text-[#8A554D] font-medium">
                         {deliveryMethod === 'local_delivery'
@@ -311,11 +311,11 @@ export const CartDrawer: React.FC = () => {
                     </div>
 
                     {/* 3-way toggle */}
-                    <div className="grid grid-cols-3 gap-1.5 p-1 bg-[#FFF7F0] rounded-xl border border-[#D7BFAE]/40">
+                    <div className="grid grid-cols-3 gap-1 p-1 bg-[#FFF7F0] rounded-xl border border-[#D7BFAE]/40">
                       <button
                         type="button"
                         onClick={() => setDeliveryMethod('local_delivery')}
-                        className={`py-2 px-1 rounded-lg text-[10px] font-bold transition-all text-center ${
+                        className={`py-1.5 px-1 rounded-lg text-[10px] font-bold transition-all text-center ${
                           deliveryMethod === 'local_delivery'
                             ? 'bg-[#4B2923] text-white shadow-xs'
                             : 'text-[#8A554D] hover:text-[#4B2923]'
@@ -326,7 +326,7 @@ export const CartDrawer: React.FC = () => {
                       <button
                         type="button"
                         onClick={() => setDeliveryMethod('courier')}
-                        className={`py-2 px-1 rounded-lg text-[10px] font-bold transition-all text-center ${
+                        className={`py-1.5 px-1 rounded-lg text-[10px] font-bold transition-all text-center ${
                           deliveryMethod === 'courier'
                             ? 'bg-[#4B2923] text-white shadow-xs'
                             : 'text-[#8A554D] hover:text-[#4B2923]'
@@ -337,7 +337,7 @@ export const CartDrawer: React.FC = () => {
                       <button
                         type="button"
                         onClick={() => setDeliveryMethod('pickup')}
-                        className={`py-2 px-1 rounded-lg text-[10px] font-bold transition-all text-center ${
+                        className={`py-1.5 px-1 rounded-lg text-[10px] font-bold transition-all text-center ${
                           deliveryMethod === 'pickup'
                             ? 'bg-[#4B2923] text-white shadow-xs'
                             : 'text-[#8A554D] hover:text-[#4B2923]'
@@ -349,34 +349,34 @@ export const CartDrawer: React.FC = () => {
 
                     {/* Coimbatore Mode: Google Maps link */}
                     {deliveryMethod === 'local_delivery' && (
-                      <div className="space-y-2 pt-1 text-xs">
+                      <div className="space-y-1.5 pt-0.5 text-xs">
                         <div className="flex items-center justify-between gap-2">
-                          <label className="text-[11px] font-bold text-[#4B2923] flex items-center gap-1">
+                          <label className="text-[10px] font-bold text-[#4B2923] flex items-center gap-1 uppercase tracking-wider">
                             <MapPin className="w-3.5 h-3.5 text-emerald-700" />
-                            <span>Google Maps Link *</span>
+                            <span>Google Maps Pin *</span>
                           </label>
                           <button
                             type="button"
                             onClick={handleGetLocation}
                             disabled={isLocating}
-                            className="text-[10px] text-emerald-800 hover:text-emerald-950 font-semibold flex items-center gap-1 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200 cursor-pointer"
+                            className="text-[10px] text-emerald-800 hover:text-emerald-950 font-semibold flex items-center gap-1 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200 cursor-pointer"
                           >
                             <Navigation className="w-3 h-3" />
-                            <span>{isLocating ? 'Detecting...' : '📍 Pin GPS'}</span>
+                            <span>{isLocating ? 'Locating...' : '📍 Auto-Pin GPS'}</span>
                           </button>
                         </div>
                         <input
                           type="url"
                           value={googleMapsLink}
                           onChange={(e) => setGoogleMapsLink(e.target.value)}
-                          placeholder="https://maps.app.goo.gl/... or paste map pin"
-                          className="w-full text-xs p-2.5 rounded-xl border border-emerald-300 bg-[#FFF7F0] text-[#4B2923]"
+                          placeholder="Paste https://maps.app.goo.gl/... link"
+                          className="w-full text-xs p-2 rounded-xl border border-emerald-300 bg-[#FFF7F0] text-[#4B2923]"
                         />
                         <input
                           type="text"
                           value={localDoorDetails}
                           onChange={(e) => setLocalDoorDetails(e.target.value)}
-                          placeholder="Flat / House No. & Landmark (optional)"
+                          placeholder="Door / Flat No. & Landmark (optional)"
                           className="w-full text-xs p-2 rounded-xl border border-[#D7BFAE]/50 bg-[#FFF7F0] text-[#4B2923]"
                         />
                       </div>
@@ -384,8 +384,8 @@ export const CartDrawer: React.FC = () => {
 
                     {/* Courier Mode: Complete Address */}
                     {deliveryMethod === 'courier' && (
-                      <div className="space-y-2 pt-1 text-xs">
-                        <div className="flex items-center gap-1 text-[11px] font-bold text-[#4B2923]">
+                      <div className="space-y-1.5 pt-0.5 text-xs">
+                        <div className="flex items-center gap-1 text-[10px] font-bold text-[#4B2923] uppercase tracking-wider">
                           <Package className="w-3.5 h-3.5 text-amber-700" />
                           <span>Complete Courier Postal Address *</span>
                         </div>
@@ -418,7 +418,7 @@ export const CartDrawer: React.FC = () => {
 
                     {/* Pickup Mode */}
                     {deliveryMethod === 'pickup' && (
-                      <div className="text-[11px] text-[#8A554D] bg-[#FFF7F0] p-2.5 rounded-xl border border-[#D7BFAE]/40 flex items-center gap-2">
+                      <div className="text-[11px] text-[#8A554D] bg-[#FFF7F0] p-2 rounded-xl border border-[#D7BFAE]/40 flex items-center gap-2">
                         <Store className="w-4 h-4 text-[#8A554D] shrink-0" />
                         <span>Podanur Kitchen Studio, Coimbatore (Free Pickup)</span>
                       </div>
@@ -434,71 +434,62 @@ export const CartDrawer: React.FC = () => {
                 )}
               </div>
 
-              {/* Footer Checkout Summary */}
+              {/* Compact, Ultra-Slim Mobile-First Footer */}
               {items.length > 0 && (
-                <div className="p-6 bg-white border-t border-[#D7BFAE]/40 space-y-4">
-                  <div className="space-y-1.5 text-xs text-[#8A554D]">
-                    <div className="flex justify-between">
-                      <span>Subtotal</span>
-                      <span className="font-semibold text-[#4B2923]">₹{subtotal}</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span>Delivery Fee</span>
-                      <span className="text-emerald-700 font-medium">
-                        {deliveryMethod === 'pickup'
-                          ? 'Free (Pickup)'
-                          : deliveryMethod === 'courier'
-                          ? '₹120 (Courier Pan-India)'
-                          : '₹80 (Local CBE Zone)'}
-                      </span>
-                    </div>
-                    <div className="border-t border-[#D7BFAE]/40 pt-2 flex justify-between text-base font-serif font-bold text-[#4B2923]">
-                      <span>Estimated Total</span>
-                      <span>
-                        ₹
-                        {subtotal +
-                          (deliveryMethod === 'pickup'
-                            ? 0
-                            : deliveryMethod === 'courier'
-                            ? subtotal >= 1200
+                <div className="px-4 py-3 sm:px-5 sm:py-3.5 bg-white border-t border-[#D7BFAE]/40 shadow-[0_-4px_20px_rgba(75,41,35,0.06)] shrink-0">
+                  <div className="flex items-center justify-between gap-3">
+                    {/* Price Breakdown */}
+                    <div className="min-w-0">
+                      <div className="flex items-baseline gap-1.5">
+                        <span className="text-[10px] uppercase font-bold tracking-wider text-[#8A554D]">
+                          Total:
+                        </span>
+                        <span className="font-serif font-bold text-lg sm:text-xl text-[#4B2923] leading-none">
+                          ₹
+                          {subtotal +
+                            (deliveryMethod === 'pickup'
                               ? 0
-                              : 120
-                            : subtotal >= 1200
-                            ? 0
-                            : 80)}
+                              : deliveryMethod === 'courier'
+                              ? subtotal >= 1200
+                                ? 0
+                                : 120
+                              : subtotal >= 1200
+                              ? 0
+                              : 80)}
+                        </span>
+                      </div>
+                      <span className="text-[10px] text-emerald-800 font-semibold block truncate mt-0.5">
+                        {deliveryMethod === 'pickup'
+                          ? '✓ Free Studio Pickup'
+                          : subtotal >= 1200
+                          ? '🎉 Free Delivery'
+                          : deliveryMethod === 'courier'
+                          ? '+ ₹120 Courier'
+                          : '+ ₹80 Delivery'}
                       </span>
                     </div>
-                  </div>
 
-                  <div className="bg-[#FFF7F0] rounded-xl p-2.5 flex items-center gap-2 text-[11px] text-[#8A554D] border border-[#D7BFAE]/30">
-                    <Sparkles className="w-4 h-4 text-[#E9AEBB] shrink-0" />
-                    <span>Freshly baked to order. No online gateway required.</span>
-                  </div>
+                    {/* Compact Side-by-Side Action Buttons */}
+                    <div className="flex items-center gap-2 shrink-0">
+                      <button
+                        type="button"
+                        onClick={handleWhatsAppOrder}
+                        className="inline-flex items-center gap-1.5 bg-emerald-600 hover:bg-emerald-700 text-white px-3.5 py-2.5 rounded-full font-bold text-xs uppercase tracking-wider shadow-sm transition-all active:scale-95 cursor-pointer"
+                        title="Order via WhatsApp"
+                      >
+                        <MessageCircle className="w-4 h-4" />
+                        <span>WhatsApp</span>
+                      </button>
 
-                  <div className="space-y-2">
-                    <button
-                      type="button"
-                      onClick={handleWhatsAppOrder}
-                      className="w-full flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white py-3.5 px-6 rounded-full font-bold text-xs uppercase tracking-wider shadow-md transition-all active:scale-98 cursor-pointer"
-                    >
-                      <MessageCircle className="w-4 h-4" />
-                      Direct WhatsApp Order
-                    </button>
-
-                    <Link
-                      to={checkoutUrl}
-                      onClick={closeCart}
-                      className="w-full flex items-center justify-center gap-2 bg-[#4B2923] text-white py-3 px-6 rounded-full text-xs font-semibold uppercase tracking-wider hover:bg-[#2F1916] transition-all"
-                    >
-                      Schedule Pre-Order &amp; Slot <ArrowRight className="w-4 h-4" />
-                    </Link>
-
-                    <button
-                      onClick={closeCart}
-                      className="w-full text-center text-xs text-[#8A554D] hover:text-[#4B2923] py-1 transition-colors"
-                    >
-                      Continue Browsing Menu
-                    </button>
+                      <Link
+                        to={checkoutUrl}
+                        onClick={closeCart}
+                        className="inline-flex items-center gap-1.5 bg-[#4B2923] hover:bg-[#2F1916] text-white px-4 py-2.5 rounded-full font-bold text-xs uppercase tracking-wider shadow-sm transition-all active:scale-95"
+                      >
+                        <span>Checkout</span>
+                        <ArrowRight className="w-3.5 h-3.5" />
+                      </Link>
+                    </div>
                   </div>
                 </div>
               )}
