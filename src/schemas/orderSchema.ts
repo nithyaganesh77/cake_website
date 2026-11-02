@@ -19,8 +19,11 @@ export const checkoutFormSchema = z.object({
     .email('Please enter a valid email address')
     .optional()
     .or(z.literal('')),
-  delivery_method: z.enum(['delivery', 'pickup']),
+  delivery_method: z.enum(['local_delivery', 'courier', 'pickup', 'delivery']),
+  google_maps_link: z.string().optional(),
   delivery_address: z.string().optional(),
+  delivery_city: z.string().optional(),
+  delivery_state: z.string().optional(),
   delivery_pincode: z.string().optional(),
   delivery_landmark: z.string().max(100).optional(),
   scheduled_date: z.string().min(1, 'Please select your preferred celebration date'),
@@ -28,19 +31,43 @@ export const checkoutFormSchema = z.object({
   payment_method_preference: z.enum(['upi', 'bank_transfer', 'cash_on_delivery', 'cash_on_pickup']),
   special_instructions: z.string().max(500, 'Instructions cannot exceed 500 characters').optional(),
 }).superRefine((data, ctx) => {
-  if (data.delivery_method === 'delivery') {
+  if (data.delivery_method === 'local_delivery' || data.delivery_method === 'delivery') {
+    // Inside Coimbatore delivery: Google Maps link is required
+    if (!data.google_maps_link || data.google_maps_link.trim().length < 5) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ['google_maps_link'],
+        message: 'Google Maps location link is required for Coimbatore doorstep delivery (tap "Pin Current Location" or paste link)',
+      });
+    }
+  } else if (data.delivery_method === 'courier') {
+    // Pan-India courier: Complete postal address is required
     if (!data.delivery_address || data.delivery_address.trim().length < 8) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
         path: ['delivery_address'],
-        message: 'Delivery address is required (at least 8 characters with street/area details)',
+        message: 'Complete postal address is required (Door/Flat No, Building, Street, Area)',
+      });
+    }
+    if (!data.delivery_city || data.delivery_city.trim().length < 2) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ['delivery_city'],
+        message: 'City / Town is required for courier delivery',
+      });
+    }
+    if (!data.delivery_state || data.delivery_state.trim().length < 2) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ['delivery_state'],
+        message: 'State is required for courier delivery',
       });
     }
     if (!data.delivery_pincode || !indianPincodeRegex.test(data.delivery_pincode.trim())) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
         path: ['delivery_pincode'],
-        message: 'Please provide a valid 6-digit Coimbatore delivery pincode (e.g. 641023)',
+        message: 'Valid 6-digit postal pincode is required (e.g. 600040)',
       });
     }
   }

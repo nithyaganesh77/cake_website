@@ -15,6 +15,9 @@ import {
   ArrowRight,
   ShieldCheck,
   CreditCard,
+  MapPin,
+  Navigation,
+  Package,
 } from 'lucide-react';
 import { dataProvider } from '@/services/dataProvider';
 import { Order, SiteSettings } from '@/types';
@@ -94,22 +97,45 @@ export const OrderConfirmation: React.FC = () => {
     );
   }
 
-  // Generate WhatsApp message
+  // Generate WhatsApp message with exact delivery requirements
   const itemsSummary = order.items
     .map((i) => `• ${i.product_name} (${i.variant_weight}) x${i.quantity}${i.custom_message ? ` ["${i.custom_message}"]` : ''}`)
     .join('\n');
 
+  let deliveryDetailsText = '';
+  if (order.delivery_method === 'courier') {
+    deliveryDetailsText =
+      `📦 *FULFILLMENT: Pan-India Express Courier*\n` +
+      `🏠 *Complete Postal Address:*\n` +
+      `${order.delivery_address || 'Address provided'}\n` +
+      `City: ${order.delivery_city || 'City'}\n` +
+      `State: ${order.delivery_state || 'State'}\n` +
+      `📮 Pincode: ${order.delivery_pincode || 'Pincode'}\n` +
+      (order.delivery_landmark ? `🚩 Landmark: ${order.delivery_landmark}\n` : '');
+  } else if (order.delivery_method === 'local_delivery' || order.delivery_method === 'delivery') {
+    deliveryDetailsText =
+      `📍 *FULFILLMENT: Doorstep Delivery (Inside Coimbatore)*\n` +
+      `🔗 *Google Maps Pin:* ${order.google_maps_link || 'Link provided'}\n` +
+      (order.delivery_address ? `🏠 House / Door Details: ${order.delivery_address}\n` : '') +
+      (order.delivery_pincode ? `📮 Pincode: ${order.delivery_pincode}\n` : '') +
+      (order.delivery_landmark ? `🚩 Landmark: ${order.delivery_landmark}\n` : '');
+  } else {
+    deliveryDetailsText =
+      `🏪 *FULFILLMENT: Studio Pickup (Podanur, Coimbatore)*\n` +
+      `📍 *Pickup Address:* ${siteSettings?.address_pickup || 'Podanur Main Road, Coimbatore 641023'}\n`;
+  }
+
   const whatsappMessage = encodeURIComponent(
-    `Hello Cakes & Dessert! I would like to confirm my pre-order.\n\n` +
-    `Order ID: ${order.order_number}\n` +
-    `Customer: ${order.customer_name}\n` +
-    `Fulfillment: ${order.delivery_method === 'delivery' ? 'Local Delivery' : 'Studio Pickup'}\n` +
-    `Scheduled Date: ${order.scheduled_date}\n` +
-    `Time Slot: ${order.scheduled_slot_label}\n\n` +
-    `Items:\n${itemsSummary}\n\n` +
-    `Total: ₹${order.total_amount}\n` +
-    `Payment Preference: ${order.payment_method_preference.toUpperCase()}\n\n` +
-    `Please confirm the order status and payment details!`
+    `🎂 *Hello Cakes & Dessert! I would like to confirm my pre-order.* 🎂\n\n` +
+    `*Order ID:* ${order.order_number}\n` +
+    `*Customer:* ${order.customer_name} (${order.customer_phone})\n\n` +
+    `${deliveryDetailsText}\n` +
+    `*Scheduled Date:* ${order.scheduled_date}\n` +
+    `*Time Window:* ${order.scheduled_slot_label}\n\n` +
+    `*Items Ordered:*\n${itemsSummary}\n\n` +
+    `*Total Amount:* ₹${order.total_amount}\n` +
+    `*Payment Preference:* ${order.payment_method_preference.toUpperCase()}\n\n` +
+    `Please confirm kitchen preparation schedule and payment details!`
   );
 
   return (
@@ -177,8 +203,12 @@ export const OrderConfirmation: React.FC = () => {
             <div className="space-y-2 text-xs text-[#8A554D]">
               <div className="flex justify-between py-1 border-b border-[#D7BFAE]/20">
                 <span>Method:</span>
-                <span className="font-bold text-[#4B2923] capitalize">
-                  {order.delivery_method === 'delivery' ? 'Local Coimbatore Delivery' : 'Studio Pickup'}
+                <span className="font-bold text-[#4B2923]">
+                  {order.delivery_method === 'courier'
+                    ? 'Pan-India Express Courier'
+                    : order.delivery_method === 'local_delivery' || order.delivery_method === 'delivery'
+                    ? 'Doorstep Delivery (Coimbatore)'
+                    : 'Studio Pickup (Podanur)'}
                 </span>
               </div>
 
@@ -192,12 +222,60 @@ export const OrderConfirmation: React.FC = () => {
                 <span className="font-bold text-[#4B2923]">{order.scheduled_slot_label}</span>
               </div>
 
-              {order.delivery_address && (
-                <div className="pt-1">
-                  <span className="block mb-1 font-semibold text-[#4B2923]">Delivery Destination:</span>
-                  <p className="leading-relaxed bg-[#FFF7F0] p-2.5 rounded-xl border border-[#D7BFAE]/30">
-                    {order.delivery_address}, {order.delivery_pincode}
-                    {order.delivery_landmark && ` (Near: ${order.delivery_landmark})`}
+              {/* Inside Coimbatore Delivery: Google Maps Pin */}
+              {(order.delivery_method === 'local_delivery' || order.delivery_method === 'delivery') && (
+                <div className="pt-2 border-t border-[#D7BFAE]/20 space-y-2">
+                  <span className="block font-semibold text-[#4B2923]">Coimbatore Delivery Destination:</span>
+                  {order.google_maps_link && (
+                    <div className="bg-emerald-50 p-3 rounded-xl border border-emerald-200">
+                      <span className="text-[11px] font-bold text-emerald-800 block mb-1">
+                        📍 Google Maps Pin:
+                      </span>
+                      <a
+                        href={order.google_maps_link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white text-[11px] font-semibold transition-colors shadow-xs"
+                      >
+                        <Navigation className="w-3 h-3" />
+                        <span>Open Location in Google Maps</span>
+                      </a>
+                    </div>
+                  )}
+                  {order.delivery_address && (
+                    <p className="leading-relaxed bg-[#FFF7F0] p-2.5 rounded-xl border border-[#D7BFAE]/30 text-[11px]">
+                      <strong>Door / Street:</strong> {order.delivery_address}
+                      {order.delivery_pincode && `, ${order.delivery_pincode}`}
+                      {order.delivery_landmark && ` (Near: ${order.delivery_landmark})`}
+                    </p>
+                  )}
+                </div>
+              )}
+
+              {/* Pan-India Courier: Complete Address */}
+              {order.delivery_method === 'courier' && (
+                <div className="pt-2 border-t border-[#D7BFAE]/20 space-y-2">
+                  <span className="block font-semibold text-[#4B2923]">Courier Postal Address:</span>
+                  <div className="leading-relaxed bg-[#FFF7F0] p-3 rounded-xl border border-[#D7BFAE]/30 text-xs">
+                    <p className="font-semibold text-[#4B2923]">{order.delivery_address}</p>
+                    <p className="text-[#8A554D] mt-0.5">
+                      {order.delivery_city}, {order.delivery_state} — {order.delivery_pincode}
+                    </p>
+                    {order.delivery_landmark && (
+                      <p className="text-[11px] text-[#8A554D] mt-1">
+                        <strong>Landmark:</strong> {order.delivery_landmark}
+                      </p>
+                    )}
+                  </div>
+                </div>
+              )}
+
+              {/* Studio Pickup */}
+              {order.delivery_method === 'pickup' && (
+                <div className="pt-2 border-t border-[#D7BFAE]/20">
+                  <span className="block font-semibold text-[#4B2923]">Pickup Studio:</span>
+                  <p className="leading-relaxed bg-[#FFF7F0] p-2.5 rounded-xl border border-[#D7BFAE]/30 text-[11px]">
+                    {siteSettings?.address_pickup || 'Podanur Main Road, Coimbatore 641023'}
                   </p>
                 </div>
               )}

@@ -1,6 +1,6 @@
 // Core Domain Types for Cakes & Dessert Luxury Platform
 
-export type DeliveryMethod = 'delivery' | 'pickup';
+export type DeliveryMethod = 'delivery' | 'pickup' | 'local_delivery' | 'courier';
 
 export type OrderStatus =
   | 'pending'
@@ -135,6 +135,9 @@ export interface Order {
   delivery_address?: string;
   delivery_pincode?: string;
   delivery_landmark?: string;
+  delivery_city?: string;
+  delivery_state?: string;
+  google_maps_link?: string;
   scheduled_date: string; // YYYY-MM-DD
   scheduled_slot_id: string;
   scheduled_slot_label: string;

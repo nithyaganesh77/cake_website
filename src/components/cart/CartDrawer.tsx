@@ -1,11 +1,127 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Plus, Minus, Trash2, ArrowRight, ShoppingBag, Sparkles } from 'lucide-react';
+import {
+  X,
+  Plus,
+  Minus,
+  Trash2,
+  ArrowRight,
+  ShoppingBag,
+  Sparkles,
+  MapPin,
+  Navigation,
+  Package,
+  Store,
+  MessageCircle,
+  AlertCircle,
+} from 'lucide-react';
 import { useCart } from '@/contexts/CartContext';
 import { Link } from 'react-router-dom';
 
 export const CartDrawer: React.FC = () => {
   const { isCartOpen, closeCart, items, updateQuantity, removeItem, subtotal, itemCount } = useCart();
+
+  // Fulfillment selector inside cart
+  const [deliveryMethod, setDeliveryMethod] = useState<'local_delivery' | 'courier' | 'pickup'>('local_delivery');
+  const [googleMapsLink, setGoogleMapsLink] = useState('');
+  const [localDoorDetails, setLocalDoorDetails] = useState('');
+  const [courierAddress, setCourierAddress] = useState('');
+  const [courierCity, setCourierCity] = useState('');
+  const [courierState, setCourierState] = useState('Tamil Nadu');
+  const [courierPincode, setCourierPincode] = useState('');
+  const [isLocating, setIsLocating] = useState(false);
+  const [validationError, setValidationError] = useState('');
+
+  const handleGetLocation = () => {
+    if (!navigator.geolocation) {
+      setValidationError('Geolocation is not supported by your device.');
+      return;
+    }
+    setIsLocating(true);
+    setValidationError('');
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        const { latitude, longitude } = pos.coords;
+        const link = `https://www.google.com/maps?q=${latitude.toFixed(6)},${longitude.toFixed(6)}`;
+        setGoogleMapsLink(link);
+        setIsLocating(false);
+      },
+      () => {
+        setIsLocating(false);
+        setValidationError('Could not auto-detect GPS. Please open Google Maps, tap Share on your pin, and paste the link.');
+      },
+      { enableHighAccuracy: true, timeout: 10000 }
+    );
+  };
+
+  const handleWhatsAppOrder = () => {
+    setValidationError('');
+
+    if (deliveryMethod === 'local_delivery') {
+      if (!googleMapsLink || googleMapsLink.trim().length < 5) {
+        setValidationError('Please paste your Google Maps link or tap "Pin GPS" for Coimbatore delivery.');
+        return;
+      }
+    } else if (deliveryMethod === 'courier') {
+      if (!courierAddress || courierAddress.trim().length < 8) {
+        setValidationError('Please enter your complete postal address (house/flat, street, area) for courier.');
+        return;
+      }
+      if (!courierCity || courierCity.trim().length < 2) {
+        setValidationError('Please enter your city / town.');
+        return;
+      }
+      if (!courierPincode || !/^[1-9][0-9]{5}$/.test(courierPincode.trim())) {
+        setValidationError('Please enter a valid 6-digit postal pincode.');
+        return;
+      }
+    }
+
+    const itemsSummary = items
+      .map(
+        (i) =>
+          `• ${i.product.name} (${i.selected_variant.weight_label}) x${i.quantity}${
+            i.custom_message ? ` ["${i.custom_message}"]` : ''
+          }`
+      )
+      .join('\n');
+
+    let deliveryText = '';
+    if (deliveryMethod === 'courier') {
+      deliveryText =
+        `📦 *FULFILLMENT: Pan-India Express Courier*\n` +
+        `🏠 *Complete Postal Address:*\n${courierAddress}\n` +
+        `City: ${courierCity}\n` +
+        `State: ${courierState}\n` +
+        `📮 Pincode: ${courierPincode}`;
+    } else if (deliveryMethod === 'local_delivery') {
+      deliveryText =
+        `📍 *FULFILLMENT: Inside Coimbatore (Doorstep)*\n` +
+        `🔗 *Google Maps Pin:* ${googleMapsLink}\n` +
+        (localDoorDetails ? `🏠 Door / Flat Details: ${localDoorDetails}\n` : '');
+    } else {
+      deliveryText =
+        `🏪 *FULFILLMENT: Studio Pickup (Podanur, Coimbatore)*\n` +
+        `📍 Podanur Main Road, Coimbatore 641023`;
+    }
+
+    const text = encodeURIComponent(
+      `🎂 *Hello Cakes & Dessert! I would like to order directly from my bag:* 🎂\n\n` +
+      `${deliveryText}\n\n` +
+      `*Items in Bag:*\n${itemsSummary}\n\n` +
+      `*Estimated Subtotal:* ₹${subtotal}\n\n` +
+      `Please confirm slot availability and payment instructions!`
+    );
+
+    window.open(`https://wa.me/918637478423?text=${text}`, '_blank');
+  };
+
+  // Build target link to checkout with state preserved
+  const checkoutUrl = `/checkout?method=${deliveryMethod}&mapLink=${encodeURIComponent(
+    googleMapsLink
+  )}&address=${encodeURIComponent(courierAddress || localDoorDetails)}&city=${encodeURIComponent(
+    courierCity
+  )}&state=${encodeURIComponent(courierState)}&pincode=${encodeURIComponent(courierPincode)}`;
 
   return (
     <AnimatePresence>
@@ -177,6 +293,145 @@ export const CartDrawer: React.FC = () => {
                     </motion.div>
                   ))
                 )}
+
+                {/* Delivery & Address Configuration in Bag */}
+                {items.length > 0 && (
+                  <div className="bg-white rounded-2xl p-4 border border-[#D7BFAE]/50 shadow-xs space-y-3">
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs font-bold uppercase tracking-wider text-[#4B2923]">
+                        Choose Fulfillment:
+                      </span>
+                      <span className="text-[10px] text-[#8A554D] font-medium">
+                        {deliveryMethod === 'local_delivery'
+                          ? '📍 Inside Coimbatore'
+                          : deliveryMethod === 'courier'
+                          ? '📦 Pan-India Courier'
+                          : '🏪 Studio Pickup'}
+                      </span>
+                    </div>
+
+                    {/* 3-way toggle */}
+                    <div className="grid grid-cols-3 gap-1.5 p-1 bg-[#FFF7F0] rounded-xl border border-[#D7BFAE]/40">
+                      <button
+                        type="button"
+                        onClick={() => setDeliveryMethod('local_delivery')}
+                        className={`py-2 px-1 rounded-lg text-[10px] font-bold transition-all text-center ${
+                          deliveryMethod === 'local_delivery'
+                            ? 'bg-[#4B2923] text-white shadow-xs'
+                            : 'text-[#8A554D] hover:text-[#4B2923]'
+                        }`}
+                      >
+                        Coimbatore
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setDeliveryMethod('courier')}
+                        className={`py-2 px-1 rounded-lg text-[10px] font-bold transition-all text-center ${
+                          deliveryMethod === 'courier'
+                            ? 'bg-[#4B2923] text-white shadow-xs'
+                            : 'text-[#8A554D] hover:text-[#4B2923]'
+                        }`}
+                      >
+                        Courier
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setDeliveryMethod('pickup')}
+                        className={`py-2 px-1 rounded-lg text-[10px] font-bold transition-all text-center ${
+                          deliveryMethod === 'pickup'
+                            ? 'bg-[#4B2923] text-white shadow-xs'
+                            : 'text-[#8A554D] hover:text-[#4B2923]'
+                        }`}
+                      >
+                        Pickup
+                      </button>
+                    </div>
+
+                    {/* Coimbatore Mode: Google Maps link */}
+                    {deliveryMethod === 'local_delivery' && (
+                      <div className="space-y-2 pt-1 text-xs">
+                        <div className="flex items-center justify-between gap-2">
+                          <label className="text-[11px] font-bold text-[#4B2923] flex items-center gap-1">
+                            <MapPin className="w-3.5 h-3.5 text-emerald-700" />
+                            <span>Google Maps Link *</span>
+                          </label>
+                          <button
+                            type="button"
+                            onClick={handleGetLocation}
+                            disabled={isLocating}
+                            className="text-[10px] text-emerald-800 hover:text-emerald-950 font-semibold flex items-center gap-1 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200 cursor-pointer"
+                          >
+                            <Navigation className="w-3 h-3" />
+                            <span>{isLocating ? 'Detecting...' : '📍 Pin GPS'}</span>
+                          </button>
+                        </div>
+                        <input
+                          type="url"
+                          value={googleMapsLink}
+                          onChange={(e) => setGoogleMapsLink(e.target.value)}
+                          placeholder="https://maps.app.goo.gl/... or paste map pin"
+                          className="w-full text-xs p-2.5 rounded-xl border border-emerald-300 bg-[#FFF7F0] text-[#4B2923]"
+                        />
+                        <input
+                          type="text"
+                          value={localDoorDetails}
+                          onChange={(e) => setLocalDoorDetails(e.target.value)}
+                          placeholder="Flat / House No. & Landmark (optional)"
+                          className="w-full text-xs p-2 rounded-xl border border-[#D7BFAE]/50 bg-[#FFF7F0] text-[#4B2923]"
+                        />
+                      </div>
+                    )}
+
+                    {/* Courier Mode: Complete Address */}
+                    {deliveryMethod === 'courier' && (
+                      <div className="space-y-2 pt-1 text-xs">
+                        <div className="flex items-center gap-1 text-[11px] font-bold text-[#4B2923]">
+                          <Package className="w-3.5 h-3.5 text-amber-700" />
+                          <span>Complete Courier Postal Address *</span>
+                        </div>
+                        <textarea
+                          rows={2}
+                          value={courierAddress}
+                          onChange={(e) => setCourierAddress(e.target.value)}
+                          placeholder="Door/Flat No, Building, Street, Locality *"
+                          className="w-full text-xs p-2 rounded-xl border border-amber-300 bg-[#FFF7F0] text-[#4B2923]"
+                        />
+                        <div className="grid grid-cols-2 gap-2">
+                          <input
+                            type="text"
+                            value={courierCity}
+                            onChange={(e) => setCourierCity(e.target.value)}
+                            placeholder="City / Town *"
+                            className="w-full text-xs p-2 rounded-xl border border-[#D7BFAE]/60 bg-[#FFF7F0] text-[#4B2923]"
+                          />
+                          <input
+                            type="text"
+                            maxLength={6}
+                            value={courierPincode}
+                            onChange={(e) => setCourierPincode(e.target.value)}
+                            placeholder="6-digit Pincode *"
+                            className="w-full text-xs p-2 rounded-xl border border-[#D7BFAE]/60 bg-[#FFF7F0] text-[#4B2923]"
+                          />
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Pickup Mode */}
+                    {deliveryMethod === 'pickup' && (
+                      <div className="text-[11px] text-[#8A554D] bg-[#FFF7F0] p-2.5 rounded-xl border border-[#D7BFAE]/40 flex items-center gap-2">
+                        <Store className="w-4 h-4 text-[#8A554D] shrink-0" />
+                        <span>Podanur Kitchen Studio, Coimbatore (Free Pickup)</span>
+                      </div>
+                    )}
+
+                    {validationError && (
+                      <div className="p-2 bg-red-50 text-red-700 text-[11px] rounded-lg border border-red-200 flex items-center gap-1.5 font-medium">
+                        <AlertCircle className="w-3.5 h-3.5 shrink-0" />
+                        <span>{validationError}</span>
+                      </div>
+                    )}
+                  </div>
+                )}
               </div>
 
               {/* Footer Checkout Summary */}
@@ -189,11 +444,29 @@ export const CartDrawer: React.FC = () => {
                     </div>
                     <div className="flex justify-between">
                       <span>Delivery Fee</span>
-                      <span className="text-emerald-700 font-medium">Calculated at slot checkout</span>
+                      <span className="text-emerald-700 font-medium">
+                        {deliveryMethod === 'pickup'
+                          ? 'Free (Pickup)'
+                          : deliveryMethod === 'courier'
+                          ? '₹120 (Courier Pan-India)'
+                          : '₹80 (Local CBE Zone)'}
+                      </span>
                     </div>
                     <div className="border-t border-[#D7BFAE]/40 pt-2 flex justify-between text-base font-serif font-bold text-[#4B2923]">
                       <span>Estimated Total</span>
-                      <span>₹{subtotal}</span>
+                      <span>
+                        ₹
+                        {subtotal +
+                          (deliveryMethod === 'pickup'
+                            ? 0
+                            : deliveryMethod === 'courier'
+                            ? subtotal >= 1200
+                              ? 0
+                              : 120
+                            : subtotal >= 1200
+                            ? 0
+                            : 80)}
+                      </span>
                     </div>
                   </div>
 
@@ -203,13 +476,23 @@ export const CartDrawer: React.FC = () => {
                   </div>
 
                   <div className="space-y-2">
-                    <Link
-                      to="/checkout"
-                      onClick={closeCart}
-                      className="w-full flex items-center justify-center gap-2 bg-[#4B2923] text-white py-3.5 px-6 rounded-full font-medium shadow-md hover:bg-[#2F1916] transition-all"
+                    <button
+                      type="button"
+                      onClick={handleWhatsAppOrder}
+                      className="w-full flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white py-3.5 px-6 rounded-full font-bold text-xs uppercase tracking-wider shadow-md transition-all active:scale-98 cursor-pointer"
                     >
-                      Proceed to Pre-Order Scheduling <ArrowRight className="w-4 h-4" />
+                      <MessageCircle className="w-4 h-4" />
+                      Direct WhatsApp Order
+                    </button>
+
+                    <Link
+                      to={checkoutUrl}
+                      onClick={closeCart}
+                      className="w-full flex items-center justify-center gap-2 bg-[#4B2923] text-white py-3 px-6 rounded-full text-xs font-semibold uppercase tracking-wider hover:bg-[#2F1916] transition-all"
+                    >
+                      Schedule Pre-Order &amp; Slot <ArrowRight className="w-4 h-4" />
                     </Link>
+
                     <button
                       onClick={closeCart}
                       className="w-full text-center text-xs text-[#8A554D] hover:text-[#4B2923] py-1 transition-colors"

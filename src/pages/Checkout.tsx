@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Link, useSearchParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import {
   Calendar,
@@ -15,6 +15,9 @@ import {
   AlertCircle,
   QrCode,
   Banknote,
+  MapPin,
+  Navigation,
+  Package,
 } from 'lucide-react';
 import { useCart } from '@/contexts/CartContext';
 import { dataProvider } from '@/services/dataProvider';
@@ -23,6 +26,7 @@ import { checkoutFormSchema, CheckoutFormData } from '@/schemas/orderSchema';
 
 export const Checkout: React.FC = () => {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const { items, subtotal, clearCart } = useCart();
 
   const [deliveryAreas, setDeliveryAreas] = useState<DeliveryArea[]>([]);
@@ -32,18 +36,30 @@ export const Checkout: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
 
+  // Parse initial delivery method from URL if navigated from Cart
+  const initialMethod = searchParams.get('method');
+  const resolvedInitialMethod: DeliveryMethod =
+    initialMethod === 'courier' ? 'courier' : initialMethod === 'pickup' ? 'pickup' : 'local_delivery';
+
   // Checkout Form State
   const [customerName, setCustomerName] = useState('');
   const [customerPhone, setCustomerPhone] = useState('');
   const [customerEmail, setCustomerEmail] = useState('');
-  const [deliveryMethod, setDeliveryMethod] = useState<DeliveryMethod>('delivery');
-  const [deliveryAddress, setDeliveryAddress] = useState('');
-  const [deliveryPincode, setDeliveryPincode] = useState('641023');
+  const [deliveryMethod, setDeliveryMethod] = useState<DeliveryMethod>(resolvedInitialMethod);
+  const [googleMapsLink, setGoogleMapsLink] = useState(searchParams.get('mapLink') || '');
+  const [deliveryAddress, setDeliveryAddress] = useState(searchParams.get('address') || '');
+  const [deliveryCity, setDeliveryCity] = useState(searchParams.get('city') || '');
+  const [deliveryState, setDeliveryState] = useState(searchParams.get('state') || 'Tamil Nadu');
+  const [deliveryPincode, setDeliveryPincode] = useState(searchParams.get('pincode') || '641023');
   const [deliveryLandmark, setDeliveryLandmark] = useState('');
   const [scheduledDate, setScheduledDate] = useState('');
   const [scheduledSlotId, setScheduledSlotId] = useState('');
   const [paymentPreference, setPaymentPreference] = useState<PaymentMethodPreference>('upi');
   const [specialInstructions, setSpecialInstructions] = useState('');
+
+  // GPS Pin locator state
+  const [isLocating, setIsLocating] = useState(false);
+  const [locationError, setLocationError] = useState('');
 
   // Calculate minimum order preparation lead time across all items in cart
   const minLeadHours = useMemo(() => {
@@ -82,9 +98,9 @@ export const Checkout: React.FC = () => {
     init();
   }, []);
 
-  // Compute matched delivery fee based on selected pincode
+  // Compute matched delivery fee based on fulfillment method & pincode
   const matchedArea = useMemo(() => {
-    if (deliveryMethod === 'pickup') return null;
+    if (deliveryMethod === 'pickup' || deliveryMethod === 'courier') return null;
     return deliveryAreas.find((a) => a.pincode === deliveryPincode.trim() && a.is_active) || null;
   }, [deliveryAreas, deliveryPincode, deliveryMethod]);
 
@@ -93,13 +109,39 @@ export const Checkout: React.FC = () => {
     if (siteSettings?.free_delivery_threshold && subtotal >= siteSettings.free_delivery_threshold) {
       return 0; // Free delivery threshold met!
     }
-    return matchedArea ? matchedArea.delivery_fee : 80; // default standard zone fee
+    if (deliveryMethod === 'courier') {
+      return 120; // Standard express courier packaging & shipping across India
+    }
+    return matchedArea ? matchedArea.delivery_fee : 80; // Standard Coimbatore zone fee
   }, [deliveryMethod, matchedArea, siteSettings, subtotal]);
 
   const finalTotal = subtotal + deliveryFee;
 
   // Selected Slot details
   const selectedSlot = timeSlots.find((s) => s.id === scheduledSlotId);
+
+  // Auto-detect GPS location link for Coimbatore delivery
+  const handleGetLocation = () => {
+    if (!navigator.geolocation) {
+      setLocationError('Geolocation is not supported by your browser.');
+      return;
+    }
+    setIsLocating(true);
+    setLocationError('');
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const { latitude, longitude } = position.coords;
+        const link = `https://www.google.com/maps?q=${latitude.toFixed(6)},${longitude.toFixed(6)}`;
+        setGoogleMapsLink(link);
+        setIsLocating(false);
+      },
+      () => {
+        setIsLocating(false);
+        setLocationError('Could not auto-detect GPS. Please open Google Maps, tap your pin, click Share, and paste the link here.');
+      },
+      { enableHighAccuracy: true, timeout: 10000 }
+    );
+  };
 
   const handleSubmitOrder = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -111,13 +153,19 @@ export const Checkout: React.FC = () => {
       return;
     }
 
+    const isLocalDelivery = deliveryMethod === 'local_delivery' || deliveryMethod === 'delivery';
+    const isCourier = deliveryMethod === 'courier';
+
     const payload: CheckoutFormData = {
       customer_name: customerName,
       customer_phone: customerPhone,
       customer_email: customerEmail || undefined,
       delivery_method: deliveryMethod,
-      delivery_address: deliveryMethod === 'delivery' ? deliveryAddress : undefined,
-      delivery_pincode: deliveryMethod === 'delivery' ? deliveryPincode : undefined,
+      google_maps_link: isLocalDelivery ? googleMapsLink : undefined,
+      delivery_address: isCourier ? deliveryAddress : (deliveryAddress || undefined),
+      delivery_city: isCourier ? deliveryCity : 'Coimbatore',
+      delivery_state: isCourier ? deliveryState : 'Tamil Nadu',
+      delivery_pincode: isCourier ? deliveryPincode : (deliveryPincode || undefined),
       delivery_landmark: deliveryLandmark || undefined,
       scheduled_date: scheduledDate,
       scheduled_slot_id: scheduledSlotId,
@@ -163,8 +211,11 @@ export const Checkout: React.FC = () => {
         customer_phone: customerPhone,
         customer_email: customerEmail || undefined,
         delivery_method: deliveryMethod,
-        delivery_address: deliveryMethod === 'delivery' ? deliveryAddress : undefined,
-        delivery_pincode: deliveryMethod === 'delivery' ? deliveryPincode : undefined,
+        google_maps_link: isLocalDelivery ? googleMapsLink : undefined,
+        delivery_address: isCourier ? deliveryAddress : (deliveryAddress || undefined),
+        delivery_city: isCourier ? deliveryCity : 'Coimbatore',
+        delivery_state: isCourier ? deliveryState : 'Tamil Nadu',
+        delivery_pincode: isCourier ? deliveryPincode : (deliveryPincode || undefined),
         delivery_landmark: deliveryLandmark || undefined,
         scheduled_date: scheduledDate,
         scheduled_slot_id: scheduledSlotId,
@@ -273,19 +324,33 @@ export const Checkout: React.FC = () => {
                 </h2>
               </div>
 
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <button
                   type="button"
-                  onClick={() => setDeliveryMethod('delivery')}
+                  onClick={() => setDeliveryMethod('local_delivery')}
                   className={`p-4 rounded-2xl border text-left transition-all ${
-                    deliveryMethod === 'delivery'
-                      ? 'border-[#4B2923] bg-[#FFF7F0] ring-1 ring-[#4B2923]'
+                    deliveryMethod === 'local_delivery' || deliveryMethod === 'delivery'
+                      ? 'border-[#4B2923] bg-[#FFF7F0] ring-2 ring-[#4B2923]'
                       : 'border-[#D7BFAE]/50 hover:border-[#8A554D]'
                   }`}
                 >
-                  <Truck className="w-5 h-5 text-[#8A554D] mb-1.5" />
-                  <span className="font-bold text-sm text-[#4B2923] block">Doorstep Delivery</span>
-                  <span className="text-[11px] text-[#8A554D] block mt-0.5">Across Coimbatore</span>
+                  <MapPin className="w-5 h-5 text-[#8A554D] mb-1.5" />
+                  <span className="font-bold text-sm text-[#4B2923] block">Inside Coimbatore</span>
+                  <span className="text-[11px] text-[#8A554D] block mt-0.5">Local Doorstep (Google Maps Pin)</span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => setDeliveryMethod('courier')}
+                  className={`p-4 rounded-2xl border text-left transition-all ${
+                    deliveryMethod === 'courier'
+                      ? 'border-[#4B2923] bg-[#FFF7F0] ring-2 ring-[#4B2923]'
+                      : 'border-[#D7BFAE]/50 hover:border-[#8A554D]'
+                  }`}
+                >
+                  <Package className="w-5 h-5 text-[#8A554D] mb-1.5" />
+                  <span className="font-bold text-sm text-[#4B2923] block">Pan-India Courier</span>
+                  <span className="text-[11px] text-[#8A554D] block mt-0.5">Outside CBE (Full Address)</span>
                 </button>
 
                 <button
@@ -293,7 +358,7 @@ export const Checkout: React.FC = () => {
                   onClick={() => setDeliveryMethod('pickup')}
                   className={`p-4 rounded-2xl border text-left transition-all ${
                     deliveryMethod === 'pickup'
-                      ? 'border-[#4B2923] bg-[#FFF7F0] ring-1 ring-[#4B2923]'
+                      ? 'border-[#4B2923] bg-[#FFF7F0] ring-2 ring-[#4B2923]'
                       : 'border-[#D7BFAE]/50 hover:border-[#8A554D]'
                   }`}
                 >
@@ -442,12 +507,48 @@ export const Checkout: React.FC = () => {
                   )}
                 </div>
 
-                {deliveryMethod === 'delivery' && (
-                  <>
+                {/* 1. Inside Coimbatore: Google Maps Pin is required */}
+                {(deliveryMethod === 'local_delivery' || deliveryMethod === 'delivery') && (
+                  <div className="space-y-4 pt-2 border-t border-[#D7BFAE]/30">
+                    <div className="bg-emerald-50/70 p-4 rounded-2xl border border-emerald-200">
+                      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-2">
+                        <label className="text-xs font-bold uppercase tracking-wider text-[#4B2923] flex items-center gap-1.5">
+                          <MapPin className="w-4 h-4 text-emerald-700" />
+                          <span>Google Maps Location Link *</span>
+                        </label>
+                        <button
+                          type="button"
+                          onClick={handleGetLocation}
+                          disabled={isLocating}
+                          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white text-[11px] font-semibold transition-colors cursor-pointer shadow-xs"
+                        >
+                          <Navigation className="w-3.5 h-3.5" />
+                          <span>{isLocating ? 'Detecting GPS...' : '📍 Pin Current GPS Location'}</span>
+                        </button>
+                      </div>
+
+                      <input
+                        type="url"
+                        value={googleMapsLink}
+                        onChange={(e) => setGoogleMapsLink(e.target.value)}
+                        placeholder="e.g. https://maps.app.goo.gl/... or https://goo.gl/maps/..."
+                        className="w-full text-xs p-3.5 rounded-xl border border-emerald-300 bg-white text-[#4B2923] focus:ring-1 focus:ring-emerald-600"
+                      />
+                      {errors.google_maps_link && (
+                        <p className="text-red-600 text-xs mt-1.5 font-medium">{errors.google_maps_link}</p>
+                      )}
+                      {locationError && (
+                        <p className="text-amber-700 text-[11px] mt-1.5">{locationError}</p>
+                      )}
+                      <p className="text-[11px] text-[#8A554D] mt-2">
+                        💡 <strong>How to copy link:</strong> Open Google Maps &rarr; tap your home pin &rarr; tap <strong>Share</strong> &rarr; tap <strong>Copy Link</strong> and paste it here. Or tap the button above to auto-pin your GPS location.
+                      </p>
+                    </div>
+
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                       <div className="sm:col-span-2">
                         <label className="text-xs font-bold uppercase tracking-wider text-[#4B2923] block mb-1">
-                          Delivery Address (House/Apt, Street) *
+                          House / Flat / Door No. & Street Details:
                         </label>
                         <input
                           type="text"
@@ -456,14 +557,10 @@ export const Checkout: React.FC = () => {
                           placeholder="e.g. Flat 3B, Glen Palms, DB Road, RS Puram"
                           className="w-full text-xs p-3.5 rounded-xl border border-[#D7BFAE] bg-[#FFF7F0] text-[#4B2923]"
                         />
-                        {errors.delivery_address && (
-                          <p className="text-red-600 text-xs mt-1">{errors.delivery_address}</p>
-                        )}
                       </div>
-
                       <div>
                         <label className="text-xs font-bold uppercase tracking-wider text-[#4B2923] block mb-1">
-                          Pincode *
+                          Coimbatore Pincode:
                         </label>
                         <input
                           type="text"
@@ -473,25 +570,130 @@ export const Checkout: React.FC = () => {
                           placeholder="641002"
                           className="w-full text-xs p-3.5 rounded-xl border border-[#D7BFAE] bg-[#FFF7F0] text-[#4B2923]"
                         />
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="text-xs font-bold uppercase tracking-wider text-[#4B2923] block mb-1">
+                        Nearby Landmark in Coimbatore (Optional):
+                      </label>
+                      <input
+                        type="text"
+                        value={deliveryLandmark}
+                        onChange={(e) => setDeliveryLandmark(e.target.value)}
+                        placeholder="e.g. Opp. Flower Market, Near Brookefields"
+                        className="w-full text-xs p-3.5 rounded-xl border border-[#D7BFAE] bg-[#FFF7F0] text-[#4B2923]"
+                      />
+                    </div>
+                  </div>
+                )}
+
+                {/* 2. Pan-India Courier: Complete Postal Address is required */}
+                {deliveryMethod === 'courier' && (
+                  <div className="space-y-4 pt-2 border-t border-[#D7BFAE]/30">
+                    <div className="bg-amber-50/70 p-4 rounded-2xl border border-amber-200 text-xs text-[#4B2923]">
+                      <div className="flex items-center gap-2 font-bold mb-1">
+                        <Package className="w-4 h-4 text-amber-800" />
+                        <span>Pan-India Courier Shipping Address</span>
+                      </div>
+                      <p className="text-[11px] text-[#8A554D]">
+                        Please provide your full postal address so our courier partner (DTDC / BlueDart / India Post) can deliver safely without return.
+                      </p>
+                    </div>
+
+                    <div>
+                      <label className="text-xs font-bold uppercase tracking-wider text-[#4B2923] block mb-1">
+                        Complete Postal Address (House/Apt No, Building, Street, Area) *
+                      </label>
+                      <textarea
+                        rows={2}
+                        value={deliveryAddress}
+                        onChange={(e) => setDeliveryAddress(e.target.value)}
+                        placeholder="e.g. Door No. 42, 3rd Floor, Shanti Apartments, 4th Main Road, Indiranagar"
+                        className="w-full text-xs p-3.5 rounded-xl border border-[#D7BFAE] bg-[#FFF7F0] text-[#4B2923]"
+                      />
+                      {errors.delivery_address && (
+                        <p className="text-red-600 text-xs mt-1 font-medium">{errors.delivery_address}</p>
+                      )}
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                      <div>
+                        <label className="text-xs font-bold uppercase tracking-wider text-[#4B2923] block mb-1">
+                          City / Town *
+                        </label>
+                        <input
+                          type="text"
+                          value={deliveryCity}
+                          onChange={(e) => setDeliveryCity(e.target.value)}
+                          placeholder="e.g. Bengaluru, Chennai, Kochi"
+                          className="w-full text-xs p-3.5 rounded-xl border border-[#D7BFAE] bg-[#FFF7F0] text-[#4B2923]"
+                        />
+                        {errors.delivery_city && (
+                          <p className="text-red-600 text-xs mt-1 font-medium">{errors.delivery_city}</p>
+                        )}
+                      </div>
+
+                      <div>
+                        <label className="text-xs font-bold uppercase tracking-wider text-[#4B2923] block mb-1">
+                          State *
+                        </label>
+                        <input
+                          type="text"
+                          value={deliveryState}
+                          onChange={(e) => setDeliveryState(e.target.value)}
+                          placeholder="e.g. Karnataka, Kerala, Tamil Nadu"
+                          className="w-full text-xs p-3.5 rounded-xl border border-[#D7BFAE] bg-[#FFF7F0] text-[#4B2923]"
+                        />
+                        {errors.delivery_state && (
+                          <p className="text-red-600 text-xs mt-1 font-medium">{errors.delivery_state}</p>
+                        )}
+                      </div>
+
+                      <div>
+                        <label className="text-xs font-bold uppercase tracking-wider text-[#4B2923] block mb-1">
+                          Postal Pincode *
+                        </label>
+                        <input
+                          type="text"
+                          maxLength={6}
+                          value={deliveryPincode}
+                          onChange={(e) => setDeliveryPincode(e.target.value)}
+                          placeholder="e.g. 560038"
+                          className="w-full text-xs p-3.5 rounded-xl border border-[#D7BFAE] bg-[#FFF7F0] text-[#4B2923]"
+                        />
                         {errors.delivery_pincode && (
-                          <p className="text-red-600 text-xs mt-1">{errors.delivery_pincode}</p>
+                          <p className="text-red-600 text-xs mt-1 font-medium">{errors.delivery_pincode}</p>
                         )}
                       </div>
                     </div>
 
                     <div>
                       <label className="text-xs font-bold uppercase tracking-wider text-[#4B2923] block mb-1">
-                        Nearby Landmark:
+                        Nearby Landmark (Optional):
                       </label>
                       <input
                         type="text"
                         value={deliveryLandmark}
                         onChange={(e) => setDeliveryLandmark(e.target.value)}
-                        placeholder="e.g. Opposite Flower Market, Near Annapoorna"
+                        placeholder="e.g. Opposite BDA Complex, Near Metro Station"
                         className="w-full text-xs p-3.5 rounded-xl border border-[#D7BFAE] bg-[#FFF7F0] text-[#4B2923]"
                       />
                     </div>
-                  </>
+                  </div>
+                )}
+
+                {/* 3. Studio Pickup notice */}
+                {deliveryMethod === 'pickup' && (
+                  <div className="p-4 bg-[#FFF7F0] rounded-2xl border border-[#D7BFAE]/50 text-xs text-[#8A554D] space-y-1">
+                    <strong className="text-[#4B2923] flex items-center gap-1.5">
+                      <Store className="w-4 h-4 text-[#8A554D]" /> Studio Kitchen Pickup Location:
+                    </strong>
+                    <p>{siteSettings?.address_pickup || 'Podanur Main Road, Coimbatore 641023'}</p>
+                    <p className="text-[11px] text-emerald-800 font-medium">
+                      ✓ No delivery fee. Exact pickup directions and kitchen contact shared upon confirmation.
+                    </p>
+                  </div>
                 )}
 
                 <div>

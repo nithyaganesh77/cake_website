@@ -83,12 +83,14 @@ export const AdminOrders: React.FC = () => {
       return;
     }
 
-    const headers = ['Order Number', 'Date Placed', 'Customer Name', 'Phone', 'Scheduled Date', 'Slot', 'Total Amount', 'Payment Status', 'Order Status'];
+    const headers = ['Order Number', 'Date Placed', 'Customer Name', 'Phone', 'Method', 'Google Maps / Address', 'Scheduled Date', 'Slot', 'Total Amount', 'Payment Status', 'Order Status'];
     const rows = orders.map((o) => [
       o.order_number,
       new Date(o.created_at).toLocaleDateString(),
       `"${o.customer_name}"`,
       `"${o.customer_phone}"`,
+      o.delivery_method,
+      `"${o.google_maps_link || o.delivery_address || ''}"`,
       o.scheduled_date,
       `"${o.scheduled_slot_label}"`,
       o.total_amount,
@@ -306,12 +308,38 @@ export const AdminOrders: React.FC = () => {
 
               <div>
                 <strong className="text-[#4B2923] block">Fulfillment Scheduled:</strong>
-                <p className="mt-1">Method: {selectedOrder.delivery_method === 'delivery' ? 'Local Delivery' : 'Studio Pickup'}</p>
+                <p className="mt-1">
+                  Method:{' '}
+                  <strong>
+                    {selectedOrder.delivery_method === 'courier'
+                      ? 'Pan-India Express Courier'
+                      : selectedOrder.delivery_method === 'local_delivery' || selectedOrder.delivery_method === 'delivery'
+                      ? 'Doorstep Delivery (Coimbatore)'
+                      : 'Studio Pickup'}
+                  </strong>
+                </p>
                 <p>Date: {selectedOrder.scheduled_date}</p>
                 <p>Slot: {selectedOrder.scheduled_slot_label}</p>
+                {selectedOrder.google_maps_link && (
+                  <p className="mt-1.5 pt-1 border-t border-[#D7BFAE]/30">
+                    <strong className="block text-[#4B2923]">📍 Google Maps Pin:</strong>
+                    <a
+                      href={selectedOrder.google_maps_link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-700 underline font-semibold text-[11px] break-all inline-block mt-0.5"
+                    >
+                      {selectedOrder.google_maps_link}
+                    </a>
+                  </p>
+                )}
                 {selectedOrder.delivery_address && (
                   <p className="mt-1 pt-1 border-t border-[#D7BFAE]/30">
-                    <strong>Address:</strong> {selectedOrder.delivery_address}, {selectedOrder.delivery_pincode}
+                    <strong className="block text-[#4B2923]">Delivery Address:</strong>
+                    <span>{selectedOrder.delivery_address}</span>
+                    {selectedOrder.delivery_city && <span>, {selectedOrder.delivery_city}</span>}
+                    {selectedOrder.delivery_state && <span>, {selectedOrder.delivery_state}</span>}
+                    {selectedOrder.delivery_pincode && <span> — {selectedOrder.delivery_pincode}</span>}
                   </p>
                 )}
               </div>
