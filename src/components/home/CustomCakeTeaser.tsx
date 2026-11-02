@@ -7,7 +7,13 @@ export const CustomCakeTeaser: React.FC = () => {
   return (
     <section className="py-20 bg-[#FFF7F0] relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="bg-gradient-to-br from-[#4B2923] to-[#2F1916] rounded-[36px] p-8 sm:p-12 lg:p-16 text-white shadow-2xl relative overflow-hidden border border-[#8A554D]/40">
+        <motion.div
+          initial={{ opacity: 0, y: 35, scale: 0.98 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+          viewport={{ once: true, margin: '-50px' }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          className="bg-gradient-to-br from-[#4B2923] to-[#2F1916] rounded-[36px] p-8 sm:p-12 lg:p-16 text-white shadow-2xl relative overflow-hidden border border-[#8A554D]/40"
+        >
           
           {/* Subtle background flourishes */}
           <div className="absolute top-0 right-0 w-96 h-96 rounded-full bg-[#E9AEBB]/10 blur-3xl pointer-events-none" />
@@ -82,7 +88,7 @@ export const CustomCakeTeaser: React.FC = () => {
 
           </div>
 
-        </div>
+        </motion.div>
       </div>
     </section>
   );

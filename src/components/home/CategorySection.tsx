@@ -14,7 +14,13 @@ export const CategorySection: React.FC<CategorySectionProps> = ({ categories }) 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="text-center max-w-2xl mx-auto mb-14">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-60px' }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          className="text-center max-w-2xl mx-auto mb-14"
+        >
           <span className="text-xs uppercase tracking-widest font-semibold text-[#8A554D] block mb-2">
             Artisanal Collections
           </span>
@@ -25,21 +31,21 @@ export const CategorySection: React.FC<CategorySectionProps> = ({ categories }) 
           <p className="text-sm sm:text-base text-[#8A554D] leading-relaxed">
             From deeply fudgy brownies baked with 70% dark Belgian chocolate to customized milestone cakes and Korean bento boxes.
           </p>
-        </div>
+        </motion.div>
 
         {/* Categories Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {categories.map((cat, idx) => (
             <motion.div
               key={cat.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: idx * 0.1 }}
+              initial={{ opacity: 0, y: 35, scale: 0.96 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              viewport={{ once: true, margin: '-40px' }}
+              transition={{ duration: 0.6, delay: idx * 0.12, ease: [0.22, 1, 0.36, 1] }}
             >
               <Link
                 to={`/shop?category=${cat.id}`}
-                className="group relative block rounded-3xl overflow-hidden bg-[#FFF7F0] border border-[#D7BFAE]/40 shadow-sm hover:shadow-xl transition-all duration-500"
+                className="group relative block rounded-3xl overflow-hidden bg-[#FFF7F0] border border-[#D7BFAE]/40 shadow-sm hover:shadow-xl transition-all duration-500 hover:-translate-y-1.5"
               >
                 {/* Image Container with Hover Zoom */}
                 <div className="aspect-4/3 overflow-hidden relative">

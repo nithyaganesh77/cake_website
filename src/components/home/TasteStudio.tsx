@@ -166,7 +166,13 @@ export const TasteStudio: React.FC = () => {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Heading */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-50px' }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          className="text-center max-w-3xl mx-auto mb-16"
+        >
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#F7DCE2] border border-[#E9AEBB]/60 text-[#4B2923] text-xs font-bold uppercase tracking-widest mb-3">
             <Wand2 className="w-3.5 h-3.5 text-[#8A554D]" />
             Interactive Patisserie Laboratory
@@ -177,7 +183,7 @@ export const TasteStudio: React.FC = () => {
           <p className="text-sm sm:text-base text-[#8A554D] mt-3 font-normal max-w-2xl mx-auto">
             Design your ideal celebratory slice layer-by-layer. Watch the harmonic flavor profile calculate in real-time as you compose your dream cake.
           </p>
-        </div>
+        </motion.div>
 
         {/* Interactive Studio Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">

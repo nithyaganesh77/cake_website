@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import { Calendar, ShoppingBag, Clock, HeartHandshake } from 'lucide-react';
 
 export const PreOrderStepsSection: React.FC = () => {
@@ -33,7 +34,13 @@ export const PreOrderStepsSection: React.FC = () => {
     <section className="py-20 bg-[#FFF7F0]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        <div className="text-center max-w-2xl mx-auto mb-16">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-50px' }}
+          transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
+          className="text-center max-w-2xl mx-auto mb-16"
+        >
           <span className="text-xs uppercase tracking-widest font-semibold text-[#8A554D] block mb-2">
             Seamless Ordering
           </span>
@@ -44,15 +51,19 @@ export const PreOrderStepsSection: React.FC = () => {
           <p className="text-sm sm:text-base text-[#8A554D]">
             Because all our bakes are handcrafted from scratch, we operate with transparent slot scheduling.
           </p>
-        </div>
+        </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative">
           {steps.map((item, idx) => {
             const Icon = item.icon;
             return (
-              <div
+              <motion.div
                 key={item.step}
-                className="bg-white rounded-3xl p-6 border border-[#D7BFAE]/30 shadow-sm relative group hover:shadow-md transition-shadow"
+                initial={{ opacity: 0, y: 35, scale: 0.96 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                viewport={{ once: true, margin: '-40px' }}
+                transition={{ duration: 0.55, delay: idx * 0.12, ease: [0.22, 1, 0.36, 1] }}
+                className="bg-white rounded-3xl p-6 border border-[#D7BFAE]/30 shadow-sm relative group hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300"
               >
                 <span className="font-serif font-extrabold text-4xl text-[#F7DCE2] group-hover:text-[#E9AEBB] transition-colors absolute top-4 right-4">
                   {item.step}
@@ -69,7 +80,7 @@ export const PreOrderStepsSection: React.FC = () => {
                 <p className="text-xs sm:text-sm text-[#8A554D] leading-relaxed">
                   {item.desc}
                 </p>
-              </div>
+              </motion.div>
             );
           })}
         </div>

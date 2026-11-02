@@ -47,10 +47,16 @@ export const Home: React.FC = () => {
       <CategorySection categories={categories} />
 
       {/* 3. Swiggy Instant Same-Day Delivery Spotlight (In the scroll) */}
-      <section className="py-10 bg-gradient-to-r from-[#200F0D] via-[#351915] to-[#200F0D] text-white border-y border-[#FC8019]/30 relative overflow-hidden">
+      <section className="py-12 bg-gradient-to-r from-[#200F0D] via-[#351915] to-[#200F0D] text-white border-y border-[#FC8019]/30 relative overflow-hidden">
         <div className="absolute -right-20 -bottom-20 w-80 h-80 rounded-full bg-[#FC8019]/15 blur-3xl pointer-events-none" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="flex flex-col lg:flex-row items-center justify-between gap-6 bg-white/5 backdrop-blur-md p-6 sm:p-8 rounded-3xl border border-white/10 shadow-2xl">
+          <motion.div
+            initial={{ opacity: 0, y: 35, scale: 0.98 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+            viewport={{ once: true, margin: '-50px' }}
+            transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
+            className="flex flex-col lg:flex-row items-center justify-between gap-6 bg-white/5 backdrop-blur-md p-6 sm:p-8 rounded-3xl border border-white/10 shadow-2xl hover:border-white/20 transition-colors"
+          >
             <div className="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-5">
               <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-[#FC8019] flex items-center justify-center shrink-0 shadow-lg text-white font-black text-2xl">
                 ⚡
@@ -84,7 +90,7 @@ export const Home: React.FC = () => {
                 <span>📦 Courier Brownie Slabs</span>
               </Link>
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -94,7 +100,13 @@ export const Home: React.FC = () => {
       {/* 5. Featured Products with Live Portion Selector */}
       <section className="py-20 bg-[#FFF7F0]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-50px' }}
+            transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
+            className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4"
+          >
             <div>
               <span className="font-script text-3xl text-[#8A554D] block mb-1">
                 Fresh from the Oven
@@ -106,12 +118,12 @@ export const Home: React.FC = () => {
             
             <Link
               to="/shop"
-              className="inline-flex items-center gap-2 text-xs uppercase tracking-widest font-bold text-[#4B2923] hover:text-[#8A554D] transition-colors group bg-white px-5 py-3 rounded-full border border-[#D7BFAE]/60 shadow-xs"
+              className="inline-flex items-center gap-2 text-xs uppercase tracking-widest font-bold text-[#4B2923] hover:text-[#8A554D] transition-colors group bg-white px-5 py-3 rounded-full border border-[#D7BFAE]/60 shadow-xs hover:shadow-md"
             >
               <span>Explore Complete Menu</span>
               <ArrowRight className="w-4 h-4 text-[#E9AEBB] group-hover:translate-x-1.5 transition-transform" />
             </Link>
-          </div>
+          </motion.div>
 
           {isLoading ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -121,8 +133,16 @@ export const Home: React.FC = () => {
             </div>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-              {featuredProducts.map((product) => (
-                <ProductCard key={product.id} product={product} />
+              {featuredProducts.map((product, idx) => (
+                <motion.div
+                  key={product.id}
+                  initial={{ opacity: 0, y: 35, scale: 0.97 }}
+                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                  viewport={{ once: true, margin: '-40px' }}
+                  transition={{ duration: 0.55, delay: idx * 0.1, ease: [0.22, 1, 0.36, 1] }}
+                >
+                  <ProductCard product={product} />
+                </motion.div>
               ))}
             </div>
           )}
@@ -150,7 +170,13 @@ export const Home: React.FC = () => {
       {/* 8. WhatsApp Quick Order Banner */}
       <section className="py-14 bg-gradient-to-r from-[#F7DCE2] via-[#FFF7F0] to-[#F7DCE2] border-t border-[#E9AEBB]/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-40px' }}
+            transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
+            className="flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left"
+          >
             <div>
               <span className="font-script text-2xl text-[#8A554D] block mb-1">
                 Direct Baker Consultation
@@ -168,7 +194,7 @@ export const Home: React.FC = () => {
                 href="https://wa.me/918637478423?text=Hello%20Cakes%20%26%20Dessert!%20I%20would%20like%20to%20enquire%20about%20ordering%20a%20cake."
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2.5 bg-[#4B2923] text-white text-xs uppercase tracking-wider font-bold px-6 py-4 rounded-full shadow-lg hover:bg-[#2F1916] transition-all hover:scale-105"
+                className="inline-flex items-center gap-2.5 bg-[#4B2923] text-white text-xs uppercase tracking-wider font-bold px-6 py-4 rounded-full shadow-lg hover:bg-[#2F1916] transition-all hover:scale-105 active:scale-95"
               >
                 <MessageCircle className="w-4 h-4 text-[#E9AEBB]" />
                 WhatsApp Baker (+91 863 747 8423)
@@ -177,19 +203,19 @@ export const Home: React.FC = () => {
                 href="https://www.swiggy.com/direct/brand/708273?source=swiggy-direct&subSource=whatsapp"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 bg-[#FC8019] text-white text-xs uppercase tracking-wider font-extrabold px-6 py-4 rounded-full shadow-lg hover:bg-[#e26e10] transition-all hover:scale-105"
+                className="inline-flex items-center gap-2 bg-[#FC8019] text-white text-xs uppercase tracking-wider font-extrabold px-6 py-4 rounded-full shadow-lg hover:bg-[#e26e10] transition-all hover:scale-105 active:scale-95"
               >
                 <span>⚡ Swiggy Same-Day</span>
               </a>
               <a
                 href="tel:+918637478423"
-                className="p-4 rounded-full bg-white text-[#4B2923] hover:bg-[#FFF7F0] border border-[#D7BFAE]/60 transition-colors shadow-sm"
+                className="p-4 rounded-full bg-white text-[#4B2923] hover:bg-[#FFF7F0] border border-[#D7BFAE]/60 transition-all hover:scale-105 shadow-sm"
                 aria-label="Call bakery"
               >
                 <PhoneCall className="w-4 h-4" />
               </a>
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
     </div>

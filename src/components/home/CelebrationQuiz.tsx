@@ -95,7 +95,13 @@ export const CelebrationQuiz: React.FC = () => {
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Interactive Matchmaker Box */}
-        <div className="bg-white rounded-3xl p-6 sm:p-10 border border-[#D7BFAE]/50 shadow-xl relative overflow-hidden">
+        <motion.div
+          initial={{ opacity: 0, y: 35, scale: 0.98 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+          viewport={{ once: true, margin: '-50px' }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          className="bg-white rounded-3xl p-6 sm:p-10 border border-[#D7BFAE]/50 shadow-xl relative overflow-hidden"
+        >
           {/* Subtle Corner Ornament */}
           <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-[#F7DCE2] to-transparent rounded-bl-full pointer-events-none" />
 
@@ -329,7 +335,7 @@ export const CelebrationQuiz: React.FC = () => {
             </motion.div>
           )}
 
-        </div>
+        </motion.div>
       </div>
     </section>
   );
