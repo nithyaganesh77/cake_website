@@ -62,17 +62,17 @@ export const HeroSection: React.FC = () => {
           <span>Handcrafted · Artisanal Patisserie · Coimbatore</span>
         </motion.div>
 
-        {/* High-Fashion Editorial Headline (Italiana + Graceful Serif Italic) */}
+        {/* High-Fashion Editorial Headline (Playfair Display + Graceful Serif Italic) */}
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.65, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
           className="max-w-4xl mx-auto drop-shadow-sm"
         >
-          <span className="font-display text-4xl sm:text-6xl lg:text-7xl font-normal text-[#FFF7F0] tracking-normal leading-[1.12] block">
+          <span className="font-serif text-4xl sm:text-6xl lg:text-7xl font-bold text-[#FFF7F0] tracking-tight leading-[1.14] block">
             Every Sweet Celebration,
           </span>
-          <span className="font-serif italic font-light text-[#E9AEBB] text-3xl sm:text-5xl lg:text-6xl tracking-wide block mt-1.5 sm:mt-2">
+          <span className="font-serif italic font-normal text-[#E9AEBB] text-3xl sm:text-5xl lg:text-6xl tracking-wide block mt-2 sm:mt-2.5">
             Artfully Handcrafted.
           </span>
         </motion.h1>
