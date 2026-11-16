@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Sparkles, ShoppingBag, Heart, Check, Clock, ShieldCheck } from 'lucide-react';
+import { X, Sparkles, ShoppingBag, Heart, Check, Clock, ShieldCheck, MessageCircle } from 'lucide-react';
 import { Product, ProductVariant } from '@/types';
 import { useCart } from '@/contexts/CartContext';
 import { useWishlist } from '@/contexts/WishlistContext';
@@ -46,6 +46,20 @@ export const QuickViewModal: React.FC<QuickViewModalProps> = ({ product, isOpen,
       setIsAdded(false);
       onClose();
     }, 1000);
+  };
+
+  const handleDirectWhatsApp = () => {
+    const waText = encodeURIComponent(
+      `🎂 *Hello Cakes & Dessert! I would like to order directly:* 🎂\n\n` +
+      `*Item:* ${product.name}\n` +
+      `*Portion / Size:* ${selectedVariant.name} (₹${selectedVariant.price})\n` +
+      `*Quantity:* ${quantity}\n` +
+      (isEggless ? `*Dietary:* Eggless (+₹${egglessSurcharge})\n` : '') +
+      (boardMessage ? `*Board Message:* "${boardMessage.trim()}"\n` : '') +
+      `*Total Price:* ₹${totalPrice}\n\n` +
+      `Please let me know how to proceed with the pre-order confirmation!`
+    );
+    window.open(`https://wa.me/918637478423?text=${waText}`, '_blank');
   };
 
   return (
@@ -248,9 +262,19 @@ export const QuickViewModal: React.FC<QuickViewModalProps> = ({ product, isOpen,
                     ) : (
                       <>
                         <ShoppingBag className="w-4 h-4 text-[#E9AEBB]" />
-                        <span>Add to Pre-Order (₹{totalPrice})</span>
+                        <span>Add to Bag (₹{totalPrice})</span>
                       </>
                     )}
+                  </button>
+
+                  {/* WhatsApp button */}
+                  <button
+                    type="button"
+                    onClick={handleDirectWhatsApp}
+                    className="p-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl transition-all shadow-md active:scale-95 cursor-pointer shrink-0"
+                    title="Order directly on WhatsApp"
+                  >
+                    <MessageCircle className="w-5 h-5" />
                   </button>
                 </div>
 

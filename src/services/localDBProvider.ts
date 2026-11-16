@@ -86,8 +86,8 @@ async function ensureInitialized() {
   } else {
     // Seamlessly sync new initial categories (slabs, tubs, single pieces, dream cakes) and comprehensive menu
     const slabsCat = await db.get('categories', 'cat-slabs');
-    const menuV3Synced = await db.get('site_settings', 'menu_v3_synced');
-    if (!slabsCat || !menuV3Synced) {
+    const menuV4Synced = await db.get('site_settings', 'menu_v4_synced');
+    if (!slabsCat || !menuV4Synced) {
       const tx = db.transaction(['categories', 'products', 'site_settings'], 'readwrite');
       for (const cat of INITIAL_CATEGORIES) {
         await tx.objectStore('categories').put(cat);
@@ -96,7 +96,7 @@ async function ensureInitialized() {
         await tx.objectStore('products').put(prod);
       }
       await tx.objectStore('site_settings').put({ key: 'main_settings', ...INITIAL_SETTINGS });
-      await tx.objectStore('site_settings').put({ key: 'menu_v3_synced', value: true, timestamp: Date.now() });
+      await tx.objectStore('site_settings').put({ key: 'menu_v4_synced', value: true, timestamp: Date.now() });
       await tx.done;
     }
   }

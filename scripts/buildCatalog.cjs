@@ -1424,7 +1424,7 @@ const siteSettings = {
   same_day_cutoff_hour: 14,
   upi_id: 'cakesanddessert@upi',
   upi_recipient_name: 'Cakes and Dessert Coimbatore',
-  bank_transfer_details: 'Account Name: Cakes and Dessert | Bank: HDFC Bank | IFSC: HDFC0001234 (Subject to client bank account verification)',
+  bank_transfer_details: 'Account Name: Cakes and Dessert | Bank: HDFC Bank, Podanur Branch, Coimbatore | Account verification & transfer instructions shared upon WhatsApp confirmation',
   cash_on_pickup_enabled: true,
   cash_on_delivery_enabled: true,
   free_delivery_threshold: 1200,

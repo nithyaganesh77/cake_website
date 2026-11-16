@@ -12,6 +12,7 @@ import {
   Truck,
   AlertCircle,
   Share2,
+  MessageCircle,
 } from 'lucide-react';
 import { dataProvider } from '@/services/dataProvider';
 import { Product, ProductVariant } from '@/types';
@@ -94,6 +95,20 @@ export const ProductDetails: React.FC = () => {
   const handleBuyNow = () => {
     addItem(product, selectedVariant, isEggless, customMessage, quantity);
     navigate('/checkout');
+  };
+
+  const handleDirectWhatsApp = () => {
+    const waText = encodeURIComponent(
+      `🎂 *Hello Cakes & Dessert! I would like to order directly:* 🎂\n\n` +
+      `*Item:* ${product.name}\n` +
+      `*Portion / Size:* ${selectedVariant.name} (₹${selectedVariant.price})\n` +
+      `*Quantity:* ${quantity}\n` +
+      (isEggless ? `*Dietary:* Eggless (+₹${egglessSurcharge})\n` : '') +
+      (customMessage ? `*Board Message:* "${customMessage}"\n` : '') +
+      `*Total Price:* ₹${totalPrice}\n\n` +
+      `Please let me know the availability and payment instructions!`
+    );
+    window.open(`https://wa.me/918637478423?text=${waText}`, '_blank');
   };
 
   return (
@@ -307,6 +322,15 @@ export const ProductDetails: React.FC = () => {
 
             {/* Action Buttons */}
             <div className="space-y-3 pt-2">
+              <button
+                type="button"
+                onClick={handleDirectWhatsApp}
+                className="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-3.5 px-6 rounded-full font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all shadow-md active:scale-98 cursor-pointer"
+              >
+                <MessageCircle className="w-4 h-4 text-white" />
+                <span>Order Directly via WhatsApp (₹{totalPrice})</span>
+              </button>
+
               <button
                 onClick={handleAddToCart}
                 disabled={isAdding}

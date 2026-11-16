@@ -64,13 +64,28 @@ export const Footer: React.FC = () => {
             </h4>
             <ul className="space-y-2.5 text-sm text-[#D7BFAE]">
               <li>
-                <Link to="/shop?category=cat-courier-slabs" className="hover:text-[#E9AEBB] transition-colors text-amber-200 font-medium">
-                  📦 Courier Brownie Slabs (Pan-India)
+                <Link to="/shop?category=cat-slabs" className="hover:text-[#E9AEBB] transition-colors font-medium text-amber-200">
+                  🍫 Brownie &amp; Blondie Slabs
                 </Link>
               </li>
               <li>
-                <Link to="/shop?category=cat-brownies" className="hover:text-[#E9AEBB] transition-colors">
-                  Signature Fudgy Brownies
+                <Link to="/shop?category=cat-tubs" className="hover:text-[#E9AEBB] transition-colors">
+                  🍨 Dessert Tubs &amp; Pots
+                </Link>
+              </li>
+              <li>
+                <Link to="/shop?category=cat-single-pieces" className="hover:text-[#E9AEBB] transition-colors">
+                  🍰 Single Pieces &amp; Brownies
+                </Link>
+              </li>
+              <li>
+                <Link to="/shop?category=cat-dream-cakes" className="hover:text-[#E9AEBB] transition-colors">
+                  ✨ Dream Cakes &amp; Cheesecakes
+                </Link>
+              </li>
+              <li>
+                <Link to="/shop?category=cat-courier-slabs" className="hover:text-[#E9AEBB] transition-colors">
+                  📦 Courier Slabs (Pan-India)
                 </Link>
               </li>
               <li>
@@ -84,18 +99,8 @@ export const Footer: React.FC = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/shop?category=cat-dessert-jars" className="hover:text-[#E9AEBB] transition-colors">
-                  Dessert Tins &amp; Jars
-                </Link>
-              </li>
-              <li>
                 <Link to="/custom-cakes" className="hover:text-[#E9AEBB] transition-colors">
                   Custom Cake Builder
-                </Link>
-              </li>
-              <li>
-                <Link to="/bulk-orders" className="hover:text-[#E9AEBB] transition-colors">
-                  Corporate &amp; Event Gifting
                 </Link>
               </li>
             </ul>
