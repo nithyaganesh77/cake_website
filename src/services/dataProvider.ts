@@ -174,6 +174,19 @@ class DataProviderService {
   async uploadImage(file: File, folder: 'products' | 'custom_requests' | 'cms'): Promise<string> {
     return this.active.uploadImage(file, folder);
   }
+
+  // Launch and data maintenance
+  async clearAllOrders(): Promise<void> {
+    return this.active.clearAllOrders();
+  }
+
+  async purgeTestHistory(): Promise<void> {
+    return this.active.purgeTestHistory();
+  }
+
+  async resetCompleteWebsite(): Promise<void> {
+    return this.active.resetCompleteWebsite();
+  }
 }
 
 export const dataProvider = new DataProviderService();

@@ -99,6 +99,17 @@ async function ensureInitialized() {
       await tx.objectStore('site_settings').put({ key: 'menu_v4_synced', value: true, timestamp: Date.now() });
       await tx.done;
     }
+
+    // Launch reset: Automatically purge old test orders, custom briefs & bulk requests for launch readiness
+    const launchCleaned = await db.get('site_settings', 'launch_cleaned_v2');
+    if (!launchCleaned) {
+      const tx = db.transaction(['orders', 'custom_requests', 'bulk_requests', 'site_settings'], 'readwrite');
+      await tx.objectStore('orders').clear();
+      await tx.objectStore('custom_requests').clear();
+      await tx.objectStore('bulk_requests').clear();
+      await tx.objectStore('site_settings').put({ key: 'launch_cleaned_v2', value: true, timestamp: Date.now() });
+      await tx.done;
+    }
   }
 }
 
@@ -373,6 +384,55 @@ export const LocalDBProvider = {
       reader.onerror = reject;
       reader.readAsDataURL(file);
     });
+  },
+
+  async clearAllOrders(): Promise<void> {
+    await ensureInitialized();
+    const db = await getDB();
+    const tx = db.transaction(['orders'], 'readwrite');
+    await tx.objectStore('orders').clear();
+    await tx.done;
+  },
+
+  async purgeTestHistory(): Promise<void> {
+    await ensureInitialized();
+    const db = await getDB();
+    const tx = db.transaction(['orders', 'custom_requests', 'bulk_requests'], 'readwrite');
+    await tx.objectStore('orders').clear();
+    await tx.objectStore('custom_requests').clear();
+    await tx.objectStore('bulk_requests').clear();
+    await tx.done;
+  },
+
+  async resetCompleteWebsite(): Promise<void> {
+    await ensureInitialized();
+    const db = await getDB();
+    const tx = db.transaction(
+      ['categories', 'products', 'orders', 'custom_requests', 'bulk_requests', 'delivery_areas', 'time_slots', 'site_settings'],
+      'readwrite'
+    );
+    await tx.objectStore('orders').clear();
+    await tx.objectStore('custom_requests').clear();
+    await tx.objectStore('bulk_requests').clear();
+    await tx.objectStore('categories').clear();
+    for (const cat of INITIAL_CATEGORIES) {
+      await tx.objectStore('categories').put(cat);
+    }
+    await tx.objectStore('products').clear();
+    for (const prod of INITIAL_PRODUCTS) {
+      await tx.objectStore('products').put(prod);
+    }
+    await tx.objectStore('delivery_areas').clear();
+    for (const area of INITIAL_DELIVERY_AREAS) {
+      await tx.objectStore('delivery_areas').put(area);
+    }
+    await tx.objectStore('time_slots').clear();
+    for (const slot of INITIAL_TIME_SLOTS) {
+      await tx.objectStore('time_slots').put(slot);
+    }
+    await tx.objectStore('site_settings').put({ key: 'main_settings', ...INITIAL_SETTINGS });
+    await tx.objectStore('site_settings').put({ key: 'launch_cleaned_v2', value: true, timestamp: Date.now() });
+    await tx.done;
   },
 };
 

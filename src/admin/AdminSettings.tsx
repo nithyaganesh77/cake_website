@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Settings, Save, CheckCircle2, QrCode, Phone, MapPin, Clock } from 'lucide-react';
+import { Settings, Save, CheckCircle2, QrCode, Phone, MapPin, Clock, RefreshCw, AlertTriangle, Trash2 } from 'lucide-react';
 import { dataProvider } from '@/services/dataProvider';
 import { SiteSettings } from '@/types';
 
@@ -213,7 +213,7 @@ export const AdminSettings: React.FC = () => {
         <div className="flex items-center gap-4">
           <button
             type="submit"
-            className="inline-flex items-center gap-2 bg-[#4B2923] text-white py-3.5 px-8 rounded-full font-semibold text-xs uppercase tracking-wider hover:bg-[#2F1916] shadow-md"
+            className="inline-flex items-center gap-2 bg-[#4B2923] text-white py-3.5 px-8 rounded-full font-semibold text-xs uppercase tracking-wider hover:bg-[#2F1916] shadow-md cursor-pointer"
           >
             <Save className="w-4 h-4 text-[#E9AEBB]" />
             Save Studio Settings
@@ -227,6 +227,67 @@ export const AdminSettings: React.FC = () => {
         </div>
 
       </form>
+
+      {/* 4. Commercial Launch & Database Reset */}
+      <div className="bg-red-50/60 rounded-3xl p-6 sm:p-8 border border-red-200 shadow-sm space-y-4 mt-12">
+        <div className="flex items-start gap-3">
+          <div className="w-10 h-10 rounded-2xl bg-red-100 flex items-center justify-center text-red-700 shrink-0 mt-0.5">
+            <AlertTriangle className="w-5 h-5" />
+          </div>
+          <div>
+            <h2 className="font-serif font-bold text-lg text-red-950">
+              Commercial Launch &amp; Order History Reset
+            </h2>
+            <p className="text-xs text-red-800/80 leading-relaxed mt-0.5">
+              Before presenting the website to your client or launching publicly, purge all mock and test orders so the system starts at 0 orders and is clean for genuine bakery sales.
+            </p>
+          </div>
+        </div>
+
+        <div className="pt-2 flex flex-wrap items-center gap-3">
+          <button
+            type="button"
+            onClick={async () => {
+              const confirmPurge = window.confirm(
+                'PURGE ALL TEST ORDERS?\n\nThis will remove all test orders from the database, resetting your order list to 0 ready for real commercial launch.'
+              );
+              if (!confirmPurge) return;
+              try {
+                await dataProvider.purgeTestHistory();
+                alert('All test orders, custom briefs, and bulk inquiries have been successfully purged!');
+                window.location.reload();
+              } catch (e: any) {
+                alert('Purge failed: ' + e.message);
+              }
+            }}
+            className="inline-flex items-center gap-2 bg-red-700 hover:bg-red-800 text-white py-3 px-6 rounded-full font-bold text-xs uppercase tracking-wider transition-all shadow-sm active:scale-95 cursor-pointer"
+          >
+            <Trash2 className="w-4 h-4 text-white" />
+            <span>Purge All Test Orders (Reset to 0)</span>
+          </button>
+
+          <button
+            type="button"
+            onClick={async () => {
+              const confirmReset = window.confirm(
+                'RESET ENTIRE WEBSITE DATA TO PRISTINE LAUNCH STATE?\n\nThis will:\n1. Purge all test orders & customer requests to 0\n2. Reload the complete fresh 49-item menu (Tubs, Slabs, Single Pieces, Dream Cakes)\n3. Reset all delivery areas and time slots to default.\n\nProceed?'
+              );
+              if (!confirmReset) return;
+              try {
+                await dataProvider.resetCompleteWebsite();
+                alert('Website successfully reset to pristine commercial launch state!');
+                window.location.reload();
+              } catch (e: any) {
+                alert('Reset failed: ' + e.message);
+              }
+            }}
+            className="inline-flex items-center gap-2 bg-white text-red-800 border border-red-300 hover:bg-red-50 py-3 px-6 rounded-full font-bold text-xs uppercase tracking-wider transition-all shadow-sm cursor-pointer"
+          >
+            <RefreshCw className="w-4 h-4 text-red-700" />
+            <span>Reset Complete Website to Launch State</span>
+          </button>
+        </div>
+      </div>
     </div>
   );
 };

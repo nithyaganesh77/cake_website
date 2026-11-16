@@ -13,6 +13,7 @@ import {
   X,
   CreditCard,
   FileText,
+  Trash2,
 } from 'lucide-react';
 import { dataProvider } from '@/services/dataProvider';
 import { Order, OrderStatus, PaymentStatus } from '@/types';
@@ -108,6 +109,21 @@ export const AdminOrders: React.FC = () => {
     document.body.removeChild(link);
   };
 
+  const handlePurgeOrders = async () => {
+    const confirmed = window.confirm(
+      'Are you sure you want to purge and reset all test orders?\n\nThis will clear all test order history to 0 so your website launches fresh for real client orders.'
+    );
+    if (!confirmed) return;
+
+    try {
+      await dataProvider.clearAllOrders();
+      alert('All test orders have been purged successfully! Order list is reset to 0.');
+      loadOrders();
+    } catch (err: any) {
+      alert('Failed to purge orders: ' + err.message);
+    }
+  };
+
   const filtered = orders.filter((o) => {
     const matchSearch =
       o.order_number.toLowerCase().includes(search.toLowerCase()) ||
@@ -130,13 +146,26 @@ export const AdminOrders: React.FC = () => {
           </p>
         </div>
 
-        <button
-          onClick={exportCSV}
-          className="inline-flex items-center gap-2 bg-white text-[#4B2923] border border-[#D7BFAE] py-2.5 px-5 rounded-full font-semibold text-xs uppercase tracking-wider hover:bg-[#FFF7F0] shadow-xs"
-        >
-          <Download className="w-4 h-4" />
-          Export Orders (CSV)
-        </button>
+        <div className="flex flex-wrap items-center gap-2">
+          {orders.length > 0 && (
+            <button
+              onClick={handlePurgeOrders}
+              className="inline-flex items-center gap-1.5 bg-red-50 text-red-700 hover:bg-red-100 border border-red-200 py-2.5 px-4 rounded-full font-semibold text-xs uppercase tracking-wider transition-colors shadow-xs cursor-pointer"
+              title="Delete all test orders before launching"
+            >
+              <Trash2 className="w-4 h-4 text-red-600" />
+              <span>Purge Test Orders</span>
+            </button>
+          )}
+
+          <button
+            onClick={exportCSV}
+            className="inline-flex items-center gap-2 bg-white text-[#4B2923] border border-[#D7BFAE] py-2.5 px-5 rounded-full font-semibold text-xs uppercase tracking-wider hover:bg-[#FFF7F0] shadow-xs cursor-pointer"
+          >
+            <Download className="w-4 h-4" />
+            Export Orders (CSV)
+          </button>
+        </div>
       </div>
 
       {/* Filter and Search Bar */}

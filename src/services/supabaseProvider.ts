@@ -325,5 +325,22 @@ export const SupabaseProvider = {
     const { data } = client.storage.from('bakery-media').getPublicUrl(fileName);
     return data.publicUrl;
   },
+
+  async clearAllOrders(): Promise<void> {
+    const client = getClient();
+    const { error } = await client.from('orders').delete().neq('id', '');
+    if (error) throw error;
+  },
+
+  async purgeTestHistory(): Promise<void> {
+    const client = getClient();
+    await client.from('orders').delete().neq('id', '');
+    await client.from('custom_cake_requests').delete().neq('id', '');
+    await client.from('bulk_order_requests').delete().neq('id', '');
+  },
+
+  async resetCompleteWebsite(): Promise<void> {
+    await this.purgeTestHistory();
+  },
 };
 
