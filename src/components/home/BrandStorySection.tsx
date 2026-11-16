@@ -20,8 +20,8 @@ export const BrandStorySection: React.FC = () => {
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-4">
                 <img
-                  src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=600&q=80"
-                  alt="Fudgy brownies fresh from oven"
+                  src="/images/products/biscoff-caramel-brownie-slab.jpg"
+                  alt="Fudgy brownie slab handcrafted in Coimbatore"
                   className="rounded-3xl object-cover h-48 sm:h-60 w-full shadow-md hover:scale-103 transition-transform duration-500"
                 />
                 <div className="bg-[#FFF7F0] p-6 rounded-3xl border border-[#D7BFAE]/40 text-center shadow-xs">
@@ -42,8 +42,8 @@ export const BrandStorySection: React.FC = () => {
                   </span>
                 </div>
                 <img
-                  src="https://images.unsplash.com/photo-1576618148400-f54bed99fcfd?auto=format&fit=crop&w=600&q=80"
-                  alt="Pastry chef frosting artisanal cakes"
+                  src="/images/products/kinder-kitkat-nutella-brownie-tub.jpg"
+                  alt="Kinder KitKat Nutella dessert tub handcrafted in Coimbatore"
                   className="rounded-3xl object-cover h-48 sm:h-60 w-full shadow-md hover:scale-103 transition-transform duration-500"
                 />
               </div>

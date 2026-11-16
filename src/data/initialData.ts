@@ -6,7 +6,7 @@ export const INITIAL_CATEGORIES: Category[] = [
     "name": "Brownie & Blondie Slabs",
     "slug": "brownie-blondie-slabs",
     "description": "Freshly baked whole-slab brownies, loaded blondies & celebration towers available in 250g, 500g, 1kg & 2kg sizes.",
-    "image": "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=800&q=80",
+    "image": "/images/products/nutty-nutella-crown-brownie.jpg",
     "display_order": 1,
     "is_active": true
   },
@@ -15,7 +15,7 @@ export const INITIAL_CATEGORIES: Category[] = [
     "name": "Dessert Tubs",
     "slug": "dessert-tubs",
     "description": "Decadent dessert tubs layered with rich fudge brownie, Nutella, Matilda chocolate, and irresistible crunch textures.",
-    "image": "https://images.unsplash.com/photo-1579372786545-d24232daf58c?auto=format&fit=crop&w=800&q=80",
+    "image": "/images/products/kinder-kitkat-nutella-brownie-tub.jpg",
     "display_order": 2,
     "is_active": true
   },
@@ -24,7 +24,7 @@ export const INITIAL_CATEGORIES: Category[] = [
     "name": "Single Pieces & Brownies",
     "slug": "single-pieces",
     "description": "Grab an individual artisan brownie square, molten lava piece, or savory Korean garlic cream cheese bun.",
-    "image": "https://images.unsplash.com/photo-1624353365286-3f8d62daad51?auto=format&fit=crop&w=800&q=80",
+    "image": "/images/products/nutella-brownie-tub.jpg",
     "display_order": 3,
     "is_active": true
   },
@@ -33,7 +33,7 @@ export const INITIAL_CATEGORIES: Category[] = [
     "name": "Dream Cakes & Confections",
     "slug": "dream-cakes",
     "description": "Viral 5-in-1 chocolate Dream Cakes, Basque cheesecakes, Italian Tiramisu, and artisanal Cookie Tins.",
-    "image": "https://images.unsplash.com/photo-1587314168485-3236d6710814?auto=format&fit=crop&w=800&q=80",
+    "image": "/images/products/rose-milk-dream-cake.jpg",
     "display_order": 4,
     "is_active": true
   },
@@ -42,7 +42,7 @@ export const INITIAL_CATEGORIES: Category[] = [
     "name": "Brownie Slabs (Courier Orders)",
     "slug": "brownie-slabs-courier",
     "description": "Thick, chocolate-filled fudgy brownie slabs securely packaged for courier delivery across Tamil Nadu & India.",
-    "image": "https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?auto=format&fit=crop&w=800&q=80",
+    "image": "/images/products/biscoff-caramel-brownie-slab.jpg",
     "display_order": 5,
     "is_active": true
   },
@@ -69,7 +69,7 @@ export const INITIAL_CATEGORIES: Category[] = [
     "name": "Signature Brownies",
     "slug": "signature-brownies",
     "description": "Ultra-fudgy, crackly-top brownies handcrafted with 70% dark Belgian chocolate.",
-    "image": "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=800&q=80",
+    "image": "/images/products/biscoff-caramel-brownie-slab.jpg",
     "display_order": 8,
     "is_active": true
   },
@@ -103,8 +103,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     "category_name": "Brownie & Blondie Slabs",
     "base_price": 350,
     "images": [
-      "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=1000&q=85",
-      "https://images.unsplash.com/photo-1587314168485-3236d6710814?auto=format&fit=crop&w=1000&q=85"
+      "/images/products/nutella-brownie-tub.jpg",
+      "/images/products/nutty-nutella-crown-brownie.jpg"
     ],
     "is_featured": true,
     "is_bestseller": true,
@@ -164,8 +164,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     "category_name": "Brownie & Blondie Slabs",
     "base_price": 350,
     "images": [
-      "https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=1000&q=85",
-      "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=1000&q=85"
+      "/images/products/biscoff-caramel-brownie-slab.jpg",
+      "/images/products/biscoff-cheesecake-tub.jpg"
     ],
     "is_featured": true,
     "is_bestseller": true,
@@ -225,8 +225,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     "category_name": "Brownie & Blondie Slabs",
     "base_price": 375,
     "images": [
-      "https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?auto=format&fit=crop&w=1000&q=85",
-      "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=1000&q=85"
+      "/images/products/biscoff-caramel-brownie-slab.jpg",
+      "/images/products/nutty-nutella-crown-brownie.jpg"
     ],
     "is_featured": true,
     "is_bestseller": true,
@@ -286,8 +286,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     "category_name": "Brownie & Blondie Slabs",
     "base_price": 350,
     "images": [
-      "https://images.unsplash.com/photo-1515037893149-de7f840978e2?auto=format&fit=crop&w=1000&q=85",
-      "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=1000&q=85"
+      "/images/products/nutty-nutella-crown-brownie.jpg",
+      "/images/products/nutella-brownie-tub.jpg"
     ],
     "is_featured": false,
     "is_bestseller": true,
@@ -346,8 +346,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     "category_name": "Brownie & Blondie Slabs",
     "base_price": 450,
     "images": [
-      "https://images.unsplash.com/photo-1606890737304-57a1ca8a5b62?auto=format&fit=crop&w=1000&q=85",
-      "https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?auto=format&fit=crop&w=1000&q=85"
+      "/images/products/choco-chips-brownie-tub.jpg",
+      "/images/products/nutty-nutella-crown-brownie.jpg"
     ],
     "is_featured": false,
     "is_bestseller": false,
@@ -407,8 +407,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     "category_name": "Brownie & Blondie Slabs",
     "base_price": 450,
     "images": [
-      "https://images.unsplash.com/photo-1588195538326-c5b1e9f80a1b?auto=format&fit=crop&w=1000&q=85",
-      "https://images.unsplash.com/photo-1606890737304-57a1ca8a5b62?auto=format&fit=crop&w=1000&q=85"
+      "/images/products/biscoff-caramel-brownie-slab.jpg",
+      "/images/products/cookie-tin-500g.jpg"
     ],
     "is_featured": false,
     "is_bestseller": false,
@@ -467,8 +467,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     "category_name": "Brownie & Blondie Slabs",
     "base_price": 1200,
     "images": [
-      "https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=1000&q=85",
-      "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=1000&q=85"
+      "/images/products/nutty-nutella-crown-brownie.jpg",
+      "/images/products/kinder-kitkat-nutella-brownie-tub.jpg"
     ],
     "is_featured": true,
     "is_bestseller": true,
@@ -521,8 +521,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     "category_name": "Brownie & Blondie Slabs",
     "base_price": 300,
     "images": [
-      "https://images.unsplash.com/photo-1616541823729-00fe0aacd32c?auto=format&fit=crop&w=1000&q=85",
-      "https://images.unsplash.com/photo-1586985289688-ca3cf47d3e6e?auto=format&fit=crop&w=1000&q=85"
+      "/images/products/strawberry-cheesecake-tub.jpg",
+      "/images/products/rose-milk-dream-cake.jpg"
     ],
     "is_featured": false,
     "is_bestseller": false,
@@ -582,8 +582,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     "category_name": "Brownie & Blondie Slabs",
     "base_price": 300,
     "images": [
-      "https://images.unsplash.com/photo-1586985289688-ca3cf47d3e6e?auto=format&fit=crop&w=1000&q=85",
-      "https://images.unsplash.com/photo-1616541823729-00fe0aacd32c?auto=format&fit=crop&w=1000&q=85"
+      "/images/products/rose-milk-dream-cake.jpg",
+      "/images/products/strawberry-cheesecake-tub.jpg"
     ],
     "is_featured": true,
     "is_bestseller": true,
@@ -642,8 +642,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     "category_name": "Dessert Tubs",
     "base_price": 160,
     "images": [
-      "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=1000&q=85",
-      "https://images.unsplash.com/photo-1579372786545-d24232daf58c?auto=format&fit=crop&w=1000&q=85"
+      "/images/products/choco-chips-brownie-tub.jpg",
+      "/images/products/dunky-brownie-tub.jpg"
     ],
     "is_featured": true,
     "is_bestseller": true,
@@ -689,7 +689,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     "category_name": "Dessert Tubs",
     "base_price": 160,
     "images": [
-      "https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?auto=format&fit=crop&w=1000&q=85"
+      "/images/products/dunky-brownie-tub.jpg",
+      "/images/products/choco-chips-brownie-tub.jpg"
     ],
     "is_featured": false,
     "is_bestseller": true,
@@ -734,7 +735,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     "category_name": "Dessert Tubs",
     "base_price": 160,
     "images": [
-      "https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=1000&q=85"
+      "/images/products/white-chocolate-dunky-brownie-tub.jpg",
+      "/images/products/white-chocolate-dream-cake.jpg"
     ],
     "is_featured": false,
     "is_bestseller": false,
@@ -778,7 +780,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     "category_name": "Dessert Tubs",
     "base_price": 200,
     "images": [
-      "https://images.unsplash.com/photo-1587314168485-3236d6710814?auto=format&fit=crop&w=1000&q=85"
+      "/images/products/nutella-brownie-tub.jpg",
+      "/images/products/kinder-kitkat-nutella-brownie-tub.jpg"
     ],
     "is_featured": true,
     "is_bestseller": true,
@@ -823,7 +826,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     "category_name": "Dessert Tubs",
     "base_price": 250,
     "images": [
-      "https://images.unsplash.com/photo-1515037893149-de7f840978e2?auto=format&fit=crop&w=1000&q=85"
+      "/images/products/kinder-kitkat-nutella-brownie-tub.jpg",
+      "/images/products/nutella-brownie-tub.jpg"
     ],
     "is_featured": true,
     "is_bestseller": true,
@@ -869,7 +873,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     "category_name": "Dessert Tubs",
     "base_price": 250,
     "images": [
-      "https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=1000&q=85"
+      "/images/products/dunky-brownie-tub.jpg",
+      "/images/products/choco-chips-brownie-tub.jpg"
     ],
     "is_featured": true,
     "is_bestseller": true,
@@ -914,7 +919,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     "category_name": "Dessert Tubs",
     "base_price": 160,
     "images": [
-      "https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=1000&q=85"
+      "/images/products/choco-chips-brownie-tub.jpg",
+      "/images/products/dunky-brownie-tub.jpg"
     ],
     "is_featured": false,
     "is_bestseller": false,
@@ -958,7 +964,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     "category_name": "Dessert Tubs",
     "base_price": 160,
     "images": [
-      "https://images.unsplash.com/photo-1624353365286-3f8d62daad51?auto=format&fit=crop&w=1000&q=85"
+      "/images/products/dunky-brownie-tub.jpg",
+      "/images/products/choco-chips-brownie-tub.jpg"
     ],
     "is_featured": false,
     "is_bestseller": false,
@@ -1002,7 +1009,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     "category_name": "Dessert Tubs",
     "base_price": 160,
     "images": [
-      "https://images.unsplash.com/photo-1499636136210-6f4ee915583e?auto=format&fit=crop&w=1000&q=85"
+      "/images/products/cookie-tin-500g.jpg",
+      "/images/products/dunky-brownie-tub.jpg"
     ],
     "is_featured": false,
     "is_bestseller": false,
@@ -1046,7 +1054,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     "category_name": "Dessert Tubs",
     "base_price": 250,
     "images": [
-      "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=1000&q=85"
+      "/images/products/pistachio-cheesecake-tub.jpg",
+      "/images/products/kinder-kitkat-nutella-brownie-tub.jpg"
     ],
     "is_featured": true,
     "is_bestseller": false,
@@ -1091,7 +1100,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     "category_name": "Dessert Tubs",
     "base_price": 165,
     "images": [
-      "https://images.unsplash.com/photo-1542990253-0d0f5be5f0ed?auto=format&fit=crop&w=1000&q=85"
+      "/images/products/choco-chips-brownie-tub.jpg",
+      "/images/products/dunky-brownie-tub.jpg"
     ],
     "is_featured": false,
     "is_bestseller": false,
@@ -1136,7 +1146,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     "category_name": "Dessert Tubs",
     "base_price": 180,
     "images": [
-      "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=1000&q=85"
+      "/images/products/choco-chips-brownie-tub.jpg",
+      "/images/products/dunky-brownie-tub.jpg"
     ],
     "is_featured": false,
     "is_bestseller": false,
@@ -1180,7 +1191,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     "category_name": "Dessert Tubs",
     "base_price": 160,
     "images": [
-      "https://images.unsplash.com/photo-1579954115545-a95591f28bfc?auto=format&fit=crop&w=1000&q=85"
+      "/images/products/dunky-brownie-tub.jpg",
+      "/images/products/white-chocolate-dunky-brownie-tub.jpg"
     ],
     "is_featured": false,
     "is_bestseller": true,
@@ -1224,7 +1236,11 @@ export const INITIAL_PRODUCTS: Product[] = [
     "category_name": "Dessert Tubs",
     "base_price": 250,
     "images": [
-      "https://images.unsplash.com/photo-1533134242443-d4fd215305ad?auto=format&fit=crop&w=1000&q=85"
+      "/images/products/biscoff-cheesecake-tub.jpg",
+      "/images/products/strawberry-cheesecake-tub.jpg",
+      "/images/products/blueberry-cheesecake-tub.jpg",
+      "/images/products/nutella-cheesecake-tub.jpg",
+      "/images/products/pistachio-cheesecake-tub.jpg"
     ],
     "is_featured": true,
     "is_bestseller": true,
@@ -1290,7 +1306,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     "category_name": "Single Pieces & Brownies",
     "base_price": 50,
     "images": [
-      "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=1000&q=85"
+      "/images/products/nutella-brownie-tub.jpg",
+      "/images/products/dunky-brownie-tub.jpg"
     ],
     "is_featured": false,
     "is_bestseller": true,
@@ -1335,7 +1352,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     "category_name": "Single Pieces & Brownies",
     "base_price": 100,
     "images": [
-      "https://images.unsplash.com/photo-1515037893149-de7f840978e2?auto=format&fit=crop&w=1000&q=85"
+      "/images/products/dunky-brownie-tub.jpg",
+      "/images/products/choco-chips-brownie-tub.jpg"
     ],
     "is_featured": true,
     "is_bestseller": true,
@@ -1379,7 +1397,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     "category_name": "Single Pieces & Brownies",
     "base_price": 75,
     "images": [
-      "https://images.unsplash.com/photo-1587314168485-3236d6710814?auto=format&fit=crop&w=1000&q=85"
+      "/images/products/nutella-brownie-tub.jpg",
+      "/images/products/nutty-nutella-crown-brownie.jpg"
     ],
     "is_featured": false,
     "is_bestseller": true,
@@ -1423,7 +1442,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     "category_name": "Single Pieces & Brownies",
     "base_price": 75,
     "images": [
-      "https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=1000&q=85"
+      "/images/products/biscoff-cheesecake-tub.jpg",
+      "/images/products/biscoff-caramel-brownie-slab.jpg"
     ],
     "is_featured": false,
     "is_bestseller": true,
@@ -1467,7 +1487,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     "category_name": "Single Pieces & Brownies",
     "base_price": 75,
     "images": [
-      "https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?auto=format&fit=crop&w=1000&q=85"
+      "/images/products/pistachio-cheesecake-tub.jpg"
     ],
     "is_featured": true,
     "is_bestseller": true,
@@ -1511,7 +1531,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     "category_name": "Single Pieces & Brownies",
     "base_price": 75,
     "images": [
-      "https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=1000&q=85"
+      "/images/products/biscoff-caramel-brownie-slab.jpg"
     ],
     "is_featured": false,
     "is_bestseller": false,
@@ -1555,7 +1575,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     "category_name": "Single Pieces & Brownies",
     "base_price": 100,
     "images": [
-      "https://images.unsplash.com/photo-1624353365286-3f8d62daad51?auto=format&fit=crop&w=1000&q=85"
+      "/images/products/choco-chips-brownie-tub.jpg",
+      "/images/products/dunky-brownie-tub.jpg"
     ],
     "is_featured": false,
     "is_bestseller": true,
@@ -1599,7 +1620,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     "category_name": "Single Pieces & Brownies",
     "base_price": 75,
     "images": [
-      "https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?auto=format&fit=crop&w=1000&q=85"
+      "/images/products/nutty-nutella-crown-brownie.jpg"
     ],
     "is_featured": false,
     "is_bestseller": false,
@@ -1644,7 +1665,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     "category_name": "Single Pieces & Brownies",
     "base_price": 75,
     "images": [
-      "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=1000&q=85"
+      "/images/products/choco-chips-brownie-tub.jpg"
     ],
     "is_featured": false,
     "is_bestseller": false,
@@ -1687,7 +1708,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     "category_name": "Single Pieces & Brownies",
     "base_price": 300,
     "images": [
-      "https://images.unsplash.com/photo-1606890737304-57a1ca8a5b62?auto=format&fit=crop&w=1000&q=85"
+      "/images/products/dunky-brownie-tub.jpg",
+      "/images/products/choco-chips-brownie-tub.jpg"
     ],
     "is_featured": true,
     "is_bestseller": true,
@@ -1790,7 +1812,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     "category_name": "Dream Cakes & Confections",
     "base_price": 200,
     "images": [
-      "https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=1000&q=85"
+      "/images/products/rose-milk-dream-cake.jpg",
+      "/images/products/white-chocolate-dream-cake.jpg"
     ],
     "is_featured": true,
     "is_bestseller": true,
@@ -1836,7 +1859,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     "category_name": "Dream Cakes & Confections",
     "base_price": 225,
     "images": [
-      "https://images.unsplash.com/photo-1588195538326-c5b1e9f80a1b?auto=format&fit=crop&w=1000&q=85"
+      "/images/products/white-chocolate-dream-cake.jpg",
+      "/images/products/rose-milk-dream-cake.jpg"
     ],
     "is_featured": false,
     "is_bestseller": false,
@@ -1880,7 +1904,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     "category_name": "Dream Cakes & Confections",
     "base_price": 250,
     "images": [
-      "https://images.unsplash.com/photo-1587314168485-3236d6710814?auto=format&fit=crop&w=1000&q=85"
+      "/images/products/nutella-brownie-tub.jpg",
+      "/images/products/white-chocolate-dream-cake.jpg"
     ],
     "is_featured": true,
     "is_bestseller": true,
@@ -1925,7 +1950,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     "category_name": "Dream Cakes & Confections",
     "base_price": 250,
     "images": [
-      "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=1000&q=85"
+      "/images/products/pistachio-cheesecake-tub.jpg",
+      "/images/products/rose-milk-dream-cake.jpg"
     ],
     "is_featured": true,
     "is_bestseller": true,
@@ -1969,7 +1995,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     "category_name": "Dream Cakes & Confections",
     "base_price": 220,
     "images": [
-      "https://images.unsplash.com/photo-1586985289688-ca3cf47d3e6e?auto=format&fit=crop&w=1000&q=85"
+      "/images/products/rose-milk-dream-cake.jpg",
+      "/images/products/strawberry-cheesecake-tub.jpg"
     ],
     "is_featured": false,
     "is_bestseller": true,
@@ -2014,7 +2041,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     "category_name": "Dream Cakes & Confections",
     "base_price": 475,
     "images": [
-      "https://images.unsplash.com/photo-1499636136210-6f4ee915583e?auto=format&fit=crop&w=1000&q=85"
+      "/images/products/cookie-tin-500g.jpg"
     ],
     "is_featured": false,
     "is_bestseller": true,
@@ -2104,7 +2131,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     "category_name": "Dream Cakes & Confections",
     "base_price": 275,
     "images": [
-      "https://images.unsplash.com/photo-1533134242443-d4fd215305ad?auto=format&fit=crop&w=1000&q=85"
+      "/images/products/nutella-cheesecake-tub.jpg",
+      "/images/products/biscoff-cheesecake-tub.jpg"
     ],
     "is_featured": true,
     "is_bestseller": true,
@@ -2149,8 +2177,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     "category_name": "Brownie Slabs (Courier Orders)",
     "base_price": 550,
     "images": [
-      "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=1000&q=85",
-      "https://images.unsplash.com/photo-1515037893149-de7f840978e2?auto=format&fit=crop&w=1000&q=85"
+      "/images/products/biscoff-caramel-brownie-slab.jpg",
+      "/images/products/nutty-nutella-crown-brownie.jpg"
     ],
     "is_featured": true,
     "is_bestseller": true,
@@ -2211,8 +2239,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     "category_name": "Brownie Slabs (Courier Orders)",
     "base_price": 620,
     "images": [
-      "https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?auto=format&fit=crop&w=1000&q=85",
-      "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=1000&q=85"
+      "/images/products/nutty-nutella-crown-brownie.jpg",
+      "/images/products/biscoff-caramel-brownie-slab.jpg"
     ],
     "is_featured": true,
     "is_bestseller": false,
