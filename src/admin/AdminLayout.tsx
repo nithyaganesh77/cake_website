@@ -119,6 +119,26 @@ export const AdminLayout: React.FC = () => {
               <LogOut className="w-4 h-4" />
             </button>
           </div>
+
+          {/* Crafted by NG Labs Signature */}
+          <div className="pt-1 flex justify-center">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#1F0E0B] border border-[#4B2923] text-[10px] text-[#FFF7F0] shadow-xs">
+              <span className="text-[#E5A96E]">✦</span>
+              <span>
+                Crafted by{' '}
+                <a
+                  href="https://github.com/nithyaganesh77"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline underline-offset-2 decoration-[#D7BFAE]/60 hover:text-[#E9AEBB] font-semibold"
+                >
+                  NG Labs
+                </a>{' '}
+                · With Purpose
+              </span>
+              <span className="text-[#E5A96E]">✦</span>
+            </div>
+          </div>
         </div>
       </aside>
 

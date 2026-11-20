@@ -186,9 +186,28 @@ export const Footer: React.FC = () => {
         </div>
 
         {/* Bottom bar */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#D7BFAE]/70">
+        <div className="pt-8 flex flex-col lg:flex-row items-center justify-between gap-5 text-xs text-[#D7BFAE]/70">
           <p>© {new Date().getFullYear()} Cakes &amp; Dessert. Handcrafted with <Heart className="w-3.5 h-3.5 inline text-[#E9AEBB] fill-[#E9AEBB]" /> in Coimbatore. All rights reserved.</p>
           
+          {/* Crafted by NG Labs Signature Pill */}
+          <div className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-[#1F0E0B] border border-[#4B2923] text-xs text-[#FFF7F0] shadow-sm tracking-wide">
+            <span className="text-[#E5A96E] text-xs">✦</span>
+            <span>
+              Crafted by{' '}
+              <a
+                href="https://github.com/nithyaganesh77"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline underline-offset-4 decoration-[#D7BFAE]/60 hover:text-[#E9AEBB] font-semibold transition-colors"
+                title="Developed by NG Labs"
+              >
+                NG Labs
+              </a>{' '}
+              · With Purpose
+            </span>
+            <span className="text-[#E5A96E] text-xs">✦</span>
+          </div>
+
           <div className="flex items-center gap-6">
             <Link to="/about" className="hover:text-[#FFF7F0]">Story</Link>
             <Link to="/contact" className="hover:text-[#FFF7F0]">Contact</Link>
