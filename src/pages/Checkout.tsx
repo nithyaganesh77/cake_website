@@ -42,16 +42,26 @@ export const Checkout: React.FC = () => {
   const resolvedInitialMethod: DeliveryMethod =
     initialMethod === 'courier' ? 'courier' : initialMethod === 'pickup' ? 'pickup' : 'local_delivery';
 
-  // Checkout Form State
-  const [customerName, setCustomerName] = useState('');
-  const [customerPhone, setCustomerPhone] = useState('');
+  // Checkout Form State (Pre-populated from URL query or localStorage)
+  const [customerName, setCustomerName] = useState(
+    () => searchParams.get('name') || localStorage.getItem('cnd_cust_name') || ''
+  );
+  const [customerPhone, setCustomerPhone] = useState(
+    () => searchParams.get('phone') || localStorage.getItem('cnd_cust_phone') || ''
+  );
   const [customerEmail, setCustomerEmail] = useState('');
   const [deliveryMethod, setDeliveryMethod] = useState<DeliveryMethod>(resolvedInitialMethod);
-  const [googleMapsLink, setGoogleMapsLink] = useState(searchParams.get('mapLink') || '');
-  const [deliveryAddress, setDeliveryAddress] = useState(searchParams.get('address') || '');
-  const [deliveryCity, setDeliveryCity] = useState(searchParams.get('city') || '');
+  const [googleMapsLink, setGoogleMapsLink] = useState(() => searchParams.get('mapLink') || '');
+  const [deliveryAddress, setDeliveryAddress] = useState(
+    () => searchParams.get('address') || localStorage.getItem('cnd_cust_address') || ''
+  );
+  const [deliveryCity, setDeliveryCity] = useState(
+    () => searchParams.get('city') || localStorage.getItem('cnd_cust_city') || 'Coimbatore'
+  );
   const [deliveryState, setDeliveryState] = useState(searchParams.get('state') || 'Tamil Nadu');
-  const [deliveryPincode, setDeliveryPincode] = useState(searchParams.get('pincode') || '641023');
+  const [deliveryPincode, setDeliveryPincode] = useState(
+    () => searchParams.get('pincode') || localStorage.getItem('cnd_cust_pincode') || '641023'
+  );
   const [deliveryLandmark, setDeliveryLandmark] = useState('');
   const [scheduledDate, setScheduledDate] = useState('');
   const [scheduledSlotId, setScheduledSlotId] = useState('');
@@ -64,8 +74,8 @@ export const Checkout: React.FC = () => {
 
   // Calculate minimum order preparation lead time across all items in cart
   const minLeadHours = useMemo(() => {
-    if (items.length === 0) return 12;
-    return Math.max(...items.map((i) => i.product.min_order_hours || 12));
+    if (items.length === 0) return 6;
+    return Math.max(...items.map((i) => i.product.min_order_hours || 6));
   }, [items]);
 
   // Generate valid booking date string
@@ -74,6 +84,13 @@ export const Checkout: React.FC = () => {
     const earliest = new Date(Date.now() + leadMs);
     return earliest.toISOString().split('T')[0];
   }, [minLeadHours]);
+
+  // Auto-set scheduled date to earliest available date
+  useEffect(() => {
+    if (!scheduledDate && minDateString) {
+      setScheduledDate(minDateString);
+    }
+  }, [minDateString]);
 
   useEffect(() => {
     async function init() {
@@ -157,22 +174,32 @@ export const Checkout: React.FC = () => {
     const isLocalDelivery = deliveryMethod === 'local_delivery' || deliveryMethod === 'delivery';
     const isCourier = deliveryMethod === 'courier';
 
+    const effectiveDate = scheduledDate || minDateString;
+    const effectiveSlot = scheduledSlotId || (timeSlots[0] ? timeSlots[0].id : 'slot-morning');
+
     const payload: CheckoutFormData = {
       customer_name: customerName,
       customer_phone: customerPhone,
       customer_email: customerEmail || undefined,
       delivery_method: deliveryMethod,
       google_maps_link: isLocalDelivery ? googleMapsLink : undefined,
-      delivery_address: isCourier ? deliveryAddress : (deliveryAddress || undefined),
+      delivery_address: deliveryAddress || undefined,
       delivery_city: isCourier ? deliveryCity : 'Coimbatore',
       delivery_state: isCourier ? deliveryState : 'Tamil Nadu',
       delivery_pincode: isCourier ? deliveryPincode : (deliveryPincode || undefined),
       delivery_landmark: deliveryLandmark || undefined,
-      scheduled_date: scheduledDate,
-      scheduled_slot_id: scheduledSlotId,
+      scheduled_date: effectiveDate,
+      scheduled_slot_id: effectiveSlot,
       payment_method_preference: paymentPreference,
       special_instructions: specialInstructions || undefined,
     };
+
+    // Save to localStorage for convenience
+    if (customerName) localStorage.setItem('cnd_cust_name', customerName);
+    if (customerPhone) localStorage.setItem('cnd_cust_phone', customerPhone);
+    if (deliveryAddress) localStorage.setItem('cnd_cust_address', deliveryAddress);
+    if (deliveryCity) localStorage.setItem('cnd_cust_city', deliveryCity);
+    if (deliveryPincode) localStorage.setItem('cnd_cust_pincode', deliveryPincode);
 
     const validation = checkoutFormSchema.safeParse(payload);
     if (!validation.success) {
@@ -558,14 +585,46 @@ export const Checkout: React.FC = () => {
                   )}
                 </div>
 
-                {/* 1. Inside Coimbatore: Google Maps Pin is required */}
+                {/* 1. Inside Coimbatore: Address or Maps Pin */}
                 {(deliveryMethod === 'local_delivery' || deliveryMethod === 'delivery') && (
                   <div className="space-y-4 pt-2 border-t border-[#D7BFAE]/30">
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                      <div className="sm:col-span-2">
+                        <label className="text-xs font-bold uppercase tracking-wider text-[#4B2923] block mb-1">
+                          Delivery Area / Street / House Details in Coimbatore *
+                        </label>
+                        <input
+                          type="text"
+                          value={deliveryAddress}
+                          onChange={(e) => setDeliveryAddress(e.target.value)}
+                          placeholder="e.g. Peelamedu, Near PSG Tech / Flat 3B"
+                          className="w-full text-xs p-3.5 rounded-xl border border-[#D7BFAE] bg-[#FFF7F0] text-[#4B2923] focus:ring-1 focus:ring-[#4B2923]"
+                        />
+                        {errors.delivery_address && (
+                          <p className="text-red-600 text-xs mt-1.5 font-medium">{errors.delivery_address}</p>
+                        )}
+                      </div>
+
+                      <div>
+                        <label className="text-xs font-bold uppercase tracking-wider text-[#4B2923] block mb-1">
+                          Pincode:
+                        </label>
+                        <input
+                          type="text"
+                          maxLength={6}
+                          value={deliveryPincode}
+                          onChange={(e) => setDeliveryPincode(e.target.value)}
+                          placeholder="641004"
+                          className="w-full text-xs p-3.5 rounded-xl border border-[#D7BFAE] bg-[#FFF7F0] text-[#4B2923]"
+                        />
+                      </div>
+                    </div>
+
                     <div className="bg-emerald-50/70 p-4 rounded-2xl border border-emerald-200">
                       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-2">
                         <label className="text-xs font-bold uppercase tracking-wider text-[#4B2923] flex items-center gap-1.5">
                           <MapPin className="w-4 h-4 text-emerald-700" />
-                          <span>Google Maps Location Link *</span>
+                          <span>Google Maps Location Link (Optional)</span>
                         </label>
                         <button
                           type="button"
@@ -574,7 +633,7 @@ export const Checkout: React.FC = () => {
                           className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white text-[11px] font-semibold transition-colors cursor-pointer shadow-xs"
                         >
                           <Navigation className="w-3.5 h-3.5" />
-                          <span>{isLocating ? 'Detecting GPS...' : '📍 Pin Current GPS Location'}</span>
+                          <span>{isLocating ? 'Detecting GPS...' : '📍 Auto-Pin GPS'}</span>
                         </button>
                       </div>
 
@@ -582,46 +641,12 @@ export const Checkout: React.FC = () => {
                         type="url"
                         value={googleMapsLink}
                         onChange={(e) => setGoogleMapsLink(e.target.value)}
-                        placeholder="e.g. https://maps.app.goo.gl/... or https://goo.gl/maps/..."
+                        placeholder="Paste Google Maps share link (optional)"
                         className="w-full text-xs p-3.5 rounded-xl border border-emerald-300 bg-white text-[#4B2923] focus:ring-1 focus:ring-emerald-600"
                       />
-                      {errors.google_maps_link && (
-                        <p className="text-red-600 text-xs mt-1.5 font-medium">{errors.google_maps_link}</p>
-                      )}
                       {locationError && (
                         <p className="text-amber-700 text-[11px] mt-1.5">{locationError}</p>
                       )}
-                      <p className="text-[11px] text-[#8A554D] mt-2">
-                        💡 <strong>How to copy link:</strong> Open Google Maps &rarr; tap your home pin &rarr; tap <strong>Share</strong> &rarr; tap <strong>Copy Link</strong> and paste it here. Or tap the button above to auto-pin your GPS location.
-                      </p>
-                    </div>
-
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                      <div className="sm:col-span-2">
-                        <label className="text-xs font-bold uppercase tracking-wider text-[#4B2923] block mb-1">
-                          House / Flat / Door No. & Street Details:
-                        </label>
-                        <input
-                          type="text"
-                          value={deliveryAddress}
-                          onChange={(e) => setDeliveryAddress(e.target.value)}
-                          placeholder="e.g. Flat 3B, Glen Palms, DB Road, RS Puram"
-                          className="w-full text-xs p-3.5 rounded-xl border border-[#D7BFAE] bg-[#FFF7F0] text-[#4B2923]"
-                        />
-                      </div>
-                      <div>
-                        <label className="text-xs font-bold uppercase tracking-wider text-[#4B2923] block mb-1">
-                          Coimbatore Pincode:
-                        </label>
-                        <input
-                          type="text"
-                          maxLength={6}
-                          value={deliveryPincode}
-                          onChange={(e) => setDeliveryPincode(e.target.value)}
-                          placeholder="641002"
-                          className="w-full text-xs p-3.5 rounded-xl border border-[#D7BFAE] bg-[#FFF7F0] text-[#4B2923]"
-                        />
-                      </div>
                     </div>
 
                     <div>

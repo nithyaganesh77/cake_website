@@ -210,35 +210,122 @@ export const Shop: React.FC = () => {
           </div>
         </div>
 
-        {/* Category Pills (Desktop & Tablet) */}
-        <div className="hidden md:flex items-center gap-2 overflow-x-auto pb-4 mb-8 no-scrollbar">
-          <button
-            onClick={() => handleCategoryChange('all')}
-            className={`px-5 py-2 rounded-full text-xs font-semibold transition-all shrink-0 ${
-              selectedCategory === 'all'
-                ? 'bg-[#4B2923] text-white shadow-sm'
-                : 'bg-white text-[#4B2923] border border-[#D7BFAE]/50 hover:bg-[#F7DCE2]'
-            }`}
-          >
-            All Desserts ({products.length})
-          </button>
-          {categories.map((cat) => {
-            const count = products.filter((p) => p.category_id === cat.id).length;
-            const isSelected = selectedCategory === cat.id;
-            return (
-              <button
-                key={cat.id}
-                onClick={() => handleCategoryChange(cat.id)}
-                className={`px-5 py-2 rounded-full text-xs font-semibold transition-all shrink-0 ${
-                  isSelected
-                    ? 'bg-[#4B2923] text-white shadow-sm'
-                    : 'bg-white text-[#4B2923] border border-[#D7BFAE]/50 hover:bg-[#F7DCE2]'
-                }`}
-              >
-                {cat.name} ({count})
-              </button>
-            );
-          })}
+        {/* Category Pills (Always visible on mobile & desktop with horizontal scroll) */}
+        <div className="sticky top-[60px] sm:top-[72px] z-30 bg-[#FFF7F0]/95 backdrop-blur-md py-3 -mx-4 px-4 sm:mx-0 sm:px-0 border-y border-[#D7BFAE]/30 mb-6">
+          <div className="flex items-center gap-2 overflow-x-auto no-scrollbar py-0.5">
+            <button
+              onClick={() => handleCategoryChange('all')}
+              className={`px-4 py-2 rounded-full text-xs font-bold transition-all shrink-0 flex items-center gap-1.5 cursor-pointer ${
+                selectedCategory === 'all'
+                  ? 'bg-[#4B2923] text-white shadow-md scale-102'
+                  : 'bg-white text-[#4B2923] border border-[#D7BFAE]/60 hover:bg-[#F7DCE2]'
+              }`}
+            >
+              <span>✨</span>
+              <span>All Bakes</span>
+              <span className={`text-[10px] px-1.5 py-0.2 rounded-full ${selectedCategory === 'all' ? 'bg-white/20 text-white' : 'bg-[#FFF7F0] text-[#8A554D]'}`}>
+                {products.length}
+              </span>
+            </button>
+
+            {categories.map((cat) => {
+              const count = products.filter((p) => p.category_id === cat.id).length;
+              const isSelected = selectedCategory === cat.id;
+
+              // Friendly category icon mapping
+              const icon =
+                cat.id === 'cat-slabs'
+                  ? '🍫'
+                  : cat.id === 'cat-tubs'
+                  ? '🍨'
+                  : cat.id === 'cat-single-pieces'
+                  ? '🍰'
+                  : cat.id === 'cat-dream-cakes'
+                  ? '🌟'
+                  : cat.id === 'cat-courier-slabs'
+                  ? '📦'
+                  : cat.id === 'cat-celebration-cakes'
+                  ? '🎂'
+                  : cat.id === 'cat-bento-cakes'
+                  ? '🍱'
+                  : cat.id === 'cat-cupcakes'
+                  ? '🧁'
+                  : '🎨';
+
+              return (
+                <button
+                  key={cat.id}
+                  onClick={() => handleCategoryChange(cat.id)}
+                  className={`px-4 py-2 rounded-full text-xs font-bold transition-all shrink-0 flex items-center gap-1.5 cursor-pointer ${
+                    isSelected
+                      ? 'bg-[#4B2923] text-white shadow-md scale-102'
+                      : 'bg-white text-[#4B2923] border border-[#D7BFAE]/60 hover:bg-[#F7DCE2]'
+                  }`}
+                >
+                  <span>{icon}</span>
+                  <span>{cat.name.replace(' & Blondie', '').replace(' (Courier Orders)', '')}</span>
+                  <span className={`text-[10px] px-1.5 py-0.2 rounded-full ${isSelected ? 'bg-white/20 text-white' : 'bg-[#FFF7F0] text-[#8A554D]'}`}>
+                    {count}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Quick Dietary & Bestseller Chips */}
+          <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pt-2 text-xs">
+            <button
+              onClick={() => setEgglessOnly(!egglessOnly)}
+              className={`px-3 py-1 rounded-full text-[11px] font-semibold transition-all shrink-0 flex items-center gap-1.5 cursor-pointer border ${
+                egglessOnly
+                  ? 'bg-emerald-600 text-white border-emerald-700 shadow-xs'
+                  : 'bg-white text-[#4B2923] border-emerald-300 hover:bg-emerald-50'
+              }`}
+            >
+              <span className={`w-2 h-2 rounded-full ${egglessOnly ? 'bg-white' : 'bg-emerald-600'}`} />
+              <span>Eggless Only</span>
+            </button>
+
+            <button
+              onClick={() => {
+                const next = new URLSearchParams(searchParams);
+                if (filterType === 'bestseller') {
+                  next.delete('filter');
+                } else {
+                  next.set('filter', 'bestseller');
+                }
+                setSearchParams(next);
+              }}
+              className={`px-3 py-1 rounded-full text-[11px] font-semibold transition-all shrink-0 flex items-center gap-1 cursor-pointer border ${
+                filterType === 'bestseller'
+                  ? 'bg-amber-700 text-white border-amber-800 shadow-xs'
+                  : 'bg-white text-[#4B2923] border-[#D7BFAE]/60 hover:bg-amber-50'
+              }`}
+            >
+              <span>⭐</span>
+              <span>Bestsellers</span>
+            </button>
+
+            <button
+              onClick={() => {
+                const next = new URLSearchParams(searchParams);
+                if (filterType === 'new') {
+                  next.delete('filter');
+                } else {
+                  next.set('filter', 'new');
+                }
+                setSearchParams(next);
+              }}
+              className={`px-3 py-1 rounded-full text-[11px] font-semibold transition-all shrink-0 flex items-center gap-1 cursor-pointer border ${
+                filterType === 'new'
+                  ? 'bg-[#E9AEBB] text-[#2F1916] border-[#D7BFAE] shadow-xs'
+                  : 'bg-white text-[#4B2923] border-[#D7BFAE]/60 hover:bg-pink-50'
+              }`}
+            >
+              <span>✨</span>
+              <span>New Creations</span>
+            </button>
+          </div>
         </div>
 
         {/* Results Count & Active Filter indicator */}

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Heart, Eye, ShoppingBag, Sparkles, Clock, Check, Star } from 'lucide-react';
+import { Heart, Eye, ShoppingBag, Sparkles, Clock, Check, Star, Plus, Minus, MessageCircle } from 'lucide-react';
 import { Product, ProductVariant } from '@/types';
 import { useCart } from '@/contexts/CartContext';
 import { useWishlist } from '@/contexts/WishlistContext';
@@ -21,8 +21,13 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     product.variants.find((v) => v.is_default) || product.variants[0]
   );
 
-  const { addItem } = useCart();
+  const { addItem, items, updateQuantity, openCart } = useCart();
   const { isInWishlist, toggleWishlist } = useWishlist();
+
+  // Find if this specific product & active variant is already in cart
+  const cartItem = items.find(
+    (i) => i.product.id === product.id && i.selected_variant.id === activeVariant.id
+  );
 
   const isFavorited = isInWishlist(product.id);
 
@@ -41,7 +46,16 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
     setIsAdding(true);
     addItem(product, activeVariant, false);
-    setTimeout(() => setIsAdding(false), 800);
+    setTimeout(() => setIsAdding(false), 700);
+  };
+
+  const handleDirectWhatsAppInquiry = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const text = encodeURIComponent(
+      `Hello Cakes & Dessert! I am interested in ordering: *${product.name}* (${activeVariant.weight_label} - ₹${activeVariant.price}). Is it available today?`
+    );
+    window.open(`https://wa.me/918637478423?text=${text}`, '_blank');
   };
 
   return (
@@ -166,6 +180,16 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             </div>
 
             <div className="flex items-center gap-1.5">
+              {/* WhatsApp direct inquiry */}
+              <button
+                onClick={handleDirectWhatsAppInquiry}
+                className="p-2.5 rounded-full border border-emerald-300 bg-emerald-50 text-emerald-800 hover:bg-emerald-100 transition-colors shadow-2xs cursor-pointer"
+                title="Ask Baker on WhatsApp"
+                aria-label="Direct WhatsApp inquiry"
+              >
+                <MessageCircle className="w-3.5 h-3.5" />
+              </button>
+
               <button
                 onClick={(e) => {
                   e.preventDefault();
@@ -174,24 +198,62 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
                 className="p-2.5 rounded-full border border-[#D7BFAE] text-[#4B2923] hover:bg-[#F7DCE2] transition-colors sm:hidden"
                 aria-label="Quick View"
               >
-                <Eye className="w-4 h-4" />
+                <Eye className="w-3.5 h-3.5" />
               </button>
 
-              <button
-                onClick={handleQuickAdd}
-                disabled={isAdding}
-                className="inline-flex items-center gap-1.5 bg-[#4B2923] text-white text-xs font-bold uppercase tracking-wider px-4 py-2.5 rounded-full shadow-sm hover:bg-[#2F1916] transition-all hover:scale-105 active:scale-95"
-              >
-                {isAdding ? (
-                  <>
-                    <Check className="w-3.5 h-3.5 text-[#E9AEBB]" /> Added
-                  </>
-                ) : (
-                  <>
-                    <ShoppingBag className="w-3.5 h-3.5 text-[#E9AEBB]" /> Add
-                  </>
-                )}
-              </button>
+              {cartItem ? (
+                <div className="flex items-center border-2 border-[#4B2923] rounded-full bg-[#FFF7F0] px-1 py-0.5 shadow-xs">
+                  <button
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      updateQuantity(cartItem.id, cartItem.quantity - 1);
+                    }}
+                    className="w-6 h-6 flex items-center justify-center text-[#4B2923] hover:bg-white rounded-full transition-colors cursor-pointer"
+                    aria-label="Decrease quantity"
+                  >
+                    <Minus className="w-3 h-3" />
+                  </button>
+                  <button
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      openCart();
+                    }}
+                    className="px-2 text-center text-xs font-black text-[#4B2923] cursor-pointer"
+                    title="Click to view bag"
+                  >
+                    {cartItem.quantity}
+                  </button>
+                  <button
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      updateQuantity(cartItem.id, cartItem.quantity + 1);
+                    }}
+                    className="w-6 h-6 flex items-center justify-center text-[#4B2923] hover:bg-white rounded-full transition-colors cursor-pointer"
+                    aria-label="Increase quantity"
+                  >
+                    <Plus className="w-3 h-3" />
+                  </button>
+                </div>
+              ) : (
+                <button
+                  onClick={handleQuickAdd}
+                  disabled={isAdding}
+                  className="inline-flex items-center gap-1.5 bg-[#4B2923] text-white text-xs font-bold uppercase tracking-wider px-4 py-2.5 rounded-full shadow-sm hover:bg-[#2F1916] transition-all hover:scale-105 active:scale-95 cursor-pointer"
+                >
+                  {isAdding ? (
+                    <>
+                      <Check className="w-3.5 h-3.5 text-[#E9AEBB]" /> Added
+                    </>
+                  ) : (
+                    <>
+                      <ShoppingBag className="w-3.5 h-3.5 text-[#E9AEBB]" /> Add
+                    </>
+                  )}
+                </button>
+              )}
             </div>
           </div>
         </div>
