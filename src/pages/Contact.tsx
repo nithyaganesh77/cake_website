@@ -73,7 +73,7 @@ export const Contact: React.FC = () => {
                 </div>
                 <div>
                   <strong className="text-[#4B2923] block text-sm">Operating Kitchen &amp; Studio</strong>
-                  <p className="mt-0.5">Podanur Main Road, Coimbatore, Tamil Nadu 641023 (Pickup by prior appointment)</p>
+                  <p className="mt-0.5">3/245 F, Tamil Annai Street, Gandhinagar, Near Palakkad Main Road, Madukkarai, Coimbatore - 641105 (Pickup by prior appointment)</p>
                 </div>
               </div>
 

@@ -129,7 +129,7 @@ export const Footer: React.FC = () => {
               </li>
               <li className="pt-2 text-xs text-[#D7BFAE]/80">
                 <span className="font-semibold text-white block mb-1">Serviceable Areas:</span>
-                Coimbatore Central, Podanur, Madukkarai, RS Puram, Gandhipuram, Peelamedu, Singanallur, Saravanampatti.
+                Coimbatore Central, Madukkarai, Podanur, RS Puram, Gandhipuram, Peelamedu, Singanallur, Saravanampatti.
               </li>
             </ul>
           </div>
@@ -142,7 +142,7 @@ export const Footer: React.FC = () => {
             
             <div className="flex items-start gap-3 text-sm text-[#D7BFAE]">
               <MapPin className="w-5 h-5 text-[#E9AEBB] shrink-0 mt-0.5" />
-              <span>Podanur Main Road, Coimbatore, Tamil Nadu 641023 (Studio Pickup by Appointment)</span>
+              <span>3/245 F, Tamil Annai Street, Gandhinagar, Near Palakkad Main Road, Madukkarai, Coimbatore - 641105 (Studio Pickup by Appointment)</span>
             </div>
 
             <div className="flex items-center gap-3 text-sm text-[#D7BFAE]">
@@ -181,7 +181,7 @@ export const Footer: React.FC = () => {
             <span>Eggless Option Available</span>
           </div>
           <div className="text-[11px] text-[#E9AEBB]">
-            Handcrafted with Care in Podanur, Coimbatore
+            Handcrafted with Care in Madukkarai, Coimbatore
           </div>
         </div>
 

@@ -89,7 +89,7 @@ export const About: React.FC = () => {
                 100% Halal &amp; Gelatine-Free
               </h4>
               <p className="text-xs text-[#8A554D] leading-relaxed">
-                Every creation in our Podanur studio is strictly crafted without animal gelatine, pork derivatives, or alcohol extracts. We use pure Madagascar vanilla beans and certified plant-based setting agents (agar-agar).
+                Every creation in our Madukkarai studio is strictly crafted without animal gelatine, pork derivatives, or alcohol extracts. We use pure Madagascar vanilla beans and certified plant-based setting agents (agar-agar).
               </p>
             </div>
 

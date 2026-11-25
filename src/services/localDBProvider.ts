@@ -112,6 +112,18 @@ async function ensureInitialized() {
       await tx.objectStore('site_settings').put({ key: 'launch_cleaned_v2', value: true, timestamp: Date.now() });
       await tx.done;
     }
+
+    // Address sync: Automatically update studio pickup address & delivery areas to Madukkarai
+    const addressSynced = await db.get('site_settings', 'madukkarai_address_v1_synced');
+    if (!addressSynced) {
+      const tx = db.transaction(['site_settings', 'delivery_areas'], 'readwrite');
+      await tx.objectStore('site_settings').put({ key: 'main_settings', ...INITIAL_SETTINGS });
+      for (const area of INITIAL_DELIVERY_AREAS) {
+        await tx.objectStore('delivery_areas').put(area);
+      }
+      await tx.objectStore('site_settings').put({ key: 'madukkarai_address_v1_synced', value: true, timestamp: Date.now() });
+      await tx.done;
+    }
   }
 }
 

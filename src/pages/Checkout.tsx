@@ -60,7 +60,7 @@ export const Checkout: React.FC = () => {
   );
   const [deliveryState, setDeliveryState] = useState(searchParams.get('state') || 'Tamil Nadu');
   const [deliveryPincode, setDeliveryPincode] = useState(
-    () => searchParams.get('pincode') || localStorage.getItem('cnd_cust_pincode') || '641023'
+    () => searchParams.get('pincode') || localStorage.getItem('cnd_cust_pincode') || '641105'
   );
   const [deliveryLandmark, setDeliveryLandmark] = useState('');
   const [scheduledDate, setScheduledDate] = useState('');
@@ -288,8 +288,8 @@ export const Checkout: React.FC = () => {
           (deliveryLandmark ? `🚩 Landmark: ${deliveryLandmark}\n` : '');
       } else {
         deliveryDetailsText =
-          `🏪 *FULFILLMENT: Studio Pickup (Podanur Kitchen, Coimbatore)*\n` +
-          `📍 *Pickup Address:* ${siteSettings?.address_pickup || 'Podanur Main Road, Coimbatore 641023'}\n`;
+          `🏪 *FULFILLMENT: Studio Pickup (Madukkarai Kitchen, Coimbatore)*\n` +
+          `📍 *Pickup Address:* ${siteSettings?.address_pickup || '3/245 F, Tamil Annai Street, Gandhinagar, Near Palakkad Main Road, Madukkarai, Coimbatore - 641105'}\n`;
       }
 
       const whatsappText =
@@ -442,14 +442,14 @@ export const Checkout: React.FC = () => {
                 >
                   <Store className="w-5 h-5 text-[#8A554D] mb-1.5" />
                   <span className="font-bold text-sm text-[#4B2923] block">Studio Pickup</span>
-                  <span className="text-[11px] text-[#8A554D] block mt-0.5">Podanur Kitchen (Free)</span>
+                  <span className="text-[11px] text-[#8A554D] block mt-0.5">Madukkarai Kitchen (Free)</span>
                 </button>
               </div>
 
               {deliveryMethod === 'pickup' && (
                 <div className="mt-4 p-3.5 bg-[#FFF7F0] rounded-xl border border-[#D7BFAE]/40 text-xs text-[#8A554D]">
                   <strong className="text-[#4B2923] block mb-0.5">Pickup Location:</strong>
-                  {siteSettings?.address_pickup || 'Podanur Main Road, Coimbatore 641023 (Directions provided upon order confirmation)'}
+                  {siteSettings?.address_pickup || '3/245 F, Tamil Annai Street, Gandhinagar, Near Palakkad Main Road, Madukkarai, Coimbatore - 641105 (Directions provided upon order confirmation)'}
                 </div>
               )}
             </div>
@@ -765,7 +765,7 @@ export const Checkout: React.FC = () => {
                     <strong className="text-[#4B2923] flex items-center gap-1.5">
                       <Store className="w-4 h-4 text-[#8A554D]" /> Studio Kitchen Pickup Location:
                     </strong>
-                    <p>{siteSettings?.address_pickup || 'Podanur Main Road, Coimbatore 641023'}</p>
+                    <p>{siteSettings?.address_pickup || '3/245 F, Tamil Annai Street, Gandhinagar, Near Palakkad Main Road, Madukkarai, Coimbatore - 641105'}</p>
                     <p className="text-[11px] text-emerald-800 font-medium">
                       ✓ No delivery fee. Exact pickup directions and kitchen contact shared upon confirmation.
                     </p>
@@ -843,7 +843,7 @@ export const Checkout: React.FC = () => {
                   >
                     <Store className="w-5 h-5 text-[#8A554D] mb-1.5" />
                     <span className="font-bold text-sm text-[#4B2923] block">Cash on Pickup</span>
-                    <span className="text-[11px] text-[#8A554D] block mt-0.5">Pay cash at Podanur kitchen</span>
+                    <span className="text-[11px] text-[#8A554D] block mt-0.5">Pay cash at Madukkarai kitchen</span>
                   </button>
                 )}
 

@@ -2577,6 +2577,14 @@ export const INITIAL_PRODUCTS: Product[] = [
 
 export const INITIAL_DELIVERY_AREAS: DeliveryArea[] = [
   {
+    "id": "area-madukkarai",
+    "pincode": "641105",
+    "area_name": "Madukkarai / Tamil Annai St (Studio Area)",
+    "delivery_fee": 40,
+    "min_order_amount": 300,
+    "is_active": true
+  },
+  {
     "id": "area-podanur",
     "pincode": "641023",
     "area_name": "Podanur / Chettipalayam Road",
@@ -2622,14 +2630,6 @@ export const INITIAL_DELIVERY_AREAS: DeliveryArea[] = [
     "area_name": "Saravanampatti / IT Corridor",
     "delivery_fee": 130,
     "min_order_amount": 600,
-    "is_active": true
-  },
-  {
-    "id": "area-madukkarai",
-    "pincode": "641105",
-    "area_name": "Madukkarai / SIDCO",
-    "delivery_fee": 60,
-    "min_order_amount": 350,
     "is_active": true
   },
   {
@@ -2697,14 +2697,14 @@ export const INITIAL_SETTINGS: SiteSettings = {
   ],
   "whatsapp_number": "918637478423",
   "email": "cakesanddessert1@gmail.com",
-  "address_pickup": "Podanur Main Road, Coimbatore, Tamil Nadu 641023 (Exact studio pickup instructions shared upon order confirmation)",
+  "address_pickup": "3/245 F, Tamil Annai Street, Gandhinagar, Near Palakkad Main Road, Madukkarai, Coimbatore - 641105 (Studio pickup by appointment)",
   "operating_hours": "Daily: 10:00 AM – 09:00 PM",
   "instagram_url": "https://instagram.com/cakesanddessert.in",
   "min_advance_order_hours": 6,
   "same_day_cutoff_hour": 14,
   "upi_id": "cakesanddessert@upi",
   "upi_recipient_name": "Cakes and Dessert Coimbatore",
-  "bank_transfer_details": "Account Name: Cakes and Dessert | Bank: HDFC Bank, Podanur Branch, Coimbatore | Account verification & transfer instructions shared upon WhatsApp confirmation",
+  "bank_transfer_details": "Account Name: Cakes and Dessert | Bank: HDFC Bank, Madukkarai / Coimbatore Branch | Account verification & transfer instructions shared upon WhatsApp confirmation",
   "cash_on_pickup_enabled": true,
   "cash_on_delivery_enabled": true,
   "free_delivery_threshold": 1200,

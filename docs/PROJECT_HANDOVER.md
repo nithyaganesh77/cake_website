@@ -53,7 +53,7 @@ The platform provides a boutique patisserie visual experience, interactive produ
 | **Brand Name** | Cakes & Dessert | Verified |
 | **Official Email** | `cakesanddessert1@gmail.com` | Verified |
 | **Contact Phones** | `+91 78417 16999` / `+91 86374 78423` | Verified |
-| **Operating Location**| Podanur Main Road, Coimbatore 641023 | Client may adjust exact door/plot number in `/admin/settings` |
+| **Operating Location**| 3/245 F, Tamil Annai Street, Gandhinagar, Near Palakkad Main Road, Madukkarai, Coimbatore - 641105 | Verified Official Studio Address |
 | **UPI ID** | `cakesanddessert@upi` | Client to enter verified merchant UPI VPA in `/admin/settings` |
 | **Bank Account** | Placeholder HDFC details | Client to update in `/admin/settings` if accepting direct NEFT |
 

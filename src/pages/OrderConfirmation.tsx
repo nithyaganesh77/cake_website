@@ -121,8 +121,8 @@ export const OrderConfirmation: React.FC = () => {
       (order.delivery_landmark ? `🚩 Landmark: ${order.delivery_landmark}\n` : '');
   } else {
     deliveryDetailsText =
-      `🏪 *FULFILLMENT: Studio Pickup (Podanur, Coimbatore)*\n` +
-      `📍 *Pickup Address:* ${siteSettings?.address_pickup || 'Podanur Main Road, Coimbatore 641023'}\n`;
+      `🏪 *FULFILLMENT: Studio Pickup (Madukkarai, Coimbatore)*\n` +
+      `📍 *Pickup Address:* ${siteSettings?.address_pickup || '3/245 F, Tamil Annai Street, Gandhinagar, Near Palakkad Main Road, Madukkarai, Coimbatore - 641105'}\n`;
   }
 
   const whatsappMessage = encodeURIComponent(
@@ -208,7 +208,7 @@ export const OrderConfirmation: React.FC = () => {
                     ? 'Pan-India Express Courier'
                     : order.delivery_method === 'local_delivery' || order.delivery_method === 'delivery'
                     ? 'Doorstep Delivery (Coimbatore)'
-                    : 'Studio Pickup (Podanur)'}
+                    : 'Studio Pickup (Madukkarai)'}
                 </span>
               </div>
 
@@ -275,7 +275,7 @@ export const OrderConfirmation: React.FC = () => {
                 <div className="pt-2 border-t border-[#D7BFAE]/20">
                   <span className="block font-semibold text-[#4B2923]">Pickup Studio:</span>
                   <p className="leading-relaxed bg-[#FFF7F0] p-2.5 rounded-xl border border-[#D7BFAE]/30 text-[11px]">
-                    {siteSettings?.address_pickup || 'Podanur Main Road, Coimbatore 641023'}
+                    {siteSettings?.address_pickup || '3/245 F, Tamil Annai Street, Gandhinagar, Near Palakkad Main Road, Madukkarai, Coimbatore - 641105'}
                   </p>
                 </div>
               )}

@@ -135,7 +135,7 @@ export const HeroSection: React.FC = () => {
           <span className="text-white/20 hidden sm:inline">•</span>
           <span className="flex items-center gap-1.5 font-medium">
             <Clock className="w-3.5 h-3.5 text-[#E9AEBB]" />
-            <span>Studio Pickup in Podanur</span>
+            <span>Studio Pickup in Madukkarai</span>
           </span>
         </motion.div>
 

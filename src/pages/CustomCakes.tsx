@@ -494,7 +494,7 @@ export const CustomCakes: React.FC = () => {
                           : 'border-[#D7BFAE]/50 text-[#8A554D]'
                       }`}
                     >
-                      Studio Pickup (Podanur)
+                      Studio Pickup (Madukkarai)
                     </button>
                   </div>
                 </div>

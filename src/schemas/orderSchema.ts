@@ -62,7 +62,7 @@ export const checkoutFormSchema = z.object({
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
         path: ['delivery_pincode'],
-        message: 'Valid 6-digit postal pincode is required (e.g. 641023)',
+        message: 'Valid 6-digit postal pincode is required (e.g. 641105)',
       });
     }
   }

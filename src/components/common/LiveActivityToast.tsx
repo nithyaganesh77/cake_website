@@ -21,7 +21,7 @@ const ACTIVITIES: ActivityItem[] = [
   {
     id: '2',
     name: 'Chef Ananya',
-    location: 'Bakery Studio, Podanur',
+    location: 'Bakery Studio, Madukkarai',
     action: 'just pulled a fresh batch of Fudgy Brownies from the oven',
     timeAgo: '8 mins ago',
   },

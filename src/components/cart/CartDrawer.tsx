@@ -174,7 +174,7 @@ export const CartDrawer: React.FC = () => {
         delivery_address: deliveryAddress || undefined,
         delivery_city: deliveryMethod === 'courier' ? courierCity : 'Coimbatore',
         delivery_state: 'Tamil Nadu',
-        delivery_pincode: deliveryMethod === 'courier' ? courierPincode : '641023',
+        delivery_pincode: deliveryMethod === 'courier' ? courierPincode : '641105',
         scheduled_date: new Date().toISOString().split('T')[0],
         scheduled_slot_id: 'slot-express',
         scheduled_slot_label: 'Standard Fresh Kitchen Dispatch Window',
@@ -211,8 +211,8 @@ export const CartDrawer: React.FC = () => {
           (googleMapsLink ? `📍 *Maps Pin:* ${googleMapsLink}` : '');
       } else {
         fulfillmentInfo =
-          `🏪 *Fulfillment:* Studio Pickup (Podanur, Coimbatore)\n` +
-          `📍 Podanur Kitchen Studio (Free Pickup)`;
+          `🏪 *Fulfillment:* Studio Pickup (Madukkarai, Coimbatore)\n` +
+          `📍 3/245 F, Tamil Annai Street, Gandhinagar, Near Palakkad Main Road, Madukkarai, CBE 641105 (Free Pickup)`;
       }
 
       const message =
@@ -598,7 +598,7 @@ export const CartDrawer: React.FC = () => {
                       {deliveryMethod === 'pickup' && (
                         <div className="text-[11px] text-[#8A554D] bg-[#FFF7F0] p-2 rounded-xl border border-[#D7BFAE]/40 flex items-center gap-2">
                           <Store className="w-4 h-4 text-[#8A554D] shrink-0" />
-                          <span>Podanur Studio Kitchen, Coimbatore (Free Pickup)</span>
+                          <span>Studio Pickup: 3/245 F, Tamil Annai St, Gandhinagar, Madukkarai, CBE 641105 (Free)</span>
                         </div>
                       )}
 
